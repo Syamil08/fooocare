@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:src="@drawable/sepakbola"-->
+            <!--android:scaleType="centerCrop" />-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorOnBoarding"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FOOCARE"
+                android:textColor="@android:color/white"
+                android:textSize="70sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/shangobold"/>
+            <TextView
+                android:id="@+id/tv_section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="footbalcare"
+                android:textSize="30sp"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/shangobold"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+
+</LinearLayout>
