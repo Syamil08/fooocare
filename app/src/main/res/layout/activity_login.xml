@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorOnBoarding"/>
+n
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Foocare"
+                android:textSize="50sp"
+                android:fontFamily="@font/shangobold"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="40dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Football Care"
+                android:textSize="25sp"
+                android:fontFamily="@font/shangobold"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="100dp"
+                />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/logincustom">
+
+                </View>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Selamat Datang"
+                        android:textSize="30sp"
+                        android:textStyle="normal"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="20sp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Silahkan login untuk melanjutkan"
+                        android:textSize="15sp"
+                        android:textStyle="normal"
+                        android:textColor="#C5BFBF"
+                        android:layout_marginBottom="30dp"
+                        />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="20dp"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="24dp"
+                        android:hint="Password"
+                        android:inputType="textPassword"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Buat Akun"
+                            android:textSize="15sp"
+                            android:layout_marginStart="20dp"
+                            android:textStyle="normal"
+                            android:textColor="#648EE6"
+                            android:layout_marginTop="14dp"
+                            android:layout_weight="1"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lupa password?"
+                            android:textSize="15sp"
+                            android:layout_marginEnd="20dp"
+                            android:textStyle="normal"
+                            android:layout_marginTop="14dp"
+                            />
+                    </LinearLayout>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="40dp"
+                        android:text="Masuk"
+                        android:textColor="@android:color/white"
+                        android:background="@drawable/buttoncustom"
+                        />
+                </LinearLayout>
+            </FrameLayout>
+
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>
