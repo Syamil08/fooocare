@@ -8,6 +8,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+//    Halaman Welcome Screen Logic
+
 public class MainActivity extends AppCompatActivity {
     private TextView tv_head,tv_section;
     @Override
