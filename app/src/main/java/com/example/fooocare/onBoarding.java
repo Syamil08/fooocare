@@ -35,13 +35,13 @@ public class onBoarding extends AppCompatActivity {
 
 //        sebelum aplikasi di launch maka kita lakukan pengecekan bahwa aplikasi telah dibuka atau belum
 
-        if (restorePrefData()){
-
-            Intent loginActivity = new Intent(getApplicationContext(),LoginActivity.class);
-            startActivity(loginActivity);
-            finish();
-
-        }
+//        if (restorePrefData()){
+//
+//            Intent loginActivity = new Intent(getApplicationContext(),LoginActivity.class);
+//            startActivity(loginActivity);
+//            finish();
+//
+//        }
 
 
         setContentView(R.layout.activity_on_boarding);
@@ -111,6 +111,14 @@ public class onBoarding extends AppCompatActivity {
 
                 }
 
+                if (tab.getPosition() < mList.size()-1){
+
+                    btnGetStarted.setVisibility(View.INVISIBLE);
+                    btnNext.setVisibility(View.VISIBLE);
+                    tabIndicator.setVisibility(View.VISIBLE);
+
+                }
+
 
             }
 
@@ -140,7 +148,7 @@ public class onBoarding extends AppCompatActivity {
 //                kita tahu dia sudah melewati halaman onBoarding atau belum
 //                dengan cara menggunakan shared preferences
 
-                savePrefsData();
+//                savePrefsData();
                 finish();
 
 
