@@ -35,7 +35,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="70sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/shangobold"/>
+                android:fontFamily="@font/shangobold" />
             <TextView
                 android:id="@+id/tv_section"
                 android:layout_width="wrap_content"

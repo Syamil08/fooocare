@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
         tv_head     = (TextView) findViewById(R.id.tv_head);
         tv_section  = (TextView) findViewById(R.id.tv_section);
-int a = 0;
 //        Memanggil library animation
         Animation myanim = AnimationUtils.loadAnimation(this,R.anim.mytransition);
         tv_head.startAnimation(myanim);

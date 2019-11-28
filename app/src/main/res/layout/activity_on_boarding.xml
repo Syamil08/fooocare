@@ -5,8 +5,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".onBoarding"
-    android:orientation="vertical">
-    
+    android:orientation="vertical"
+    android:background="#ffffff">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/screen_viewpager"
+            android:layout_width="368dp"
+            android:layout_height="188dp"
+            android:layout_weight="2"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp">
+
+            <!--TabLayout-->
+
+            <com.google.android.material.tabs.TabLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="left"/>
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="center"/>
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="right"/>
+
+            </com.google.android.material.tabs.TabLayout>
+
+
+            <Button
+                android:background="#fff"
+                android:id="@+id/button_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="LANJUT"
+                android:drawableRight="@drawable/ic_arrow_right"
+                android:drawableTint="@color/gradient_start_color"
+                android:textColor="@color/gradient_start_color"
+                android:paddingLeft="30dp"
+                android:paddingRight="10dp"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
