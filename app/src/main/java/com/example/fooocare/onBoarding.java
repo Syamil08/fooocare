@@ -1,17 +1,15 @@
 package com.example.fooocare;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -35,9 +33,9 @@ public class onBoarding extends AppCompatActivity {
 
 //        sebelum aplikasi di launch maka kita lakukan pengecekan bahwa aplikasi telah dibuka atau belum
 
-        if (restorePrefData()){
+        if (restorePrefData()) {
 
-            Intent loginActivity = new Intent(getApplicationContext(),LoginActivity.class);
+            Intent loginActivity = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(loginActivity);
             finish();
 
@@ -47,23 +45,23 @@ public class onBoarding extends AppCompatActivity {
         setContentView(R.layout.activity_on_boarding);
 
 //        ini views untuk tabLayout
-        btnNext         = (Button) findViewById(R.id.btn_next);
-        btnGetStarted   = (Button) findViewById(R.id.btn_get_started);
-        tabIndicator    = findViewById(R.id.tab_indicator);
-        btnAnim         = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.getstarted_animation);
+        btnNext = (Button) findViewById(R.id.btn_next);
+        btnGetStarted = (Button) findViewById(R.id.btn_get_started);
+        tabIndicator = findViewById(R.id.tab_indicator);
+        btnAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.getstarted_animation);
 
 
 //        fill list screen
 
         final List<Screenitem> mList = new ArrayList<>();
-        mList.add(new Screenitem("Menjaga Kesehatan","Mencegah lebih baik daripada mengobati, jaga kesehatan keluarga Anda saat ini",R.drawable.vektor_one));
-        mList.add(new Screenitem("Menjaga Stamina","Memudahkan anda untuk melihat report harian yang anda miliki",R.drawable.vektor_three));
-        mList.add(new Screenitem("Report Harian","Ambil gambar anda dan lihat kalorinya",R.drawable.vektor_two));
+        mList.add(new Screenitem("Menjaga Kesehatan", "Mencegah lebih baik daripada mengobati, jaga kesehatan keluarga Anda saat ini", R.drawable.vektor_one));
+        mList.add(new Screenitem("Menjaga Stamina", "Memudahkan anda untuk melihat report harian yang anda miliki", R.drawable.vektor_three));
+        mList.add(new Screenitem("Report Harian", "Ambil gambar anda dan lihat kalorinya", R.drawable.vektor_two));
 
 //        setup viewpager
 
         screenPager = findViewById(R.id.screen_viewpager);
-        introViewPagerAdapter = new IntroViewPagerAdapter(this,mList);
+        introViewPagerAdapter = new IntroViewPagerAdapter(this, mList);
         screenPager.setAdapter(introViewPagerAdapter);
 
 //        setting tabLayout dengan viewPager
@@ -79,7 +77,7 @@ public class onBoarding extends AppCompatActivity {
 
 
                 position = screenPager.getCurrentItem();
-                if (position < mList.size()){
+                if (position < mList.size()) {
 
                     position++;
                     screenPager.setCurrentItem(position);
@@ -88,7 +86,7 @@ public class onBoarding extends AppCompatActivity {
 
 //                ketika posisi sudah sampai pada banyaknya data maka
 
-                if (position == mList.size()-1){
+                if (position == mList.size() - 1) {
 
 //                    TODO: munculkan tombol GetStarted kemudian hilangkan tabLayout dan tombol Next
 
@@ -105,13 +103,13 @@ public class onBoarding extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
-                if (tab.getPosition() == mList.size()-1){
+                if (tab.getPosition() == mList.size() - 1) {
 
                     loadLastScreen();
 
                 }
 
-                if (tab.getPosition() < mList.size()-1){
+                if (tab.getPosition() < mList.size() - 1) {
 
                     btnGetStarted.setVisibility(View.INVISIBLE);
                     btnNext.setVisibility(View.VISIBLE);
@@ -141,7 +139,7 @@ public class onBoarding extends AppCompatActivity {
             public void onClick(View view) {
 
 //                Ketika Melakukan interaksi dengan btn Get Started maka akan diarahkan ke halaman login
-                Intent loginActivity = new Intent(getApplicationContext(),LoginActivity.class);
+                Intent loginActivity = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(loginActivity);
 
 //                menyimpan nilai boolean dalam penyimpanan agar ketika user menjalankan aplikasi
@@ -158,8 +156,8 @@ public class onBoarding extends AppCompatActivity {
 
     private boolean restorePrefData() {
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs",MODE_PRIVATE);
-        Boolean isIntroActivityOpenedBefore = pref.getBoolean("isIntroOpened",false);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+        Boolean isIntroActivityOpenedBefore = pref.getBoolean("isIntroOpened", false);
         return isIntroActivityOpenedBefore;
 
 
@@ -167,9 +165,9 @@ public class onBoarding extends AppCompatActivity {
 
     private void savePrefsData() {
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs",MODE_PRIVATE);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean("isIntroOpened",true);
+        editor.putBoolean("isIntroOpened", true);
         editor.commit();
 
     }

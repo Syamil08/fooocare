@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".onBoarding"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/screen_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="188dp"
+            android:layout_weight="2"
+            android:layout_marginBottom="80dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp">
+
+            <!--TabLayout-->
+
+            <Button
+                android:background="#fff"
+                android:id="@+id/btn_prev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="KEMBALI"
+                android:drawableLeft="@drawable/ic_arrow_left"
+                android:drawableTint="@color/gradient_start_color"
+                android:textColor="@color/gradient_start_color"
+                android:paddingLeft="30dp"
+                android:paddingRight="10dp"/>
+
+
+            <com.google.android.material.tabs.TabLayout
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="80dp"
+                app:tabBackground="@drawable/indicator_selector"
+                android:id="@+id/tab_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            </com.google.android.material.tabs.TabLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:background="#fff"
+                    android:id="@+id/btn_finish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="SELESASI"
+                    android:drawableTint="@color/gradient_start_color"
+                    android:textColor="@color/gradient_start_color"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="10dp"
+                    android:visibility="invisible"/>
+
+                <Button
+                    android:background="#fff"
+                    android:id="@+id/btn_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="LANJUT"
+                    android:drawableRight="@drawable/ic_arrow_right"
+                    android:drawableTint="@color/gradient_start_color"
+                    android:textColor="@color/gradient_start_color"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="10dp"/>
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
