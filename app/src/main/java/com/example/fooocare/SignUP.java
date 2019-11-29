@@ -63,12 +63,7 @@ public class SignUP extends AppCompatActivity {
 
                     position--;
                     viewPager.setCurrentItem(position);
-
-                }
-
-                if (position == 0) {
-                    loadFirstScreen();
-
+                    btnFinish.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -79,7 +74,5 @@ public class SignUP extends AppCompatActivity {
         btnFinish.setVisibility(View.VISIBLE);
     }
 
-    private void loadFirstScreen() {
-        btnPrev.setVisibility(View.INVISIBLE);
-    }
+
 }

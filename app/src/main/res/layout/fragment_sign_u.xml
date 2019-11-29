@@ -3,145 +3,142 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorOnBoarding" />
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
 
-            <!--            <FrameLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_gravity="center_horizontal">-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorOnBoarding" />
 
-            <!--                <View-->
-            <!--                    android:layout_width="120dp"-->
-            <!--                    android:layout_height="120dp"-->
-            <!--                    android:layout_gravity="center_horizontal"-->
-            <!--                    android:background="@drawable/buletan_signup">-->
-
-            <!--                </View>-->
-
-            <!--            </FrameLayout>-->
-
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp">
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/logincustom">
+                <!--            <FrameLayout-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_gravity="center_horizontal">-->
 
-                </View>
+                <!--                <View-->
+                <!--                    android:layout_width="120dp"-->
+                <!--                    android:layout_height="120dp"-->
+                <!--                    android:layout_gravity="center_horizontal"-->
+                <!--                    android:background="@drawable/buletan_signup">-->
 
-                <LinearLayout
+                <!--                </View>-->
+
+                <!--            </FrameLayout>-->
+
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginTop="80dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="20sp"
-                        android:layout_marginBottom="60dp"
-                        android:text="Buat Akun Anda"
-                        android:textColor="@android:color/black"
-                        android:textSize="30sp"
-                        android:textStyle="normal" />
-
-                    <EditText
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:hint="Masukkan Nama Anda"
-                        android:inputType="textPersonName" />
+                        android:layout_height="match_parent"
+                        android:background="@drawable/logincustom">
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="20dp"
-                        android:hint="Masukkan Email Anda"
-                        android:inputType="textEmailAddress" />
-
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="20dp"
-                        android:hint="Masukkan Password Anda"
-                        android:inputType="textPassword" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="20dp"
-                        android:hint="Masukkan Tanggal Lahir Anda"
-                        android:inputType="datetime" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pilih Jenis Kelamin Anda"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="20dp"/>
+                    </View>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="20sp"
+                            android:layout_marginBottom="60dp"
+                            android:text="Buat Akun Anda"
+                            android:textColor="@android:color/black"
+                            android:textSize="30sp"
+                            android:textStyle="normal" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:hint="Masukkan Nama Anda"
+                            android:inputType="textPersonName" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginEnd="20dp"
+                            android:hint="Masukkan Email Anda"
+                            android:inputType="textEmailAddress" />
+
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginEnd="20dp"
+                            android:hint="Masukkan Password Anda"
+                            android:inputType="textPassword" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginEnd="20dp"
+                            android:hint="Masukkan Tanggal Lahir Anda"
+                            android:inputType="datetime" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginEnd="20dp"
+                            android:text="Pilih Jenis Kelamin Anda" />
+
 
                         <RadioGroup
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
+
                             <RadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"
                                 android:layout_marginEnd="20dp"
                                 android:text="Laki-Laki"
-                                android:textColor="#C5BFBF"/>
+                                android:textColor="#C5BFBF" />
+
                             <RadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"
                                 android:layout_marginEnd="20dp"
                                 android:text="Perempuan"
-                                android:textColor="#C5BFBF"/>
+                                android:textColor="#C5BFBF" />
                         </RadioGroup>
 
 
                     </LinearLayout>
+                </FrameLayout>
 
 
-                </LinearLayout>
-            </FrameLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </ScrollView>
 
-
-        </LinearLayout>
-    </FrameLayout>
 </LinearLayout>
