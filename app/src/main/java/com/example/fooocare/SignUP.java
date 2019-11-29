@@ -1,5 +1,6 @@
 package com.example.fooocare;
 
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,14 +8,17 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.fooocare.Model.Pengguna;
 import com.example.fooocare.ui.main.SectionsPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUP extends AppCompatActivity {
     SectionsPagerAdapter sectionsPagerAdapter;
     Button btnNext, btnPrev, btnFinish;
     int position = 0;
-
+    DatabaseReference reff;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,13 +64,19 @@ public class SignUP extends AppCompatActivity {
 
                 position = viewPager.getCurrentItem();
                 if (position < 3) {
-
                     position--;
                     viewPager.setCurrentItem(position);
                     btnFinish.setVisibility(View.INVISIBLE);
+                    btnNext.setVisibility(View.VISIBLE);
                 }
             }
         });
+
+        reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
+        Pengguna pengguna = new Pengguna("Dimastyo Muhaimin Arifin",
+                "dimas@gmail.com", "muhaimin123", 174, 70);
+        reff.push().setValue(pengguna);
+
     }
 
     private void loadLastScreen() {
