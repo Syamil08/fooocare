@@ -19,6 +19,7 @@ public class SignUP extends AppCompatActivity {
     Button btnNext, btnPrev, btnFinish;
     int position = 0;
     DatabaseReference reff;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
