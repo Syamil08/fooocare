@@ -24,6 +24,7 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
     Button btnNext, btnPrev, btnFinish;
     int position = 0;
     DatabaseReference reff;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
