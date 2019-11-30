@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "13739102367-lgjus7lu8u38jk986tmklcashhtop5tt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fooocare",
+            "certificate_hash": "e37645638b5554a51e03fb4b61a56e60a69b2723"
+          }
+        },
+        {
           "client_id": "13739102367-o6dl1kdpvidqaugr2c2a6mp7fmjq9o0j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

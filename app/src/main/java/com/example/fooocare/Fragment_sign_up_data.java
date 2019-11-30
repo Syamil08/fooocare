@@ -50,7 +50,7 @@ public class Fragment_sign_up_data extends Fragment {
     @Override
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.fragment_sign_u, container, false);
+        View v = inflater.inflate(R.layout.fragment_sign_u, container, false);
         jenis_kelamin = v.findViewById(R.id.jenis_kelamin);
         mNama = v.findViewById(R.id.nama);
         mEmail = v.findViewById(R.id.email);
