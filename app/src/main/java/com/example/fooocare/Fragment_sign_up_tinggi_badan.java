@@ -2,7 +2,8 @@ package com.example.fooocare;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,19 +35,7 @@ public class Fragment_sign_up_tinggi_badan extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if((TextUtils.isEmpty(mTinggiBadan.getText().toString()) && TextUtils.isEmpty(mBeratBadan.getText().toString()))){
 
-        }
-        else{
-            List<Integer> data = new ArrayList<>();
-            data.add(Integer.parseInt(mTinggiBadan.getText().toString()));
-            data.add(Integer.parseInt(mBeratBadan.getText().toString()));
-            listener.fragmentSignUpTinggiBadanEvent(data);
-        }
-    }
 
     @Override
     public void onDetach() {
@@ -60,6 +49,20 @@ public class Fragment_sign_up_tinggi_badan extends Fragment {
         View v = inflater.inflate(R.layout.fragment_sign_up_tinggi_badan, container, false);
         mTinggiBadan = (EditText) v.findViewById(R.id.tinggi_badan);
         mBeratBadan = (EditText) v.findViewById(R.id.berat_badan);
+        mBeratBadan.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+
+                List<Integer> data = new ArrayList<>();
+                data.add(Integer.parseInt(mTinggiBadan.getText().toString()));
+                data.add(Integer.parseInt(mBeratBadan.getText().toString()));
+                listener.fragmentSignUpTinggiBadanEvent(data);
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
         return v;
     }
 }
