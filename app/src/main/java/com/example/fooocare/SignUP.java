@@ -18,13 +18,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.Console;
+import java.util.List;
 
-public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.OnHeadlineSelectedListener {
+public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.OnHeadlineSelectedListener, Fragment_sign_up_tinggi_badan.FragmentSignUpTinggiBadanListener {
     SectionsPagerAdapter sectionsPagerAdapter;
     Button btnNext, btnPrev, btnFinish;
     int position = 0;
     DatabaseReference reff;
-
+    Pengguna pengguna;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,7 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tab_indicator);
         tabs.setupWithViewPager(viewPager);
-
+        pengguna = new Pengguna();
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,9 +80,20 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
         });
 
         reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
-        Pengguna pengguna = new Pengguna("Dimastyo Muhaimin Arifin",
+        final Pengguna pengguna = new Pengguna("Dimastyo Muhaimin Arifin",
                 "dimas@gmail.com", "muhaimin123", 174, 70);
         reff.push().setValue(pengguna);
+
+        btnFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                position = viewPager.getCurrentItem();
+                Log.d("Nama Pengguna", pengguna.getNamaLengkap());
+                Log.d("Tinggi Badan Pengguna", String.valueOf(pengguna.getTinggiBadan()));
+            }
+        });
 
     }
 
@@ -91,15 +103,25 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
     }
 
     String tag = "I";
-    @Override
-    public void someEvent(String s) {
-        reff = FirebaseDatabase.getInstance().getReference().child("Test Fragment");
-        reff.push().setValue(s);
-        Log.d(tag, s);
-    }
+
 
     @Override
     public void onAttachFragment(@NonNull Fragment fragment) {
         super.onAttachFragment(fragment);
+    }
+
+    @Override
+    public void fragmentSignUpEvent(List<String> s) {
+        pengguna.setNamaLengkap(s.get(0));
+        pengguna.setEmail(s.get(1));
+        pengguna.setPassword(s.get(2));
+        pengguna.setUsia(Integer.parseInt(s.get(3)));
+//        pengguna.setJenis_kelamin(s.get(4));
+    }
+
+    @Override
+    public void fragmentSignUpTinggiBadanEvent(List<Integer> s) {
+        pengguna.setTinggiBadan(s.get(0));
+        pengguna.setBeratBadan(s.get(1));
     }
 }

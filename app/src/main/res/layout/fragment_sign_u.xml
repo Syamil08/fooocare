@@ -66,6 +66,7 @@
                             android:textStyle="normal" />
 
                         <EditText
+                            android:id="@+id/nama"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
@@ -74,6 +75,7 @@
                             android:inputType="textPersonName" />
 
                         <EditText
+                            android:id="@+id/email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
@@ -84,6 +86,7 @@
 
 
                         <EditText
+                            android:id="@+id/password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
@@ -93,6 +96,7 @@
                             android:inputType="textPassword" />
 
                         <EditText
+                            android:id="@+id/usia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
@@ -111,11 +115,13 @@
 
 
                         <RadioGroup
+                            android:id="@+id/jenis_kelamin"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <RadioButton
+                                android:id="@+id/laki"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"
@@ -124,6 +130,7 @@
                                 android:textColor="#C5BFBF" />
 
                             <RadioButton
+                                android:id="@+id/perempuan"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"

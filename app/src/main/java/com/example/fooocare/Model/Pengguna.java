@@ -3,8 +3,17 @@ package com.example.fooocare.Model;
 import java.util.List;
 
 public class Pengguna {
-    private String namaLengkap, email, password;
-    private int tinggiBadan, beratBadan;
+    private String namaLengkap, email, password, jenis_kelamin;
+
+    public String getJenis_kelamin() {
+        return jenis_kelamin;
+    }
+
+    public void setJenis_kelamin(String jenis_kelamin) {
+        this.jenis_kelamin = jenis_kelamin;
+    }
+
+    private int tinggiBadan, beratBadan, usia;
 //    private List<String> olahraga;
 
     public Pengguna(String namaLengkap, String email, String password, int tinggiBadan, int beratBadan) {
@@ -13,6 +22,18 @@ public class Pengguna {
         this.password = password;
         this.tinggiBadan = tinggiBadan;
         this.beratBadan = beratBadan;
+    }
+
+    public int getUsia() {
+        return usia;
+    }
+
+    public void setUsia(int usia) {
+        this.usia = usia;
+    }
+
+    public Pengguna() {
+
     }
 
     public String getNamaLengkap() {
