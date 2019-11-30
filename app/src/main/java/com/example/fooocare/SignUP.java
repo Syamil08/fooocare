@@ -80,9 +80,9 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
         });
 
         reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
-        final Pengguna pengguna = new Pengguna("Dimastyo Muhaimin Arifin",
-                "dimas@gmail.com", "muhaimin123", 174, 70);
-        reff.push().setValue(pengguna);
+//        final Pengguna pengguna = new Pengguna("Dimastyo Muhaimin Arifin",
+//                "dimas@gmail.com", "muhaimin123", 174, 70);
+//        reff.push().setValue(pengguna);
 
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override

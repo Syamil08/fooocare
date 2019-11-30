@@ -2,6 +2,7 @@ package com.example.fooocare;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,10 @@ public class Fragment_sign_up_tinggi_badan extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(mTinggiBadan.getText().toString() != null && mBeratBadan.getText().toString() != null){
+        if((TextUtils.isEmpty(mTinggiBadan.getText().toString()) && TextUtils.isEmpty(mBeratBadan.getText().toString()))){
+
+        }
+        else{
             List<Integer> data = new ArrayList<>();
             data.add(Integer.parseInt(mTinggiBadan.getText().toString()));
             data.add(Integer.parseInt(mBeratBadan.getText().toString()));
