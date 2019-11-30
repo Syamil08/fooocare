@@ -2,10 +2,13 @@ package com.example.fooocare;
 
 import android.graphics.ColorSpace;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.fooocare.Model.Pengguna;
@@ -14,7 +17,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class SignUP extends AppCompatActivity {
+import java.io.Console;
+
+public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.OnHeadlineSelectedListener {
     SectionsPagerAdapter sectionsPagerAdapter;
     Button btnNext, btnPrev, btnFinish;
     int position = 0;
@@ -84,5 +89,16 @@ public class SignUP extends AppCompatActivity {
         btnFinish.setVisibility(View.VISIBLE);
     }
 
+    String tag = "I";
+    @Override
+    public void someEvent(String s) {
+        reff = FirebaseDatabase.getInstance().getReference().child("Test Fragment");
+        reff.push().setValue(s);
+        Log.d(tag, s);
+    }
 
+    @Override
+    public void onAttachFragment(@NonNull Fragment fragment) {
+        super.onAttachFragment(fragment);
+    }
 }
