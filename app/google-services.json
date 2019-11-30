@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "13739102367",
+    "firebase_url": "https://foocare-38111.firebaseio.com",
+    "project_id": "foocare-38111",
+    "storage_bucket": "foocare-38111.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13739102367:android:7882aeb81e168a1aced2aa",
+        "android_client_info": {
+          "package_name": "com.example.fooocare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13739102367-o6dl1kdpvidqaugr2c2a6mp7fmjq9o0j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fooocare",
+            "certificate_hash": "555f0616b6508f87753a9993eb65865ed17e234a"
+          }
+        },
+        {
+          "client_id": "13739102367-5tl9119tlurt7jnf0abogd9u0nhhu5ri.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsjGL9KWKpHx22E1L_ht3VtKvqXKHHEGE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13739102367-5tl9119tlurt7jnf0abogd9u0nhhu5ri.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
