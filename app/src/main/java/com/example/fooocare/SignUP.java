@@ -79,17 +79,18 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
             }
         });
 
-        reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
+
 
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 position = viewPager.getCurrentItem();
                 Log.d("Nama Pengguna", pengguna.getNamaLengkap());
                 Log.d("Tinggi Badan Pengguna", String.valueOf(pengguna.getTinggiBadan()));
+
+                reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
                 reff.push().setValue(pengguna);
+
             }
         });
 
@@ -114,7 +115,7 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
         pengguna.setEmail(s.get(1));
         pengguna.setPassword(s.get(2));
         pengguna.setUsia(Integer.parseInt(s.get(3)));
-//        pengguna.setJenis_kelamin(s.get(4));
+        pengguna.setJenis_kelamin(s.get(4));
     }
 
     @Override
