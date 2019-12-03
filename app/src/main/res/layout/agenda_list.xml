@@ -17,7 +17,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pertandingan Perdana Liga 1 Shopee"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"/>
 
         <TextView
             android:id="@+id/txt_tanggal"
@@ -26,7 +28,9 @@
             android:layout_below="@+id/txt_pertandingan"
             android:layout_marginTop="5dp"
             android:drawableLeft="@drawable/ic_date"
-            android:text="   24 November 2019" />
+            android:text="   24 November 2019"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"/>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
