@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class AgendaFragment extends Fragment {
     private View rootview;
     private RecyclerView agenda, agendaSejarah;
-    private RecyclerView.LayoutManager mLayoutAgenda;
+    private RecyclerView.LayoutManager mLayoutAgenda, mLayoutAgendaSejarah;
     private RecyclerView.Adapter mAdapterAgenda, mAdapterAgendaSejarah;
     private ArrayList<AgendaItem> AgendaList;
     private ArrayList<AgendaItem> AgendaListSejarah;
@@ -45,8 +45,10 @@ public class AgendaFragment extends Fragment {
     public void buildRecyclerViewAgendaSejarah(){
         agendaSejarah = rootview.findViewById(R.id.recyclerViewSejarahAgenda);
         agendaSejarah.setHasFixedSize(true);
-        mLayoutAgenda = new LinearLayoutManager(getContext());
+        mLayoutAgendaSejarah = new LinearLayoutManager(getContext());
         mAdapterAgendaSejarah = new AgendaListAdapter(AgendaListSejarah);
+
+        agendaSejarah.setLayoutManager(mLayoutAgendaSejarah);
         agendaSejarah.setAdapter(mAdapterAgendaSejarah);
     }
 
