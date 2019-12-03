@@ -35,7 +35,7 @@ public class AgendaListAdapter extends RecyclerView.Adapter<AgendaListAdapter.Ag
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listAgenda.size();
     }
 
     public class AgendaListViewHolder extends RecyclerView.ViewHolder {
