@@ -8,12 +8,57 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class AgendaFragment extends Fragment {
+    private View rootview;
+    private RecyclerView agenda;
+    private RecyclerView.LayoutManager mLayoutAgenda;
+    private RecyclerView.Adapter mAdapterAgenda, mAdapterAgendaSejarah;
+    private ArrayList<AgendaItem> AgendaList;
+    private ArrayList<AgendaItem> AgendaListSejarah;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_agenda, container, false);
+        rootview = inflater.inflate(R.layout.fragment_agenda, container, false);
+        createListAgenda();
+        createListAgendaSejara();
+        buildRecyclerViewAgenda();
+        buildRecyclerViewAgendaSejarah();
+        return rootview;
+    }
+
+    public void buildRecyclerViewAgenda(){
+        agenda = rootview.findViewById(R.id.recyclerViewAgendaTerdekat);
+        agenda.setHasFixedSize(true);
+        mLayoutAgenda = new LinearLayoutManager(getContext());
+        mAdapterAgenda = new AgendaListAdapter(AgendaList);
+
+        agenda.setLayoutManager(mLayoutAgenda);
+        agenda.setAdapter(mAdapterAgenda);
+    }
+
+    public void buildRecyclerViewAgendaSejarah(){
+        agenda = rootview.findViewById(R.id.recyclerViewSejarahAgenda);
+        agenda.setHasFixedSize(true);
+        mLayoutAgenda = new LinearLayoutManager(getContext());
+        mAdapterAgendaSejarah = new AgendaListAdapter(AgendaListSejarah);
+        agenda.setAdapter(mAdapterAgendaSejarah);
+    }
+
+    public void createListAgenda(){
+        AgendaList = new ArrayList<AgendaItem>();
+        AgendaList.add(new AgendaItem("Pertandingan Persahabatan Shopee", "     24 Oktober 2019"));
+        AgendaList.add(new AgendaItem("Pertandingan Liga 1 Traveloka", "     25 Oktober 2019"));
+    }
+
+    public void createListAgendaSejara(){
+        AgendaListSejarah = new ArrayList<AgendaItem>();
+        AgendaListSejarah.add(new AgendaItem("Pertandingan Champions League", "     24 November 2019"));
+        AgendaListSejarah.add(new AgendaItem("Pertandingan Europa League", "     25 November 2019"));
     }
 }
