@@ -25,6 +25,33 @@
             android:layout_marginTop="5dp"
             android:drawableLeft="@drawable/ic_date"
             android:text="   24 November 2019" />
+
+        <RelativeLayout
+            android:id="@+id/agenda_expandable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_tanggal">
+
+            <TextView
+                android:id="@+id/tvMakanPagi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Makan Pagi"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvKalori"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_below="@+id/tvMakanPagi"
+                android:text="112 cal"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

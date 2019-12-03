@@ -31,6 +31,9 @@ public class AgendaListAdapter extends RecyclerView.Adapter<AgendaListAdapter.Ag
         AgendaItem currentItem = listAgenda.get(position);
         holder.mTxtPertandingan.setText(currentItem.getPertandingan());
         holder.mTxtTanggal.setText(currentItem.getTanggal());
+
+        boolean isExpanded = listAgenda.get(position).expanded;
+        holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -40,11 +43,22 @@ public class AgendaListAdapter extends RecyclerView.Adapter<AgendaListAdapter.Ag
 
     public class AgendaListViewHolder extends RecyclerView.ViewHolder {
         public TextView mTxtPertandingan, mTxtTanggal;
+        public RecyclerView expandableLayout;
 
         public AgendaListViewHolder(@NonNull View itemView) {
             super(itemView);
             mTxtPertandingan = (TextView) itemView.findViewById(R.id.txt_pertandingan);
             mTxtTanggal = (TextView) itemView.findViewById(R.id.txt_tanggal);
+            expandableLayout = itemView.findViewById(R.id.agenda_expandable);
+
+            mTxtPertandingan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AgendaItem agenda = listAgenda.get(getAdapterPosition());
+                    agenda.setExpanded(!agenda.isExpanded());
+                    notifyItemChanged(getAdapterPosition());
+                }
+            });
         }
     }
 }

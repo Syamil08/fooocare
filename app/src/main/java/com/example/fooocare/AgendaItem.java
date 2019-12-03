@@ -2,7 +2,7 @@ package com.example.fooocare;
 
 public class AgendaItem {
     public String pertandingan, tanggal;
-    public   boolean expanded;
+    public boolean expanded;
 
     public AgendaItem(String pertandingan, String tanggal) {
         this.pertandingan = pertandingan;
@@ -20,6 +20,14 @@ public class AgendaItem {
 
     public String getTanggal() {
         return tanggal;
+    }
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
     }
 
     public void setTanggal(String tanggal) {
