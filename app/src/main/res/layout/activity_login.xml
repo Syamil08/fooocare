@@ -1,134 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    >
+    tools:context=".LoginActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorOnBoarding"/>
-n
+            android:background="@color/colorOnBoarding" />
+        n
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/shangobold"
                 android:text="Foocare"
-                android:textSize="50sp"
-                android:fontFamily="@font/shangobold"
-                android:textStyle="bold"
                 android:textColor="@android:color/white"
-                android:layout_marginTop="40dp" />
+                android:textSize="50sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Football Care"
-                android:textSize="25sp"
+                android:layout_marginBottom="100dp"
                 android:fontFamily="@font/shangobold"
-                android:textStyle="bold"
+                android:text="Football Care"
                 android:textColor="@android:color/white"
-                android:layout_marginBottom="100dp" />
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/logincustom">
 
                 </View>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Selamat Datang"
-                        android:textSize="30sp"
-                        android:textStyle="normal"
-                        android:textColor="@android:color/black"
                         android:layout_marginTop="20sp"
-                        />
+                        android:text="Selamat Datang"
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp"
+                        android:textStyle="normal" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Silahkan login untuk melanjutkan"
-                        android:textSize="17sp"
-                        android:textStyle="normal"
-                        android:textColor="#C5BFBF"
                         android:layout_marginBottom="30dp"
-                        />
+                        android:text="Silahkan login untuk melanjutkan"
+                        android:textColor="#C5BFBF"
+                        android:textSize="17sp"
+                        android:textStyle="normal" />
 
                     <EditText
+                        android:id="@+id/txt_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
                         android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
                         android:hint="Email"
-                        android:inputType="textEmailAddress"/>
+                        android:inputType="textEmailAddress" />
 
                     <EditText
+                        android:id="@+id/txt_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="24dp"
+                        android:layout_marginEnd="20dp"
                         android:hint="Password"
-                        android:inputType="textPassword"/>
+                        android:inputType="textPassword" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_marginLeft="2dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginLeft="2dp">
+                        android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Buat Akun"
-                            android:textSize="15sp"
                             android:layout_marginStart="20dp"
-                            android:textStyle="normal"
-                            android:textColor="#648EE6"
                             android:layout_marginTop="14dp"
                             android:layout_weight="1"
-                            />
+                            android:text="Buat Akun"
+                            android:textColor="#648EE6"
+                            android:textSize="15sp"
+                            android:textStyle="normal" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginEnd="20dp"
                             android:text="Lupa password?"
                             android:textSize="15sp"
-                            android:layout_marginEnd="20dp"
-                            android:textStyle="normal"
-                            android:layout_marginTop="14dp"
-                            />
+                            android:textStyle="normal" />
                     </LinearLayout>
+
                     <Button
+                        android:id="@+id/btn_login"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_marginTop="50dp"
-                        android:text="Masuk"
-                        android:textColor="@android:color/white"
+                        android:layout_marginEnd="20dp"
                         android:background="@drawable/buttoncustom"
-                        />
+                        android:text="Masuk"
+                        android:textColor="@android:color/white" />
                 </LinearLayout>
             </FrameLayout>
-
 
 
         </LinearLayout>

@@ -1,10 +1,11 @@
 package com.example.fooocare;
 
-import android.graphics.ColorSpace;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +14,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.fooocare.Model.Pengguna;
 import com.example.fooocare.ui.main.SectionsPagerAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.Console;
 import java.util.List;
 
 public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.OnHeadlineSelectedListener, Fragment_sign_up_tinggi_badan.FragmentSignUpTinggiBadanListener {
@@ -26,6 +30,8 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
     int position = 0;
     DatabaseReference reff;
     Pengguna pengguna;
+    FirebaseAuth fAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +86,6 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
         });
 
 
-
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,9 +93,22 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
                 Log.d("Nama Pengguna", pengguna.getNamaLengkap());
                 Log.d("Tinggi Badan Pengguna", String.valueOf(pengguna.getTinggiBadan()));
 
-                reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
-                reff.push().setValue(pengguna);
+//                reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
+                fAuth = FirebaseAuth.getInstance();
+//                reff.push().setValue(pengguna);
 
+                fAuth.createUserWithEmailAndPassword(pengguna.getEmail(), "12345678").addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(SignUP.this, "User created",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                        }
+                        else {
+                            Toast.makeText(SignUP.this, "Failed",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
 
