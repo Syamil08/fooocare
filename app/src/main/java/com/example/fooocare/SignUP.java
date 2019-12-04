@@ -25,101 +25,103 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.OnHeadlineSelectedListener, Fragment_sign_up_tinggi_badan.FragmentSignUpTinggiBadanListener {
+public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.OnHeadlineSelectedListener, Fragment_sign_up_tinggi_badan.FragmentSignUpTinggiBadanListener, Fragment_sign_up_data.MovePositionListener
+{
     SectionsPagerAdapter sectionsPagerAdapter;
     Button btnNext, btnPrev, btnFinish;
     int position = 0;
     DatabaseReference reff;
     Pengguna pengguna;
     FirebaseAuth fAuth;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (restorePrefData()) {
-
-            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
-
-        }
+//        if (restorePrefData()) {
+//
+//            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+//
+//        }
 
         setContentView(R.layout.activity_sign_up);
-        btnNext = (Button) findViewById(R.id.btn_next);
-        btnPrev = (Button) findViewById(R.id.btn_prev);
-        btnFinish = (Button) findViewById(R.id.btn_finish);
+//        btnNext = (Button) findViewById(R.id.btn_next);
+//        btnPrev = (Button) findViewById(R.id.btn_prev);
+//        btnFinish = (Button) findViewById(R.id.btn_finish);
         sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        final ViewPager viewPager = findViewById(R.id.screen_viewpager);
+        viewPager = findViewById(R.id.screen_viewpager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tab_indicator);
         tabs.setupWithViewPager(viewPager);
         pengguna = new Pengguna();
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        btnNext.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//                position = viewPager.getCurrentItem();
+//                if (position < 3) {
+//
+//                    position++;
+//                    viewPager.setCurrentItem(position);
+//
+//                }
+//
+////                ketika posisi sudah sampai pada banyaknya data maka
+//
+//                if (position == 2) {
+//
+////                    TODO: munculkan tombol GetStarted kemudian hilangkan tabLayout dan tombol Next
+//
+//                    loadLastScreen();
+//
+//                }
+//            }
+//        });
 
-
-                position = viewPager.getCurrentItem();
-                if (position < 3) {
-
-                    position++;
-                    viewPager.setCurrentItem(position);
-
-                }
-
-//                ketika posisi sudah sampai pada banyaknya data maka
-
-                if (position == 2) {
-
-//                    TODO: munculkan tombol GetStarted kemudian hilangkan tabLayout dan tombol Next
-
-                    loadLastScreen();
-
-                }
-            }
-        });
-
-        btnPrev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                position = viewPager.getCurrentItem();
-                if (position < 3) {
-                    position--;
-                    viewPager.setCurrentItem(position);
-                    btnFinish.setVisibility(View.INVISIBLE);
-                    btnNext.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-
-        btnFinish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                position = viewPager.getCurrentItem();
-                Log.d("Nama Pengguna", pengguna.getNamaLengkap());
-                Log.d("Tinggi Badan Pengguna", String.valueOf(pengguna.getTinggiBadan()));
-
-//                reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
-                fAuth = FirebaseAuth.getInstance();
-//                reff.push().setValue(pengguna);
-
-                fAuth.createUserWithEmailAndPassword(pengguna.getEmail(), pengguna.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(SignUP.this, "User created",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
-                            savePrefsData();
-                        }
-                        else {
-                            Toast.makeText(SignUP.this, "Failed"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        });
+//        btnPrev.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//                position = viewPager.getCurrentItem();
+//                if (position < 3) {
+//                    position--;
+//                    viewPager.setCurrentItem(position);
+//                    btnFinish.setVisibility(View.INVISIBLE);
+//                    btnNext.setVisibility(View.VISIBLE);
+//                }
+//            }
+//        });
+//
+//
+//        btnFinish.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                position = viewPager.getCurrentItem();
+//                Log.d("Nama Pengguna", pengguna.getNamaLengkap());
+//                Log.d("Tinggi Badan Pengguna", String.valueOf(pengguna.getTinggiBadan()));
+//
+////                reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
+//                fAuth = FirebaseAuth.getInstance();
+////                reff.push().setValue(pengguna);
+//
+//                fAuth.createUserWithEmailAndPassword(pengguna.getEmail(), pengguna.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if(task.isSuccessful()){
+//                            Toast.makeText(SignUP.this, "User created",Toast.LENGTH_SHORT).show();
+//                            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+////                            savePrefsData();
+//                        }
+//                        else {
+//                            Toast.makeText(SignUP.this, "Failed"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//            }
+//        });
 
     }
 
@@ -168,5 +170,10 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
         Boolean isIntroActivityOpenedBefore = pref.getBoolean("isIntroOpened", false);
         return isIntroActivityOpenedBefore;
 
+    }
+
+    @Override
+    public void move(int position) {
+        viewPager.setCurrentItem(position);
     }
 }

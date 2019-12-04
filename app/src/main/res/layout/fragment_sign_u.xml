@@ -3,9 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -139,6 +141,32 @@
                                 android:textColor="#C5BFBF" />
                         </RadioGroup>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+
+                            <Button
+                                android:id="@+id/btn_next"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:layout_weight="1"
+                                android:background="#fff"
+                                android:drawableRight="@drawable/ic_arrow_right"
+                                android:drawableTint="@color/gradient_start_color"
+                                android:paddingLeft="30dp"
+                                android:paddingRight="10dp"
+                                android:text="LANJUT"
+                                android:textColor="@color/gradient_start_color"
+                                android:layout_gravity="end"/>
+
+
+                        </LinearLayout>
 
                     </LinearLayout>
                 </FrameLayout>

@@ -41,19 +41,19 @@
 
             <!--TabLayout-->
 
-            <Button
-                android:background="#fff"
-                android:id="@+id/btn_prev"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:text="KEMBALI"
-                android:drawableLeft="@drawable/ic_arrow_left"
-                android:drawableTint="@color/gradient_start_color"
-                android:textColor="@color/gradient_start_color"
-                android:paddingLeft="30dp"
-                android:paddingRight="10dp"
-                android:layout_weight="1"/>
+            <!--<Button-->
+                <!--android:background="#fff"-->
+                <!--android:id="@+id/btn_prev"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:text="KEMBALI"-->
+                <!--android:drawableLeft="@drawable/ic_arrow_left"-->
+                <!--android:drawableTint="@color/gradient_start_color"-->
+                <!--android:textColor="@color/gradient_start_color"-->
+                <!--android:paddingLeft="30dp"-->
+                <!--android:paddingRight="10dp"-->
+                <!--android:layout_weight="1"/>-->
 
 
             <com.google.android.material.tabs.TabLayout
@@ -67,38 +67,38 @@
 
             </com.google.android.material.tabs.TabLayout>
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <Button
-                    android:background="#fff"
-                    android:id="@+id/btn_finish"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:text="SELESASI"
-                    android:drawableTint="@color/gradient_start_color"
-                    android:textColor="@color/gradient_start_color"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="10dp"
-                    android:visibility="invisible"
-                    android:layout_weight="1"/>
+            <!--<FrameLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<Button-->
+                    <!--android:background="#fff"-->
+                    <!--android:id="@+id/btn_finish"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="20dp"-->
+                    <!--android:text="SELESASI"-->
+                    <!--android:drawableTint="@color/gradient_start_color"-->
+                    <!--android:textColor="@color/gradient_start_color"-->
+                    <!--android:paddingLeft="30dp"-->
+                    <!--android:paddingRight="10dp"-->
+                    <!--android:visibility="invisible"-->
+                    <!--android:layout_weight="1"/>-->
 
-                <Button
-                    android:background="#fff"
-                    android:id="@+id/btn_next"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:text="LANJUT"
-                    android:drawableRight="@drawable/ic_arrow_right"
-                    android:drawableTint="@color/gradient_start_color"
-                    android:textColor="@color/gradient_start_color"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="10dp"
-                    android:layout_weight="1"/>
+                <!--<Button-->
+                    <!--android:background="#fff"-->
+                    <!--android:id="@+id/btn_next"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="20dp"-->
+                    <!--android:text="LANJUT"-->
+                    <!--android:drawableRight="@drawable/ic_arrow_right"-->
+                    <!--android:drawableTint="@color/gradient_start_color"-->
+                    <!--android:textColor="@color/gradient_start_color"-->
+                    <!--android:paddingLeft="30dp"-->
+                    <!--android:paddingRight="10dp"-->
+                    <!--android:layout_weight="1"/>-->
 
-            </FrameLayout>
+            <!--</FrameLayout>-->
 
 
         </LinearLayout>
