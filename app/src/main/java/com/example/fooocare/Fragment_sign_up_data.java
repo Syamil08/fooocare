@@ -64,7 +64,7 @@ public class Fragment_sign_up_data extends Fragment {
                 List<String> data = new ArrayList<>();
                 data.add(mNama.getText().toString());
                 data.add(mEmail.getText().toString());
-                data.add(mPassword.getText().toString());
+                data.add(mPassword.getText().toString().trim());
                 data.add(mUsia.getText().toString());
                 data.add(kelamin.getText().toString());
                 listener.fragmentSignUpEvent(data);

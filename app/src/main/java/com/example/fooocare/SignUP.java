@@ -93,11 +93,11 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
                 Log.d("Nama Pengguna", pengguna.getNamaLengkap());
                 Log.d("Tinggi Badan Pengguna", String.valueOf(pengguna.getTinggiBadan()));
 
-//                reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
+                reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
                 fAuth = FirebaseAuth.getInstance();
-//                reff.push().setValue(pengguna);
+                reff.push().setValue(pengguna);
 
-                fAuth.createUserWithEmailAndPassword(pengguna.getEmail(), "12345678").addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                fAuth.createUserWithEmailAndPassword(pengguna.getEmail(), pengguna.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
