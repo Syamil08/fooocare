@@ -171,6 +171,36 @@
                             />
                     </LinearLayout>
                 </LinearLayout>
+                <Button
+                    android:id="@+id/btn_finish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="1"
+                    android:background="#fff"
+                    android:drawableTint="@color/gradient_start_color"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="10dp"
+                    android:text="SELESAI"
+                    android:textColor="@color/gradient_start_color" />
+
+                <Button
+                    android:id="@+id/btn_prev"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|left"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="1"
+                    android:background="#fff"
+                    android:drawableLeft="@drawable/ic_arrow_left"
+                    android:drawableTint="@color/gradient_start_color"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="10dp"
+                    android:text="KEMBALI"
+                    android:textColor="@color/gradient_start_color" />
 
             </FrameLayout>
 

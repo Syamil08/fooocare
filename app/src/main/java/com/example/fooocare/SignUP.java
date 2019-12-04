@@ -3,7 +3,6 @@ package com.example.fooocare;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -25,8 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.OnHeadlineSelectedListener, Fragment_sign_up_tinggi_badan.FragmentSignUpTinggiBadanListener, Fragment_sign_up_data.MovePositionListener
-{
+public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.OnHeadlineSelectedListener, Fragment_sign_up_tinggi_badan.FragmentSignUpTinggiBadanListener, Fragment_sign_up_data.MovePositionListener {
     SectionsPagerAdapter sectionsPagerAdapter;
     Button btnNext, btnPrev, btnFinish;
     int position = 0;
@@ -53,6 +51,7 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
         viewPager = findViewById(R.id.screen_viewpager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tab_indicator);
+        tabs.setVisibility(View.GONE);
         tabs.setupWithViewPager(viewPager);
         pengguna = new Pengguna();
 //        btnNext.setOnClickListener(new View.OnClickListener() {
@@ -103,23 +102,22 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
 //                Log.d("Nama Pengguna", pengguna.getNamaLengkap());
 //                Log.d("Tinggi Badan Pengguna", String.valueOf(pengguna.getTinggiBadan()));
 //
-////                reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
-//                fAuth = FirebaseAuth.getInstance();
-////                reff.push().setValue(pengguna);
+//        reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
+//        fAuth = FirebaseAuth.getInstance();
+//        reff.push().setValue(pengguna);
 //
-//                fAuth.createUserWithEmailAndPassword(pengguna.getEmail(), pengguna.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if(task.isSuccessful()){
-//                            Toast.makeText(SignUP.this, "User created",Toast.LENGTH_SHORT).show();
-//                            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
-////                            savePrefsData();
-//                        }
-//                        else {
-//                            Toast.makeText(SignUP.this, "Failed"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
+//        fAuth.createUserWithEmailAndPassword(pengguna.getEmail(), pengguna.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<AuthResult> task) {
+//                if (task.isSuccessful()) {
+//                    Toast.makeText(SignUP.this, "User created", Toast.LENGTH_SHORT).show();
+//                    startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+//                            savePrefsData();
+//                } else {
+//                    Toast.makeText(SignUP.this, "Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
 //            }
 //        });
 
@@ -175,5 +173,8 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
     @Override
     public void move(int position) {
         viewPager.setCurrentItem(position);
+        if(position == 2){
+            Fragment_sign_up_olahraga.pengguna = this.pengguna;
+        }
     }
 }
