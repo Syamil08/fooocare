@@ -3,6 +3,7 @@ package com.example.fooocare;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,7 +44,7 @@ public class AgendaListAdapter extends RecyclerView.Adapter<AgendaListAdapter.Ag
 
     public class AgendaListViewHolder extends RecyclerView.ViewHolder {
         public TextView mTxtPertandingan, mTxtTanggal;
-        public RecyclerView expandableLayout;
+        public RelativeLayout expandableLayout;
 
         public AgendaListViewHolder(@NonNull View itemView) {
             super(itemView);

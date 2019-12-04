@@ -3,7 +3,7 @@
     <item
         android:drawable="@drawable/regular"
         android:state_checked="true"
-        android:state_pressed="true" />
+        android:state_pressed="true"/>
     <item
         android:drawable="@drawable/checked"
         android:state_pressed="true" />
