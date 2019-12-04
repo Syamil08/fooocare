@@ -1,6 +1,7 @@
 package com.example.fooocare;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +36,13 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (restorePrefData()) {
+
+            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+
+        }
+
         setContentView(R.layout.activity_sign_up);
         btnNext = (Button) findViewById(R.id.btn_next);
         btnPrev = (Button) findViewById(R.id.btn_prev);
@@ -93,9 +101,9 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
                 Log.d("Nama Pengguna", pengguna.getNamaLengkap());
                 Log.d("Tinggi Badan Pengguna", String.valueOf(pengguna.getTinggiBadan()));
 
-                reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
+//                reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
                 fAuth = FirebaseAuth.getInstance();
-                reff.push().setValue(pengguna);
+//                reff.push().setValue(pengguna);
 
                 fAuth.createUserWithEmailAndPassword(pengguna.getEmail(), pengguna.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -103,9 +111,10 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
                         if(task.isSuccessful()){
                             Toast.makeText(SignUP.this, "User created",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                            savePrefsData();
                         }
                         else {
-                            Toast.makeText(SignUP.this, "Failed",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUP.this, "Failed"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -142,5 +151,22 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
     public void fragmentSignUpTinggiBadanEvent(List<Integer> s) {
         pengguna.setTinggiBadan(s.get(0));
         pengguna.setBeratBadan(s.get(1));
+    }
+
+    private void savePrefsData() {
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean("isIntroOpened", true);
+        editor.commit();
+
+    }
+
+    private boolean restorePrefData() {
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+        Boolean isIntroActivityOpenedBefore = pref.getBoolean("isIntroOpened", false);
+        return isIntroActivityOpenedBefore;
+
     }
 }

@@ -1,6 +1,7 @@
 package com.example.fooocare;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         fAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
+
+        if (restorePrefData()) {
+
+            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+
+        }
+
         setContentView(R.layout.activity_login);
         mBtnLogin = (Button) findViewById(R.id.btn_login);
         mEmail = (EditText) findViewById(R.id.txt_email);
@@ -42,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(LoginActivity.this, "Login succesful",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                            savePrefsData();
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "Login Failed",Toast.LENGTH_SHORT).show();
@@ -50,5 +59,22 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void savePrefsData() {
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean("isIntroOpened", true);
+        editor.commit();
+
+    }
+
+    private boolean restorePrefData() {
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+        Boolean isIntroActivityOpenedBefore = pref.getBoolean("isIntroOpened", false);
+        return isIntroActivityOpenedBefore;
+
     }
 }
