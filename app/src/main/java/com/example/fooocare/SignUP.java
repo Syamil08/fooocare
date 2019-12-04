@@ -114,6 +114,8 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
 
     }
 
+    //Load last screen
+
     private void loadLastScreen() {
         btnNext.setVisibility(View.INVISIBLE);
         btnFinish.setVisibility(View.VISIBLE);
