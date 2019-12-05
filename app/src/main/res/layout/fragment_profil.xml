@@ -42,9 +42,9 @@
                         android:layout_marginRight="20dp">
 
                             <TextView
+                                android:id="@+id/namaPengguna"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Halo, Syamil"
                                 android:textColor="@android:color/white"
                                 android:textSize="25sp"
                                 android:textStyle="bold" />
@@ -133,9 +133,9 @@
                     android:layout_weight="1"/>
 
                 <TextView
+                    android:id="@+id/nama"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Syamil"
                     android:textSize="14sp"/>
 
             </LinearLayout>
@@ -154,12 +154,13 @@
                         android:layout_weight="1"/>
 
                     <TextView
+                        android:id="@+id/email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="hahaha@gmail.com"
                         android:textSize="14sp"/>
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -170,35 +171,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Password"
+                        android:text="Usia"
                         android:textSize="14sp"
                         android:layout_weight="1"/>
 
                     <TextView
+                        android:id="@+id/usia"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="********"
-                        android:textSize="14sp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tanggal Lahir"
-                        android:textSize="14sp"
-                        android:layout_weight="1"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2000-01-01"
                         android:textSize="14sp"/>
 
             </LinearLayout>
@@ -217,9 +197,9 @@
                             android:layout_weight="1"/>
 
                         <TextView
+                            android:id="@+id/kelamin"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Laki - Laki"
                             android:textSize="14sp"/>
 
             </LinearLayout>
@@ -238,9 +218,9 @@
                             android:layout_weight="1"/>
 
                         <TextView
+                            android:id="@+id/tinggiBadan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="176 cm"
                             android:textSize="14sp"/>
 
             </LinearLayout>
@@ -259,9 +239,9 @@
                             android:layout_weight="1"/>
 
                         <TextView
+                            android:id="@+id/berat"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="76 kg"
                             android:textSize="14sp"/>
 
                 </LinearLayout>
@@ -271,6 +251,14 @@
 
 
         </androidx.cardview.widget.CardView>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Keluar Dari Akun"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background=""/>
 
 
         </LinearLayout>

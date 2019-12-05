@@ -41,3 +41,38 @@ public class MainActivity extends AppCompatActivity {
         timer.start();
     }
 }
+
+
+
+/*
+    1. Topik / Masalah yang Akan diselesaikan
+      - Mengatur pola makan bagi atlet sepakbola agar memiliki gizi yang seimbang
+       serta agar bisa mendapatkan stamina terbaik ketika akan melakukan suatu pertandingan.
+    2. Mengapa aplikasi tersebut harus dibangun di Android
+      - User experience (Pengalaman dari menggunakan aplikasi yang diberikan kepada pengguna yang belum tentu didapatkan
+        pada sistem berbasis web atau yang lainnya).
+      - Android memiliki akses kedalam sumber daya sistemnya (seperti kamera, baterai, dll).
+    3. Siapa usernya
+       Pemain Sepakbola
+    4. Siapa clientnya
+       - Akademi Sepakbola
+       - Klub Sepakbola
+       - Tim kesehatan dalam sebuah klub sepakbola
+    5. Apa inputnya
+       - nama
+       - password
+       - email
+       - jenis kelamin
+       - Usia Pemain
+       - Berat badan pemain
+       - Tinggi badan pemain
+       - Jadwal pertandingan pemain
+       - Kesibukan Pemain
+    6. Apa outputnya
+        Rekomendasi menu makanan
+    7. Fungsi-fungsi/fitur apa saja yang ada pada aplikasi tersebut
+        - fitur rekomendasi makanan
+        - fitur tambah pertandingan
+        - fitur check-out makanan
+
+ */
