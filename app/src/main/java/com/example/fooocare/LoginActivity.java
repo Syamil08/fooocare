@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(LoginActivity.this, "Login succesful",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                            finish();
                             savePrefsData();
                         }
                         else {
@@ -76,5 +77,10 @@ public class LoginActivity extends AppCompatActivity {
         Boolean isIntroActivityOpenedBefore = pref.getBoolean("isIntroOpened", false);
         return isIntroActivityOpenedBefore;
 
+    }
+
+    public void toRegister(View view) {
+        Intent i = new Intent(getApplicationContext(),SignUP.class);
+        startActivity(i);
     }
 }

@@ -112,7 +112,8 @@
                             android:text="Buat Akun"
                             android:textColor="#648EE6"
                             android:textSize="15sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:onClick="toRegister"/>
 
                         <TextView
                             android:layout_width="wrap_content"

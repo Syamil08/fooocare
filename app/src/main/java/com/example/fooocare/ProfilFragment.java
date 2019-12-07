@@ -1,9 +1,12 @@
 package com.example.fooocare;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,10 +22,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class ProfilFragment extends Fragment {
     FirebaseAuth auth;
     FirebaseUser user;
     View root;
+    Button btn_logout;
 
     TextView namaPengguna,nama,email,usia,jenisKelamin,tinggiBadan,beratBadan;
 
@@ -72,7 +78,22 @@ public class ProfilFragment extends Fragment {
             }
         });
 
+        btn_logout = root.findViewById(R.id.btn_logout);
 
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                auth.signOut();
+                Intent i = new Intent(getActivity().getApplicationContext(),LoginActivity.class);
+                SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putBoolean("isIntroOpened", false);
+                editor.commit();
+                startActivity(i);
+
+            }
+        });
 
         return root;
     }
