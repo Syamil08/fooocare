@@ -1,5 +1,6 @@
 package com.example.fooocare.Model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CaloryCounter {
@@ -18,4 +19,18 @@ public class CaloryCounter {
 
     return aktivitas_kal;
     }
+
+    public static ArrayList<Sepakbola> mdlSepakbola;
+    public static float agendaCounter(int berat,int latihan){
+        float _pengali = 0, total = 0;
+        for (Sepakbola data: mdlSepakbola){
+            if(data.getBerat() >= berat){
+                _pengali = data.getPengali();
+                break;
+            }
+        }
+        total = latihan * 90 * _pengali;
+        return total;
+    }
+
 }
