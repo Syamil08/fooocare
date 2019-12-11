@@ -75,10 +75,10 @@ public class HomeFragment extends Fragment {
         getImagesMalam();
         getImagesSiang();
         getImages();
-        buildRecyclerView();
+//        buildRecyclerView();
 
         tv_banyakKalori = rootView.findViewById(R.id.tv_banyakKalori);
-        buttonInsertAgenda = rootView.findViewById(R.id.btn_tambah_agenda);
+//        buttonInsertAgenda = rootView.findViewById(R.id.btn_tambah_agenda);
 
         CaloryCounter.GeneratePengali();
         CaloryCounter.GenerateBMR();
@@ -86,18 +86,18 @@ public class HomeFragment extends Fragment {
         tv_banyakKalori.setText(String.valueOf(banyakKalori));
 
 
-        buttonInsertAgenda.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int position = mExampleList.size();
-                openDialog();
-                insertItem(position);
-                kaloriAgenda = CaloryCounter.agendaCounter(60,3);
-                banyakKalori += kaloriAgenda/7;
-                Log.d("Kalori",String.valueOf(kaloriAgenda));
-                tv_banyakKalori.setText(String.valueOf(banyakKalori));
-            }
-        });
+//        buttonInsertAgenda.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int position = mExampleList.size();
+//                openDialog();
+//                insertItem(position);
+//                kaloriAgenda = CaloryCounter.agendaCounter(60,3);
+//                banyakKalori += kaloriAgenda/7;
+//                Log.d("Kalori",String.valueOf(kaloriAgenda));
+//                tv_banyakKalori.setText(String.valueOf(banyakKalori));
+//            }
+//        });
         return rootView;
     }
 
@@ -116,7 +116,7 @@ public class HomeFragment extends Fragment {
 
 
     public void buildRecyclerView(){
-        mRecyclerView = rootView.findViewById(R.id.recyclerViewAgenda);
+//        mRecyclerView = rootView.findViewById(R.id.recyclerViewAgenda);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
         mAdapter = new ExampleAdapter(mExampleList);
@@ -143,14 +143,14 @@ public class HomeFragment extends Fragment {
 
 
 
-        initRecyclerView();
+//        initRecyclerView();
 
     }
 
     private void initRecyclerView() {
 
         mLayoutManagerMakanan   = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
-        mRecyclerViewMakanan    = rootView.findViewById(R.id.recyclerViewMakanan);
+//        mRecyclerViewMakanan    = rootView.findViewById(R.id.recyclerViewMakanan);
         mRecyclerViewMakanan.setLayoutManager(mLayoutManagerMakanan);
         mAdapterMakanan = new RecyclerViewAdapterMakanan(getContext(),mName,mKalori,mImages, mKandungan);
         mRecyclerViewMakanan.setAdapter(mAdapterMakanan);
@@ -173,12 +173,12 @@ public class HomeFragment extends Fragment {
         }
 
 
-        initRecyclerViewSiang();
+//        initRecyclerViewSiang();
     }
 
     private void initRecyclerViewSiang() {
         mLayoutManagerMakananSiang   = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
-        mRecyclerViewMakananSiang    = rootView.findViewById(R.id.recyclerViewMakananSiang);
+//        mRecyclerViewMakananSiang    = rootView.findViewById(R.id.recyclerViewMakananSiang);
         mRecyclerViewMakananSiang.setLayoutManager(mLayoutManagerMakananSiang);
         mAdapterMakananSiang = new RecyclerViewAdapterMakananSiang(getContext(),mNameSiang,mKaloriSiang,mImagesSiang, mKandunganSiang);
         mRecyclerViewMakananSiang.setAdapter(mAdapterMakananSiang);
@@ -201,12 +201,12 @@ public class HomeFragment extends Fragment {
             mKandunganMalam.add(String.valueOf(protein.getProtein()));
         }
 
-        initRecyclerViewMalam();
+//        initRecyclerViewMalam();
     }
 
     private void initRecyclerViewMalam() {
         mLayoutManagerMakananMalam   = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
-        mRecyclerViewMakananMalam    = rootView.findViewById(R.id.recyclerViewMakananMalam);
+//        mRecyclerViewMakananMalam    = rootView.findViewById(R.id.recyclerViewMakananMalam);
         mRecyclerViewMakananMalam.setLayoutManager(mLayoutManagerMakananMalam);
         mAdapterMakananMalam = new RecyclerViewAdapterMakananMalam(getContext(),mNameMalam,mKaloriMalam,mImagesMalam, mKandunganMalam);
         mRecyclerViewMakananMalam.setAdapter(mAdapterMakananMalam);
@@ -254,12 +254,12 @@ public class HomeFragment extends Fragment {
         mNameOlahraga.add("Apple");
         mKaloriOlahraga.add("53 cal/100g");
 
-        initRecyclerViewOlahraga();
+//        initRecyclerViewOlahraga();
     }
 
     private void initRecyclerViewOlahraga() {
         mLayoutManagerMakananOlahraga   = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
-        mRecyclerViewMakananOlahraga    = rootView.findViewById(R.id.recyclerViewOlahraga);
+//        mRecyclerViewMakananOlahraga    = rootView.findViewById(R.id.recyclerViewOlahraga);
         mRecyclerViewMakananOlahraga.setLayoutManager(mLayoutManagerMakananOlahraga);
         mAdapterMakananOlahraga = new RecyclerViewAdapterMakanan(getContext(),mNameOlahraga,mKaloriOlahraga,mImagesOlahraga,mKandungan);
         mRecyclerViewMakananOlahraga.setAdapter(mAdapterMakananOlahraga);
