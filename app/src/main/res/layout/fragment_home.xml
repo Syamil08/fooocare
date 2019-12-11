@@ -587,19 +587,21 @@
 
         <!--</LinearLayout>-->
 
+        <!--TableLayout Makan Pagi-->
         <TableLayout
             android:id="@+id/makan_pagi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp">
 
             <TableRow
                 android:id="@+id/tableRowMakanPagi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_cardhome">
+                android:background="@drawable/bg_cardhome"
+                android:padding="5dp">
 
                 <ImageView
                     android:id="@+id/imageMakanPagi"
@@ -643,26 +645,307 @@
 
                 </LinearLayout>
 
-                <!--<TextView-->
-                    <!--android:id="@+id/textViewEnergyExercise"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="80dp"-->
-                    <!--android:gravity="center"-->
-                    <!--android:padding="5dp"-->
-                    <!--android:text="Calorie"-->
-                    <!--android:textSize="16sp" />-->
 
                 <ImageButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:background="@drawable/btn_circlecardhome"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_plus"
+                    android:layout_marginRight="10dp"/>
 
             </TableRow>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_cardhomedown">
+
+                <TextView
+                    android:id="@+id/banyakKaloriPagi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/coresans"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:text="1350 cal"/>
+
+                <TextView
+                    android:id="@+id/kaloriDimakan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/coresans"
+                    android:padding="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="1200 cal tersisa"/>
+
+            </LinearLayout>
+
+
         </TableLayout>
 
+        <!-- Akhir TableLayout Makan Pagi-->
 
+        <!-- Recyclerview tampilan makanan yang dipilih -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMakanPagi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:padding="20dp"/>
+
+        <!-- Akhir Recyclerview tampilan makanan yang dipilih-->
+
+
+        <!--TableLayout Makan Pagi-->
+        <TableLayout
+            android:id="@+id/makan_siang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp">
+
+            <TableRow
+                android:id="@+id/tableRowMakanSiang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_cardhome"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/imageMakanSiang"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:padding="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/makansiang"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/judulMakanSiang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="3dp"
+                        android:fontFamily="@font/coresans"
+                        android:textStyle="bold"
+                        android:text="Makan Siang"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/rekomendasiMakanSiang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="3dp"
+                        android:fontFamily="@font/coresans"
+                        android:text="Rekomendasi: 563 - 1000 kj"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/btn_circlecardhome"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_plus"
+                    android:layout_marginRight="10dp"/>
+
+            </TableRow>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_cardhomedown">
+
+                <TextView
+                    android:id="@+id/banyakKaloriSiang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/coresans"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:text="1350 cal"/>
+
+                <TextView
+                    android:id="@+id/kaloriDimakanSiang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/coresans"
+                    android:padding="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="1200 cal tersisa"/>
+
+            </LinearLayout>
+
+
+        </TableLayout>
+
+        <!-- Akhir TableLayout Makan Pagi-->
+
+        <!-- Recyclerview tampilan makanan yang dipilih -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMakanSiang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:padding="20dp"/>
+
+        <!-- Akhir Recyclerview tampilan makanan yang dipilih-->
+
+
+
+        <!--TableLayout Makan Pagi-->
+        <TableLayout
+            android:id="@+id/makan_malam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp">
+
+            <TableRow
+                android:id="@+id/tableRowMakanMalam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_cardhome"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/imageMakanMalam"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:padding="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/makanmalam"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/judulMakanMalam"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="3dp"
+                        android:fontFamily="@font/coresans"
+                        android:textStyle="bold"
+                        android:text="Makan Malam"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/rekomendasiMakanMalam"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="3dp"
+                        android:fontFamily="@font/coresans"
+                        android:text="Rekomendasi: 563 - 1000 kj"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/btn_circlecardhome"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_plus"
+                    android:layout_marginRight="10dp"/>
+
+            </TableRow>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_cardhomedown">
+
+                <TextView
+                    android:id="@+id/banyakKaloriMalam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/coresans"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:text="1350 cal"/>
+
+                <TextView
+                    android:id="@+id/kaloriDimakanMalam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/coresans"
+                    android:padding="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="1200 cal tersisa"/>
+
+            </LinearLayout>
+
+
+        </TableLayout>
+
+        <!-- Akhir TableLayout Makan Pagi-->
+
+        <!-- Recyclerview tampilan makanan yang dipilih -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recylerMakanMalam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:padding="20dp"/>
+
+        <!-- Akhir Recyclerview tampilan makanan yang dipilih-->
 
 
 
