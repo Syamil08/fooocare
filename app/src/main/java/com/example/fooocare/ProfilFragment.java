@@ -62,10 +62,10 @@ public class ProfilFragment extends Fragment {
                 String _tinggiBadan = dataSnapshot.child("tinggiBadan").getValue().toString();
                 String _beratBadan = dataSnapshot.child("beratBadan").getValue().toString();
 
-                namaPengguna.setText("Hallo "+_namaPengguna);
+                namaPengguna.setText("Hallo, "+_namaPengguna);
                 nama.setText(_nama);
                 email.setText(_email);
-                usia.setText(_email);
+                usia.setText(_usia);
                 jenisKelamin.setText(_jenisKelamin);
                 tinggiBadan.setText(_tinggiBadan);
                 beratBadan.setText(_beratBadan);

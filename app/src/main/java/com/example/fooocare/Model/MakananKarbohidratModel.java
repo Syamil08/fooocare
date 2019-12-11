@@ -1,21 +1,11 @@
 package com.example.fooocare.Model;
 
-public class MakananKarbohidratModel {
-    private String nama;
-    private float karbohidrat, kalori;
+public class MakananKarbohidratModel extends MakananModel {
+    private float karbohidrat;
 
-    public MakananKarbohidratModel(String nama, float karbohidrat, float kalori) {
-        this.nama = nama;
+    public MakananKarbohidratModel(String nama, float karbohidrat, float kalori, String images) {
+        super(nama,kalori,images);
         this.karbohidrat = karbohidrat;
-        this.kalori = kalori;
-    }
-
-    public String getNama() {
-        return nama;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
     }
 
     public float getKarbohidrat() {
@@ -26,11 +16,4 @@ public class MakananKarbohidratModel {
         this.karbohidrat = karbohidrat;
     }
 
-    public float getKalori() {
-        return kalori;
-    }
-
-    public void setKalori(float kalori) {
-        this.kalori = kalori;
-    }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageAgendapagi"
+        android:layout_width="90dp"
+        android:layout_height="90dp" />
+
+    <TextView
+        android:id="@+id/textJudulpagi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="judul"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_toEndOf="@+id/imageAgendapagi"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/caloriPagi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deskripsi Kalori"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_toEndOf="@+id/imageAgendapagi"
+        android:layout_below="@+id/textJudulpagi"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"/>
+
+</RelativeLayout>

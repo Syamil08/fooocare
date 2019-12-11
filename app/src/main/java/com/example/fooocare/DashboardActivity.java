@@ -13,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements DialogPage.DialogPageListener {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -29,20 +29,7 @@ public class DashboardActivity extends AppCompatActivity {
 
 //        set untuk home fragment yang akan muncul pertama kali
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
-
-
-//        ArrayList<ExampleItem> exampleList = new ArrayList<>();
-//        exampleList.add(new ExampleItem("Line 1","Line 2"));
-//        exampleList.add(new ExampleItem("Line 3","Line 4"));
-//        exampleList.add(new ExampleItem("Line 5","Line 6"));
-//
-//        mRecyclerView = findViewById(R.id.recyclerViewAgenda);
-//        mRecyclerView.setHasFixedSize(true);
-//        mLayoutManager = new LinearLayoutManager(this);
-//        mAdapter = new ExampleAdapter(exampleList);
-//
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//        mRecyclerView.setAdapter(mAdapter);
+        
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -73,5 +60,10 @@ public class DashboardActivity extends AppCompatActivity {
                 }
             };
 
+
+    @Override
+    public void applyTexts(String judul, String tanggal) {
+        HomeFragment.mExampleList.add(new ExampleItem(judul, tanggal));
+    }
 
 }

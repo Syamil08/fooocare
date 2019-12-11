@@ -11,13 +11,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fooocare.Model.MakananKarbohidratModel;
+import com.example.fooocare.Model.MakananModel;
+import com.example.fooocare.Model.MakananProteinModel;
+
 import java.util.ArrayList;
 
 public class AgendaFragment extends Fragment {
     private View rootview;
-    private RecyclerView agenda, agendaSejarah;
-    private RecyclerView.LayoutManager mLayoutAgenda, mLayoutAgendaSejarah;
-    private RecyclerView.Adapter mAdapterAgenda, mAdapterAgendaSejarah;
+    private RecyclerView agenda, agendaSejarah,agendaPagi;
+    private RecyclerView.LayoutManager mLayoutAgenda, mLayoutAgendaSejarah,mLayoutAgendaPagi;
+    private RecyclerView.Adapter mAdapterAgenda, mAdapterAgendaSejarah,mAdapterAgendaPagi;
     private ArrayList<AgendaItem> AgendaList;
     private ArrayList<AgendaItem> AgendaListSejarah;
 
@@ -29,8 +33,10 @@ public class AgendaFragment extends Fragment {
         createListAgendaSejara();
         buildRecyclerViewAgenda();
         buildRecyclerViewAgendaSejarah();
+
         return rootview;
     }
+
 
     public void buildRecyclerViewAgenda(){
         agenda = rootview.findViewById(R.id.recyclerViewAgendaTerdekat);

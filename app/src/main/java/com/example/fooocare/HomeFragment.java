@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,81 +15,105 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fooocare.Model.CaloryCounter;
+import com.example.fooocare.Model.MakananKarboGenerator;
+import com.example.fooocare.Model.MakananKarbohidratModel;
+import com.example.fooocare.Model.MakananProteinGenerator;
+import com.example.fooocare.Model.MakananProteinModel;
+
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
-    private ArrayList<ExampleItem> mExampleList;
+    public static ArrayList<ExampleItem> mExampleList = new ArrayList<>();
     private RecyclerView mRecyclerView,mRecyclerViewMakanan,mRecyclerViewMakananSiang,mRecyclerViewMakananMalam,mRecyclerViewMakananOlahraga;
     private RecyclerView.Adapter mAdapter,mAdapterMakanan,mAdapterMakananSiang,mAdapterMakananMalam,mAdapterMakananOlahraga;
     private RecyclerView.LayoutManager mLayoutManager,mLayoutManagerMakanan,mLayoutManagerMakananSiang,mLayoutManagerMakananMalam,mLayoutManagerMakananOlahraga;
     private View rootView;
+    TextView tv_banyakKalori;
     private Button buttonInsertAgenda;
     private int line1 = 5,line2 = 6;
+    private float banyakKalori,kaloriAgenda;
+
 
 
     //    array list makanan rekomendasi makan pagi
     private ArrayList<String> mName = new ArrayList<>();
     private ArrayList<String> mImages = new ArrayList<>();
     private ArrayList<String> mKalori = new ArrayList<>();
+    private ArrayList<String> mKandungan = new ArrayList<>();
 
     //    array list makanan rekomendasi makan siang
     private ArrayList<String> mNameSiang = new ArrayList<>();
     private ArrayList<String> mKaloriSiang = new ArrayList<>();
     private ArrayList<String> mImagesSiang = new ArrayList<>();
+    private ArrayList<String> mKandunganSiang = new ArrayList<>();
 
     //    array list makanan rekomendasi makan malam
     private ArrayList<String> mNameMalam = new ArrayList<>();
     private ArrayList<String> mKaloriMalam = new ArrayList<>();
     private ArrayList<String> mImagesMalam = new ArrayList<>();
+    private ArrayList<String> mKandunganMalam = new ArrayList<>();
 
     //    array list olahraga yang dilakukan
     private ArrayList<String> mNameOlahraga = new ArrayList<>();
     private ArrayList<String> mKaloriOlahraga = new ArrayList<>();
     private ArrayList<String> mImagesOlahraga = new ArrayList<>();
+    private ArrayList<MakananKarbohidratModel> listKarbo;
+    private ArrayList<MakananProteinModel> listProtein;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
+        MakananKarboGenerator generatorKarbo = new MakananKarboGenerator();
+        listKarbo = generatorKarbo.getListMakanan();
+        MakananProteinGenerator generatorProtein = new MakananProteinGenerator();
+        listProtein = generatorProtein.getListMakanan();
+
         getImagesOlahraga();
         getImagesMalam();
         getImagesSiang();
         getImages();
-        createExampleList();
         buildRecyclerView();
 
+        tv_banyakKalori = rootView.findViewById(R.id.tv_banyakKalori);
         buttonInsertAgenda = rootView.findViewById(R.id.btn_tambah_agenda);
+
+        CaloryCounter.GeneratePengali();
+        CaloryCounter.GenerateBMR();
+        banyakKalori = CaloryCounter.coutnCalory(60,19,"Laki-Laki",160,(float) 2.3);
+        tv_banyakKalori.setText(String.valueOf(banyakKalori));
+
 
         buttonInsertAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int position = mExampleList.size();
-                Log.d("Posisi",Integer.toString(position));
-                line1++;
-                line2++;
-                Log.d("Line 1",Integer.toString(line1));
-                Log.d("Line 1",Integer.toString(line2));
+                openDialog();
                 insertItem(position);
+                kaloriAgenda = CaloryCounter.agendaCounter(60,3);
+                banyakKalori += kaloriAgenda/7;
+                Log.d("Kalori",String.valueOf(kaloriAgenda));
+                tv_banyakKalori.setText(String.valueOf(banyakKalori));
             }
         });
         return rootView;
     }
 
+//    untuk membuka dialog,
+    public void openDialog(){
+        DialogPage dialogPage = new DialogPage();
+        dialogPage.show(getFragmentManager(),"Tambah Agenda");
+    }
+
+
     //    prosedur untuk menambah agenda
     public void insertItem(int position){
-        mExampleList.add(position, new ExampleItem("Line "+line1,"Line "+line2,"Makan Pagi",190));
         mAdapter.notifyItemInserted(position);
     }
 
-//    Memabuat sebuah array list
-    public void createExampleList(){
-        mExampleList = new ArrayList<>();
-        mExampleList.add(new ExampleItem("Line 1","Line 2","Makan Pagi",110));
-        mExampleList.add(new ExampleItem("Line 3","Line 4","Makan Pagi", 120));
-        mExampleList.add(new ExampleItem("Line 5","Line 6","Makan Pagi", 200));
 
-    }
 
     public void buildRecyclerView(){
         mRecyclerView = rootView.findViewById(R.id.recyclerViewAgenda);
@@ -102,46 +127,21 @@ public class HomeFragment extends Fragment {
     }
 
     public void getImages(){
-        mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        mName.add("Apple");
-        mKalori.add("53 cal/100g");
+        for (MakananKarbohidratModel karbo : listKarbo){
+            mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+            mName.add(karbo.getNama());
+            mKalori.add(String.valueOf(karbo.getKalori()));
+            mKandungan.add(String.valueOf(karbo.getKarbohidrat()));
+        }
 
-        mImages.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mName.add("Apple");
-        mKalori.add("53 cal/100g");
-
-        mImages.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        mName.add("Apple");
-        mKalori.add("53 cal/100g");
-
-        mImages.add("https://i.redd.it/j6myfqglup501.jpg");
-        mName.add("Apple");
-        mKalori.add("53 cal/100g");
+        for (MakananProteinModel protein : listProtein){
+            mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+            mName.add(protein.getNama());
+            mKalori.add(String.valueOf(protein.getKalori()));
+            mKandungan.add(String.valueOf(protein.getProtein()));
+        }
 
 
-        mImages.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        mName.add("Apple");
-        mKalori.add("53 cal/100g");
-
-
-        mImages.add("https://i.redd.it/k98uzl68eh501.jpg");
-        mName.add("Apple");
-        mKalori.add("53 cal/100g");
-
-
-        mImages.add("https://i.redd.it/glin0nwndo501.jpg");
-        mName.add("Apple");
-        mKalori.add("53 cal/100g");
-
-
-        mImages.add("https://i.redd.it/obx4zydshg601.jpg");
-        mName.add("Apple");
-        mKalori.add("53 cal/100g");
-
-
-        mImages.add("https://i.imgur.com/ZcLLrkY.jpg");
-        mName.add("Apple");
-        mKalori.add("53 cal/100g");
 
         initRecyclerView();
 
@@ -152,51 +152,26 @@ public class HomeFragment extends Fragment {
         mLayoutManagerMakanan   = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         mRecyclerViewMakanan    = rootView.findViewById(R.id.recyclerViewMakanan);
         mRecyclerViewMakanan.setLayoutManager(mLayoutManagerMakanan);
-        mAdapterMakanan = new RecyclerViewAdapterMakanan(getContext(),mName,mKalori,mImages);
+        mAdapterMakanan = new RecyclerViewAdapterMakanan(getContext(),mName,mKalori,mImages, mKandungan);
         mRecyclerViewMakanan.setAdapter(mAdapterMakanan);
     }
 
     private void getImagesSiang() {
-        mImagesSiang.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        mNameSiang.add("Apple");
-        mKaloriSiang.add("53 cal/100g");
 
-        mImagesSiang.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mNameSiang.add("Apple");
-        mKaloriSiang.add("53 cal/100g");
+        for (MakananKarbohidratModel karbo : listKarbo){
+            mImagesSiang.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+            mNameSiang.add(karbo.getNama());
+            mKaloriSiang.add(String.valueOf(karbo.getKalori()));
+            mKandunganSiang.add(String.valueOf(karbo.getKarbohidrat()));
+        }
 
-        mImagesSiang.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        mNameSiang.add("Apple");
-        mKaloriSiang.add("53 cal/100g");
+        for (MakananProteinModel protein : listProtein){
+            mImagesSiang.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+            mNameSiang.add(protein.getNama());
+            mKaloriSiang.add(String.valueOf(protein.getKalori()));
+            mKandunganSiang.add(String.valueOf(protein.getProtein()));
+        }
 
-        mImagesSiang.add("https://i.redd.it/j6myfqglup501.jpg");
-        mNameSiang.add("Apple");
-        mKaloriSiang.add("53 cal/100g");
-
-
-        mImagesSiang.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        mNameSiang.add("Apple");
-        mKaloriSiang.add("53 cal/100g");
-
-
-        mImagesSiang.add("https://i.redd.it/k98uzl68eh501.jpg");
-        mNameSiang.add("Apple");
-        mKaloriSiang.add("53 cal/100g");
-
-
-        mImagesSiang.add("https://i.redd.it/glin0nwndo501.jpg");
-        mNameSiang.add("Apple");
-        mKaloriSiang.add("53 cal/100g");
-
-
-        mImagesSiang.add("https://i.redd.it/obx4zydshg601.jpg");
-        mNameSiang.add("Apple");
-        mKaloriSiang.add("53 cal/100g");
-
-
-        mImagesSiang.add("https://i.imgur.com/ZcLLrkY.jpg");
-        mNameSiang.add("Apple");
-        mKaloriSiang.add("53 cal/100g");
 
         initRecyclerViewSiang();
     }
@@ -205,51 +180,26 @@ public class HomeFragment extends Fragment {
         mLayoutManagerMakananSiang   = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         mRecyclerViewMakananSiang    = rootView.findViewById(R.id.recyclerViewMakananSiang);
         mRecyclerViewMakananSiang.setLayoutManager(mLayoutManagerMakananSiang);
-        mAdapterMakananSiang = new RecyclerViewAdapterMakanan(getContext(),mNameSiang,mKaloriSiang,mImagesSiang);
+        mAdapterMakananSiang = new RecyclerViewAdapterMakananSiang(getContext(),mNameSiang,mKaloriSiang,mImagesSiang, mKandunganSiang);
         mRecyclerViewMakananSiang.setAdapter(mAdapterMakananSiang);
     }
 
     private void getImagesMalam() {
-        mImagesMalam.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        mNameMalam.add("Apple");
-        mKaloriMalam.add("53 cal/100g");
-
-        mImagesMalam.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mNameMalam.add("Apple");
-        mKaloriMalam.add("53 cal/100g");
-
-        mImagesMalam.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        mNameMalam.add("Apple");
-        mKaloriMalam.add("53 cal/100g");
-
-        mImagesMalam.add("https://i.redd.it/j6myfqglup501.jpg");
-        mNameMalam.add("Apple");
-        mKaloriMalam.add("53 cal/100g");
 
 
-        mImagesMalam.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        mNameMalam.add("Apple");
-        mKaloriMalam.add("53 cal/100g");
+        for (MakananKarbohidratModel karbo : listKarbo){
+            mImagesMalam.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+            mNameMalam.add(karbo.getNama());
+            mKaloriMalam.add(String.valueOf(karbo.getKalori()));
+            mKandunganMalam.add(String.valueOf(karbo.getKarbohidrat()));
+        }
 
-
-        mImagesMalam.add("https://i.redd.it/k98uzl68eh501.jpg");
-        mNameMalam.add("Apple");
-        mKaloriMalam.add("53 cal/100g");
-
-
-        mImagesMalam.add("https://i.redd.it/glin0nwndo501.jpg");
-        mNameMalam.add("Apple");
-        mKaloriMalam.add("53 cal/100g");
-
-
-        mImagesMalam.add("https://i.redd.it/obx4zydshg601.jpg");
-        mNameMalam.add("Apple");
-        mKaloriMalam.add("53 cal/100g");
-
-
-        mImagesMalam.add("https://i.imgur.com/ZcLLrkY.jpg");
-        mNameMalam.add("Apple");
-        mKaloriMalam.add("53 cal/100g");
+        for (MakananProteinModel protein : listProtein){
+            mImagesMalam.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+            mNameMalam.add(protein.getNama());
+            mKaloriMalam.add(String.valueOf(protein.getKalori()));
+            mKandunganMalam.add(String.valueOf(protein.getProtein()));
+        }
 
         initRecyclerViewMalam();
     }
@@ -258,7 +208,7 @@ public class HomeFragment extends Fragment {
         mLayoutManagerMakananMalam   = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         mRecyclerViewMakananMalam    = rootView.findViewById(R.id.recyclerViewMakananMalam);
         mRecyclerViewMakananMalam.setLayoutManager(mLayoutManagerMakananMalam);
-        mAdapterMakananMalam = new RecyclerViewAdapterMakanan(getContext(),mNameMalam,mKaloriMalam,mImagesMalam);
+        mAdapterMakananMalam = new RecyclerViewAdapterMakananMalam(getContext(),mNameMalam,mKaloriMalam,mImagesMalam, mKandunganMalam);
         mRecyclerViewMakananMalam.setAdapter(mAdapterMakananMalam);
     }
 
@@ -311,7 +261,7 @@ public class HomeFragment extends Fragment {
         mLayoutManagerMakananOlahraga   = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         mRecyclerViewMakananOlahraga    = rootView.findViewById(R.id.recyclerViewOlahraga);
         mRecyclerViewMakananOlahraga.setLayoutManager(mLayoutManagerMakananOlahraga);
-        mAdapterMakananOlahraga = new RecyclerViewAdapterMakanan(getContext(),mNameOlahraga,mKaloriOlahraga,mImagesOlahraga);
+        mAdapterMakananOlahraga = new RecyclerViewAdapterMakanan(getContext(),mNameOlahraga,mKaloriOlahraga,mImagesOlahraga,mKandungan);
         mRecyclerViewMakananOlahraga.setAdapter(mAdapterMakananOlahraga);
     }
 }

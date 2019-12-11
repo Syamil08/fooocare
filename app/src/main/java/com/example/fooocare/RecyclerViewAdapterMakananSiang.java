@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.fooocare.Model.MakananKarbohidratModel;
 
 import java.util.ArrayList;
 
@@ -25,13 +26,15 @@ public class RecyclerViewAdapterMakananSiang extends RecyclerView.Adapter<Recycl
     private ArrayList<String> mNameSiang = new ArrayList<>();
     private ArrayList<String> mKaloriSiang = new ArrayList<>();
     private ArrayList<String> mImagesSiang = new ArrayList<>();
+    private ArrayList<String> mKandunganSiang = new ArrayList<>();
     private Context mContextSiang;
 
-    public RecyclerViewAdapterMakananSiang(Context mContext, ArrayList<String> mName, ArrayList<String> mKalori , ArrayList<String> mImages) {
+    public RecyclerViewAdapterMakananSiang(Context mContext, ArrayList<String> mName, ArrayList<String> mKalori , ArrayList<String> mImages, ArrayList<String> mKandunganSiang) {
         this.mNameSiang = mName;
         this.mKaloriSiang = mKalori;
         this.mImagesSiang = mImages;
         this.mContextSiang = mContext;
+        this.mKandunganSiang = mKandunganSiang;
     }
 
     @NonNull
@@ -59,6 +62,7 @@ public class RecyclerViewAdapterMakananSiang extends RecyclerView.Adapter<Recycl
             @Override
             public void onClick(View view) {
                 Toast.makeText(mContextSiang, mNameSiang.get(position),Toast.LENGTH_SHORT).show();
+                AgendaListAdapter.agendaMakananSiang.add(new MakananKarbohidratModel(mNameSiang.get(position),Float.valueOf(mKaloriSiang.get(position)),Float.valueOf(mKandunganSiang.get(position)),mImagesSiang.get(position)));
             }
         });
 

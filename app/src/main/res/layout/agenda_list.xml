@@ -39,102 +39,37 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
-                    android:id="@+id/txt_makan"
+                    android:id="@+id/text_makanPagi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Makan Pagi"
-                    android:textSize="18dp" />
-
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"/>
+                
                 <TextView
-                    android:id="@+id/txt_kalori"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="112 cal"
-                    android:textSize="18dp" />
-
-                <RelativeLayout
-                    android:id="@+id/menuPagi1"
+                    android:text="calori"
+                    android:layout_marginRight="20dp"
+                    android:textSize="18sp"
+                    android:layout_alignParentRight="true"/>
+                
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewAgendaPagi"
+                    android:layout_below="@+id/text_makanPagi"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/txt_makan"
-                    android:layout_marginTop="10dp">
-
-                    <ImageView
-                        android:id="@+id/gambar1"
-                        android:layout_width="50dp"
-                        android:layout_height="60dp"
-                        android:background="@drawable/background_menu_makanan"
-                        android:padding="5dp"
-                        android:src="@drawable/lemon" />
-
-                    <TextView
-                        android:id="@+id/txt_ket1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_toEndOf="@+id/gambar1"
-                        android:text="Lemon"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:id="@+id/txt_kal1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txt_ket1"
-                        android:layout_marginLeft="15dp"
-                        android:layout_toEndOf="@+id/gambar1"
-                        android:text="86 cal/100g"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/menuPagi2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/menuPagi1"
-                    android:layout_marginTop="10dp">
-
-                    <ImageView
-                        android:id="@+id/gambar2"
-                        android:layout_width="50dp"
-                        android:layout_height="60dp"
-                        android:background="@drawable/background_menu_makanan"
-                        android:padding="5dp"
-                        android:src="@drawable/lemon" />
-
-                    <TextView
-                        android:id="@+id/txt_ket2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_toEndOf="@+id/gambar2"
-                        android:text="Lemon"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:id="@+id/txt_kal2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txt_ket2"
-                        android:layout_marginLeft="15dp"
-                        android:layout_toEndOf="@+id/gambar2"
-                        android:text="86 cal/100g"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
+                    android:layout_height="wrap_content" />
+                
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/menuPagi2"
                     android:layout_marginTop="10dp"
+                    android:layout_below="@id/recyclerViewAgendaPagi"
                     android:background="@drawable/btn_checkout"
                     android:text="Check Out Makanan"
                     android:textColor="@android:color/white" />
+                
             </RelativeLayout>
 
             <RelativeLayout
@@ -149,96 +84,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Makan Siang"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    android:layout_marginBottom="10dp"/>
 
                 <TextView
                     android:id="@+id/txt_kalori2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="112 cal"
+                    android:text="calori"
+                    android:layout_marginRight="20dp"
                     android:textSize="18dp" />
 
-                <RelativeLayout
-                    android:id="@+id/menuSiang1"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewAgendaSiang"
+                    android:layout_below="@+id/txt_makan2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/txt_makan2"
-                    android:layout_marginTop="10dp">
-
-                    <ImageView
-                        android:id="@+id/gambar_siang1"
-                        android:layout_width="50dp"
-                        android:layout_height="60dp"
-                        android:background="@drawable/background_menu_makanan"
-                        android:padding="5dp"
-                        android:src="@drawable/lemon" />
-
-                    <TextView
-                        android:id="@+id/txt_ket_siang1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_toEndOf="@+id/gambar_siang1"
-                        android:text="Lemon"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:id="@+id/txt_kal_siang1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txt_ket_siang1"
-                        android:layout_marginLeft="15dp"
-                        android:layout_toEndOf="@+id/gambar_siang1"
-                        android:text="86 cal/100g"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/menuSiang2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/menuSiang1"
-                    android:layout_marginTop="10dp">
-
-                    <ImageView
-                        android:id="@+id/gambar_siang2"
-                        android:layout_width="50dp"
-                        android:layout_height="60dp"
-                        android:background="@drawable/background_menu_makanan"
-                        android:padding="5dp"
-                        android:src="@drawable/lemon" />
-
-                    <TextView
-                        android:id="@+id/txt_ket_siang2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_toEndOf="@+id/gambar_siang2"
-                        android:text="Lemon"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:id="@+id/txt_kal_siang2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txt_ket_siang2"
-                        android:layout_marginLeft="15dp"
-                        android:layout_toEndOf="@+id/gambar_siang2"
-                        android:text="86 cal/100g"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
+                    android:layout_height="wrap_content"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/menuSiang2"
+                    android:layout_below="@id/recyclerViewAgendaSiang"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/btn_checkout"
                     android:text="Check Out Makanan"
                     android:textColor="@android:color/white" />
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -250,9 +122,10 @@
 
                 <TextView
                     android:id="@+id/txt_makan3"
+                    android:layout_marginBottom="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Makan Siang"
+                    android:text="Makan Malam"
                     android:textSize="18dp" />
 
                 <TextView
@@ -260,85 +133,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="112 cal"
+                    android:text="calori"
+                    android:layout_marginRight="20dp"
                     android:textSize="18dp" />
 
-                <RelativeLayout
-                    android:id="@+id/menuMalam1"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewAgendaMalam"
+                    android:layout_below="@+id/txt_makan3"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/txt_makan3"
-                    android:layout_marginTop="10dp">
-
-                    <ImageView
-                        android:id="@+id/gambar_malam1"
-                        android:layout_width="50dp"
-                        android:layout_height="60dp"
-                        android:background="@drawable/background_menu_makanan"
-                        android:padding="5dp"
-                        android:src="@drawable/lemon" />
-
-                    <TextView
-                        android:id="@+id/txt_ket_malam1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_toEndOf="@+id/gambar_malam1"
-                        android:text="Lemon"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:id="@+id/txt_kal_malam1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txt_ket_malam1"
-                        android:layout_marginLeft="15dp"
-                        android:layout_toEndOf="@+id/gambar_malam1"
-                        android:text="86 cal/100g"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/menuMalam2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/menuMalam1"
-                    android:layout_marginTop="10dp">
-
-                    <ImageView
-                        android:id="@+id/gambar_malam2"
-                        android:layout_width="50dp"
-                        android:layout_height="60dp"
-                        android:background="@drawable/background_menu_makanan"
-                        android:padding="5dp"
-                        android:src="@drawable/lemon" />
-
-                    <TextView
-                        android:id="@+id/txt_ket_malam2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_toEndOf="@+id/gambar_malam2"
-                        android:text="Lemon"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:id="@+id/txt_kal_malam2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txt_ket_malam2"
-                        android:layout_marginLeft="15dp"
-                        android:layout_toEndOf="@+id/gambar_malam2"
-                        android:text="86 cal/100g"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
+                    android:layout_height="wrap_content"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/menuMalam2"
+                    android:layout_below="@id/recyclerViewAgendaMalam"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/btn_checkout"
                     android:text="Check Out Makanan"

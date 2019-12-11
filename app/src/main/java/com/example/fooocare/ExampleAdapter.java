@@ -35,19 +35,23 @@ public class ExampleAdapter  extends RecyclerView.Adapter<ExampleAdapter.Example
 
 //        kemudian set TextView Berdasarkan Posisi yang didapatkan
 
-        holder.mTextView1.setText(currentItem.getmText1());
-        holder.mTextView2.setText(currentItem.getmText2());
-        holder.mTextView3.setText(currentItem.getmMakan());
-        holder.mTextView4.setText(Integer.toString(currentItem.getmKalori()));
-
-        boolean isExpanded = mExampleList.get(position).isExpanded();
-        holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+        holder.mTextView1.setText(currentItem.getJudul());
+        holder.mTextView2.setText(currentItem.getTanggal());
+//        holder.mTextView3.setText(currentItem.getmMakan());
+//        holder.mTextView4.setText(Integer.toString(currentItem.getmKalori()));
+//
+//        boolean isExpanded = mExampleList.get(position).isExpanded();
+//        holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
 
     }
 
     @Override
     public int getItemCount() {
-        return mExampleList.size();
+        try {
+            return mExampleList.size();
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
 //    cara mengambil data array list dari class ExampleItem ke Adapter
@@ -70,18 +74,20 @@ public class ExampleAdapter  extends RecyclerView.Adapter<ExampleAdapter.Example
 //            cari id TextView tersebut
             mTextView1 = itemView.findViewById(R.id.textView);
             mTextView2 = itemView.findViewById(R.id.textView2);
-            mTextView3 = itemView.findViewById(R.id.tvMakanPagi);
-            mTextView4 = itemView.findViewById(R.id.tvKalori);
-            expandableLayout = itemView.findViewById(R.id.expandableLayout);
+//            mTextView3 = itemView.findViewById(R.id.tvMakanPagi);
+//            mTextView4 = itemView.findViewById(R.id.tvKalori);
+//            expandableLayout = itemView.findViewById(R.id.expandableLayout);
 
-            mTextView1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ExampleItem exampleItem = mExampleList.get(getAdapterPosition());
-                    exampleItem.setExpanded(!exampleItem.isExpanded());
-                    notifyItemChanged(getAdapterPosition());
-                }
-            });
+//            mTextView1.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    ExampleItem exampleItem = mExampleList.get(getAdapterPosition());
+//                    exampleItem.setExpanded(!exampleItem.isExpanded());
+//                    notifyItemChanged(getAdapterPosition());
+//                }
+//            });
+
+
         }
     }
 

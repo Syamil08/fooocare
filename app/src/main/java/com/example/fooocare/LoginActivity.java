@@ -27,11 +27,11 @@ public class LoginActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
 
-        if (restorePrefData()) {
-
-            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
-
-        }
+//        if (restorePrefData()) {
+//
+//            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+//
+//        }
 
         setContentView(R.layout.activity_login);
         mBtnLogin = (Button) findViewById(R.id.btn_login);
@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Login succesful",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                             finish();
-                            savePrefsData();
+//                            savePrefsData();
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "Login Failed",Toast.LENGTH_SHORT).show();

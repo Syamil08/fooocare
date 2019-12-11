@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.fooocare.Model.MakananKarbohidratModel;
 
 import java.util.ArrayList;
 
@@ -25,13 +26,15 @@ public class RecyclerViewAdapterMakananMalam extends RecyclerView.Adapter<Recycl
     private ArrayList<String> mNameMalam = new ArrayList<>();
     private ArrayList<String> mKaloriMalam = new ArrayList<>();
     private ArrayList<String> mImagesMalam = new ArrayList<>();
+    private ArrayList<String> mKandunganMalam = new ArrayList<>();
     private Context mContextMalam;
 
-    public RecyclerViewAdapterMakananMalam(Context mContext, ArrayList<String> mName, ArrayList<String> mKalori , ArrayList<String> mImages) {
+    public RecyclerViewAdapterMakananMalam(Context mContext, ArrayList<String> mName, ArrayList<String> mKalori , ArrayList<String> mImages, ArrayList<String> mKandunganMalam) {
         this.mNameMalam = mName;
         this.mKaloriMalam = mKalori;
         this.mImagesMalam = mImages;
         this.mContextMalam = mContext;
+        this.mKandunganMalam = mKandunganMalam;
     }
 
     @NonNull
@@ -59,6 +62,7 @@ public class RecyclerViewAdapterMakananMalam extends RecyclerView.Adapter<Recycl
             @Override
             public void onClick(View view) {
                 Toast.makeText(mContextMalam, mNameMalam.get(position),Toast.LENGTH_SHORT).show();
+                AgendaListAdapter.agendaMakananMalam.add(new MakananKarbohidratModel(mNameMalam.get(position),Float.valueOf(mKaloriMalam.get(position)),Float.valueOf(mKandunganMalam.get(position)),mImagesMalam.get(position)));
             }
         });
 
@@ -78,9 +82,9 @@ public class RecyclerViewAdapterMakananMalam extends RecyclerView.Adapter<Recycl
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageMalam   = itemView.findViewById(R.id.image_makananSiang);
-            makananMalam = itemView.findViewById(R.id.tvMakananCardSiang);
-            kaloriMalam  = itemView.findViewById(R.id.tvBanyakKaloriSiang);
+            imageMalam   = itemView.findViewById(R.id.image_makananMalam);
+            makananMalam = itemView.findViewById(R.id.tvMakananCardMalam);
+            kaloriMalam  = itemView.findViewById(R.id.tvBanyakKaloriMalam);
         }
     }
 }
