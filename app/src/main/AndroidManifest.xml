@@ -27,6 +27,7 @@
 
         </activity>
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".JenisMakananActivity"></activity>
     </application>
 
 </manifest>

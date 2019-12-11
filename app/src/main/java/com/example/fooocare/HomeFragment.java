@@ -1,11 +1,13 @@
 package com.example.fooocare;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,6 +35,7 @@ public class HomeFragment extends Fragment {
     private Button buttonInsertAgenda;
     private int line1 = 5,line2 = 6;
     private float banyakKalori,kaloriAgenda;
+    ImageButton tambahPagi,tambahSiang,tambahMalam;
 
 
 
@@ -76,9 +79,17 @@ public class HomeFragment extends Fragment {
         getImagesSiang();
         getImages();
 //        buildRecyclerView();
-
+        tambahPagi = rootView.findViewById(R.id.tambahMakanPagi);
         tv_banyakKalori = rootView.findViewById(R.id.tv_banyakKalori);
 //        buttonInsertAgenda = rootView.findViewById(R.id.btn_tambah_agenda);
+
+        tambahPagi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(),JenisMakananActivity.class));
+            }
+        });
+
 
         CaloryCounter.GeneratePengali();
         CaloryCounter.GenerateBMR();

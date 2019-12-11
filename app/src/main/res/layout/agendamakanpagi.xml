@@ -16,7 +16,7 @@
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/karbohidrat"/>
+                android:src="@drawable/makanpagi"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -28,7 +28,8 @@
                     android:id="@+id/textJudulpagi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="judul"
+                    android:text="Judul"
+                    android:textStyle="bold"
                     android:fontFamily="@font/coresans"
                     android:textSize="18sp"
                     android:layout_marginLeft="20dp"
@@ -39,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:text="Deskripsi Kalori"
                     android:fontFamily="@font/coresans"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="15dp"/>
@@ -50,16 +51,17 @@
                     android:layout_marginLeft="19dp"
                     android:background="@android:color/darker_gray" />
             </LinearLayout>
+
             <ImageButton
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/btn_circlecardhome"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_plus"
-                android:layout_marginRight="10dp"
-                />
+                android:layout_marginRight="10dp" />
 
         </TableRow>
+
     </TableLayout>
 
 

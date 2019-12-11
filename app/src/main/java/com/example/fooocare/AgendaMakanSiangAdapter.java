@@ -63,9 +63,9 @@ public class AgendaMakanSiangAdapter extends RecyclerView.Adapter<AgendaMakanSia
 
         public AgendaListViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageAgendaSiang = itemView.findViewById(R.id.imageAgendasiang);
-            _mJudul = (TextView) itemView.findViewById(R.id.textJudulsiang);
-            _mkalori = (TextView) itemView.findViewById(R.id.calorisiang);
+//            imageAgendaSiang = itemView.findViewById(R.id.imageAgendasiang);
+//            _mJudul = (TextView) itemView.findViewById(R.id.textJudulsiang);
+//            _mkalori = (TextView) itemView.findViewById(R.id.calorisiang);
 
 
         }
