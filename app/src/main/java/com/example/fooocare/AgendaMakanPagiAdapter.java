@@ -4,9 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.fooocare.Model.MakananKarbohidratModel;
 import com.example.fooocare.Model.MakananModel;
+import com.example.fooocare.Model.MakananProteinModel;
 
 import java.util.ArrayList;
 
@@ -21,10 +25,15 @@ public class AgendaMakanPagiAdapter extends RecyclerView.Adapter<AgendaMakanPagi
 
     ArrayList<MakananModel> listAgenda;
     Context mContext;
+    MakananPagiListener listener;
+    public interface MakananPagiListener{
+        void listenList(MakananModel makanan);
+    }
 
     public AgendaMakanPagiAdapter(Context mContext,ArrayList<MakananModel> listAgenda) {
         this.listAgenda = listAgenda;
         this.mContext = mContext;
+        this.listener = listener;
     }
 
     @NonNull
@@ -36,16 +45,33 @@ public class AgendaMakanPagiAdapter extends RecyclerView.Adapter<AgendaMakanPagi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AgendaListViewHolder holder, int position) {
-        MakananModel currentItem = listAgenda.get(position);
+    public void onBindViewHolder(@NonNull final AgendaListViewHolder holder, int position) {
+        final MakananModel currentItem = listAgenda.get(position);
 
         Glide.with(mContext)
                 .asBitmap()
                 .load(currentItem.getImages())
                 .into(holder.imageAgendaPagi);
         holder._mJudul.setText(currentItem.getNama());
-        holder._mkalori.setText(String.valueOf(currentItem.getKalori()));
+        if(currentItem instanceof MakananKarbohidratModel){
+            holder._mkalori.setText(currentItem.getKalori() +" cal / "+ ((MakananKarbohidratModel) currentItem).getKarbohidrat()+"gram");
+        }
+        else if (currentItem instanceof MakananProteinModel){
+            holder._mkalori.setText(currentItem.getKalori() +" cal / "+ ((MakananProteinModel) currentItem).getProtein()+"gram");
+        }
+        holder.mBtnTambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              Toast.makeText(mContext,"Test", Toast.LENGTH_SHORT).show();
+              listAgenda.add(currentItem);
+              HomeFragment.listMakananPagi.add(currentItem);
+            }
+        });
+    }
 
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
     }
 
     @Override
@@ -61,14 +87,13 @@ public class AgendaMakanPagiAdapter extends RecyclerView.Adapter<AgendaMakanPagi
         ImageView imageAgendaPagi;
         public TextView _mJudul, _mkalori;
         public RelativeLayout expandableLayout;
-
+        public ImageButton mBtnTambah;
         public AgendaListViewHolder(@NonNull View itemView) {
             super(itemView);
             imageAgendaPagi = itemView.findViewById(R.id.imageAgendapagi);
             _mJudul = (TextView) itemView.findViewById(R.id.textJudulpagi);
             _mkalori = (TextView) itemView.findViewById(R.id.caloriPagi);
-
-
+            mBtnTambah = (ImageButton)itemView.findViewById(R.id.btn_tambah);
         }
     }
 }

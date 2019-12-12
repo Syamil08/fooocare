@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.fooocare.Model.MakananKarbohidratModel;
 import com.example.fooocare.Model.MakananModel;
+import com.example.fooocare.Model.MakananProteinModel;
 
 import java.util.ArrayList;
 
@@ -24,70 +26,61 @@ public class RecyclerViewAdapterMakanan extends RecyclerView.Adapter<RecyclerVie
     private static final String TAG = "RecyclerViewAdapter";
 
 //    mendefinisikan variable ArrayList
-    private ArrayList<String> mName = new ArrayList<>();
-    private ArrayList<String> mKalori = new ArrayList<>();
-    private ArrayList<String> mImages = new ArrayList<>();
-    private ArrayList<String> mKandungan = new ArrayList<>();
+
     private ArrayList<MakananModel> dataMakanan = new ArrayList<>();
 
     private Context mContext;
 
-    public RecyclerViewAdapterMakanan(Context mContext,ArrayList<String> mName,ArrayList<String> mKalori ,ArrayList<String> mImages, ArrayList<String> mKandungan) {
-        this.mName = mName;
-        this.mKalori = mKalori;
-        this.mImages = mImages;
+    public RecyclerViewAdapterMakanan(Context mContext, ArrayList<MakananModel> list) {
         this.mContext = mContext;
-        this.mKandungan = mKandungan;
+        this.dataMakanan = list;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitemcard,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_makan_pagi,parent,false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-
+        final MakananModel currentItem = dataMakanan.get(position);
 //        untuk holder image menggunakan glide
 
         Glide.with(mContext)
                 .asBitmap()
-                .load(mImages.get(position))
+                .load(currentItem.getImages())
                 .into(holder.image);
 
-        holder.makanan.setText(mName.get(position));
-        holder.kalori.setText(mKalori.get(position));
-
-        holder.image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mContext, mName.get(position),Toast.LENGTH_SHORT).show();
-                AgendaListAdapter.agendaMakananPagi.add(new MakananKarbohidratModel(mName.get(position),Float.valueOf(mKalori.get(position)),Float.valueOf(mKandungan.get(position)),mImages.get(position)));
-            }
-        });
+        holder.makanan.setText(currentItem.getNama());
+        if(currentItem instanceof MakananKarbohidratModel){
+            holder.kalori.setText(currentItem.getKalori() +" cal / "+ ((MakananKarbohidratModel) currentItem).getKarbohidrat()+"gram");
+        }
+        else if (currentItem instanceof MakananProteinModel){
+            holder.kalori.setText(currentItem.getKalori() +" cal / "+ ((MakananProteinModel) currentItem).getProtein()+"gram");
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return mName.size();
+        return dataMakanan.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        CircleImageView image;
+        ImageView image;
         TextView makanan;
         TextView kalori;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            image   = itemView.findViewById(R.id.image_makanan);
-            makanan = itemView.findViewById(R.id.tvMakananCard);
-            kalori  = itemView.findViewById(R.id.tvBanyakKalori);
+            image   = itemView.findViewById(R.id.imageMenuPagi);
+            makanan = itemView.findViewById(R.id.textNamaMenuPagi);
+            kalori  = itemView.findViewById(R.id.textKaloriMenuPagi);
         }
     }
 }

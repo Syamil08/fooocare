@@ -7,12 +7,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.fooocare.Model.MakananKarbohidratModel;
 import com.example.fooocare.Model.MakananModel;
+import com.example.fooocare.Model.MakananProteinModel;
 
 import java.util.ArrayList;
 
@@ -43,7 +46,12 @@ public class AgendaMakanSiangAdapter extends RecyclerView.Adapter<AgendaMakanSia
                 .load(currentItem.getImages())
                 .into(holder.imageAgendaSiang);
         holder._mJudul.setText(currentItem.getNama());
-        holder._mkalori.setText(String.valueOf(currentItem.getKalori()));
+        if(currentItem instanceof MakananKarbohidratModel){
+            holder._mkalori.setText(currentItem.getKalori() +" cal / "+ ((MakananKarbohidratModel) currentItem).getKarbohidrat()+"gram");
+        }
+        else if (currentItem instanceof MakananProteinModel){
+            holder._mkalori.setText(currentItem.getKalori() +" cal / "+ ((MakananProteinModel) currentItem).getProtein()+"gram");
+        }
 
     }
 
@@ -63,9 +71,9 @@ public class AgendaMakanSiangAdapter extends RecyclerView.Adapter<AgendaMakanSia
 
         public AgendaListViewHolder(@NonNull View itemView) {
             super(itemView);
-//            imageAgendaSiang = itemView.findViewById(R.id.imageAgendasiang);
-//            _mJudul = (TextView) itemView.findViewById(R.id.textJudulsiang);
-//            _mkalori = (TextView) itemView.findViewById(R.id.calorisiang);
+            imageAgendaSiang = itemView.findViewById(R.id.imageAgendasiang);
+            _mJudul = (TextView) itemView.findViewById(R.id.textJudulsiang);
+            _mkalori = (TextView) itemView.findViewById(R.id.caloriSiang);
 
 
         }

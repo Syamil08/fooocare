@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/imageAgendapagi"
+                android:id="@+id/imageMenuPagi"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_gravity="center_vertical"
@@ -25,7 +25,7 @@
                 android:fontFamily="@font/coresans"
                 android:layout_weight="1">
                 <TextView
-                    android:id="@+id/textJudulpagi"
+                    android:id="@+id/textNamaMenuPagi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Judul"
@@ -35,7 +35,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"/>
                 <TextView
-                    android:id="@+id/caloriPagi"
+                    android:id="@+id/textKaloriMenuPagi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Deskripsi Kalori"
@@ -53,7 +53,7 @@
             </LinearLayout>
 
             <ImageButton
-                android:id="@+id/btn_tambah"
+                android:id="@+id/btn_confirm"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/btn_circlecardhome"
