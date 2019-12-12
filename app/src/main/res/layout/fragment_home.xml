@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
 
 
     <LinearLayout
@@ -31,37 +31,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp"
                     android:gravity="center_horizontal"
-                    android:layout_marginTop="30dp">
+                    android:orientation="horizontal">
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_weight="2"-->
-                        <!--android:layout_marginLeft="10dp">-->
-
-                        <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:text="1800"-->
-                            <!--android:textSize="25sp"-->
-                            <!--android:textAlignment="center"-->
-                            <!--android:layout_gravity="center"-->
-                            <!--android:textColor="@android:color/white"/>-->
-
-                        <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:text="Kalori yang telah dimakan"-->
-                            <!--android:textSize="18sp"-->
-                            <!--android:textAlignment="center"-->
-                            <!--android:layout_gravity="center"-->
-                            <!--android:textColor="@android:color/white"/>-->
-
-                    <!--</LinearLayout>-->
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -71,12 +44,12 @@
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
+                            android:layout_gravity="center"
                             android:background="@drawable/circle_shape"
                             android:indeterminate="false"
                             android:max="100"
                             android:progress="65"
-                            android:progressDrawable="@drawable/circular_progress_bar"
-                            android:layout_gravity="center"/>
+                            android:progressDrawable="@drawable/circular_progress_bar" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -90,51 +63,51 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/coresans"
-                                android:textStyle="bold"
                                 android:text="2900"
-                                android:textSize="24sp"
                                 android:textAlignment="center"
-                                android:textColor="@android:color/white" />
+                                android:textColor="@android:color/white"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:gravity="center"
                                 android:fontFamily="@font/coresans"
+                                android:gravity="center"
                                 android:text="LEFT"
-                                android:textStyle="normal"
-                                android:textColor="@android:color/white"/>
+                                android:textColor="@android:color/white"
+                                android:textStyle="normal" />
 
                         </LinearLayout>
 
                     </FrameLayout>
 
                     <!--<LinearLayout-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_weight="2"-->
-                        <!--android:layout_marginRight="10dp">-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_weight="2"-->
+                    <!--android:layout_marginRight="10dp">-->
 
-                        <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:text="400"-->
-                            <!--android:textSize="25sp"-->
-                            <!--android:textAlignment="center"-->
-                            <!--android:layout_gravity="center"-->
-                            <!--android:textColor="@android:color/white"/>-->
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="400"-->
+                    <!--android:textSize="25sp"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:textColor="@android:color/white"/>-->
 
-                        <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:text="Kalori yang telah dimakan"-->
-                            <!--android:textSize="18sp"-->
-                            <!--android:textAlignment="center"-->
-                            <!--android:layout_gravity="center"-->
-                            <!--android:textColor="@android:color/white"/>-->
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Kalori yang telah dimakan"-->
+                    <!--android:textSize="18sp"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:textColor="@android:color/white"/>-->
 
                     <!--</LinearLayout>-->
 
@@ -145,28 +118,28 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp"
                     android:gravity="center_horizontal"
-                    android:layout_marginTop="40dp">
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="2"
-                        android:layout_marginLeft="10dp">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/coresans"
-                            android:textStyle="bold"
-                            android:text="Karbohidrat"
-                            android:textSize="15sp"
-                            android:textAlignment="center"
                             android:layout_gravity="center"
-                            android:textColor="@android:color/white"/>
+                            android:fontFamily="@font/coresans"
+                            android:text="Karbohidrat"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <ProgressBar
                             android:id="@+id/progress_bar_karbo"
@@ -174,20 +147,20 @@
                             android:layout_width="90dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:progressBackgroundTint="#80cccccc"
                             android:max="100"
                             android:progress="70"
-                            android:progressTint="@android:color/white"/>
+                            android:progressBackgroundTint="#80cccccc"
+                            android:progressTint="@android:color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:fontFamily="@font/coresans"
                             android:text="200g tersisa"
-                            android:textSize="15sp"
                             android:textAlignment="center"
-                            android:layout_gravity="center"
-                            android:textColor="@android:color/white"/>
+                            android:textColor="@android:color/white"
+                            android:textSize="15sp" />
 
                     </LinearLayout>
 
@@ -195,21 +168,21 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="2"
-                        android:layout_marginLeft="10dp">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
+                            android:layout_gravity="center"
                             android:fontFamily="@font/coresans"
                             android:text="Protein"
-                            android:textSize="15sp"
                             android:textAlignment="center"
-                            android:layout_gravity="center"
-                            android:textColor="@android:color/white"/>
+                            android:textColor="@android:color/white"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <ProgressBar
                             android:id="@+id/progress_bar_protein"
@@ -217,20 +190,20 @@
                             android:layout_width="90dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:progressBackgroundTint="#80cccccc"
-                            android:progressTint="@android:color/white"
                             android:max="100"
-                            android:progress="40"/>
+                            android:progress="40"
+                            android:progressBackgroundTint="#80cccccc"
+                            android:progressTint="@android:color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:fontFamily="@font/coresans"
                             android:text="70g tersisa"
-                            android:textSize="15sp"
                             android:textAlignment="center"
-                            android:layout_gravity="center"
-                            android:textColor="@android:color/white"/>
+                            android:textColor="@android:color/white"
+                            android:textSize="15sp" />
 
                     </LinearLayout>
 
@@ -238,21 +211,21 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="2"
-                        android:layout_marginLeft="10dp">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/coresans"
-                            android:textStyle="bold"
-                            android:text="Lemak"
-                            android:textSize="15sp"
-                            android:textAlignment="center"
                             android:layout_gravity="center"
-                            android:textColor="@android:color/white"/>
+                            android:fontFamily="@font/coresans"
+                            android:text="Lemak"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
 
                         <ProgressBar
@@ -261,20 +234,20 @@
                             android:layout_width="90dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:progressBackgroundTint="#80cccccc"
-                            android:progressTint="@android:color/white"
                             android:max="100"
-                            android:progress="80"/>
+                            android:progress="80"
+                            android:progressBackgroundTint="#80cccccc"
+                            android:progressTint="@android:color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:fontFamily="@font/coresans"
                             android:text="20g tersisa"
-                            android:textSize="15sp"
                             android:textAlignment="center"
-                            android:layout_gravity="center"
-                            android:textColor="@android:color/white"/>
+                            android:textColor="@android:color/white"
+                            android:textSize="15sp" />
 
                     </LinearLayout>
 
@@ -289,57 +262,57 @@
         <!--Bagian Konten-->
 
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_marginLeft="20dp"-->
-            <!--android:layout_marginRight="20dp">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp">-->
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Atur Agenda Pertandingan"-->
-                <!--android:textSize="18sp"/>-->
-            <!---->
-            <!--<View-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="2dp"-->
-                <!--android:background="@android:color/darker_gray"/>-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Atur Agenda Pertandingan"-->
+        <!--android:textSize="18sp"/>-->
+        <!---->
+        <!--<View-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:background="@android:color/darker_gray"/>-->
 
         <!--</LinearLayout>-->
 
 
         <!--Bagian Button Tambah Agenda Pertandingan-->
-        
+
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_marginLeft="20dp"-->
-            <!--android:layout_marginRight="20dp"-->
-            <!--android:orientation="vertical">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:orientation="vertical">-->
 
-            <!--<Button-->
-                <!--android:id="@+id/btn_tambah_agenda"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textSize="16sp"-->
-                <!--android:textAlignment="textStart"-->
-                <!--android:text="Tambah Agenda Anda"-->
-                <!--android:drawableLeft="@drawable/ic_plus"-->
-                <!--android:drawableTint="@color/colorPrimary"-->
-                <!--android:background="@drawable/btn_tambah_agenda_custom"-->
-                <!--android:layout_marginBottom="20dp"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:elevation="10dp"/>-->
+        <!--<Button-->
+        <!--android:id="@+id/btn_tambah_agenda"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="16sp"-->
+        <!--android:textAlignment="textStart"-->
+        <!--android:text="Tambah Agenda Anda"-->
+        <!--android:drawableLeft="@drawable/ic_plus"-->
+        <!--android:drawableTint="@color/colorPrimary"-->
+        <!--android:background="@drawable/btn_tambah_agenda_custom"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:paddingLeft="10dp"-->
+        <!--android:elevation="10dp"/>-->
 
-            <!--<androidx.recyclerview.widget.RecyclerView-->
-                <!--android:id="@+id/recyclerViewAgenda"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:padding="4dp"-->
-                <!--android:scrollbars="vertical" />-->
+        <!--<androidx.recyclerview.widget.RecyclerView-->
+        <!--android:id="@+id/recyclerViewAgenda"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:padding="4dp"-->
+        <!--android:scrollbars="vertical" />-->
 
         <!--</LinearLayout>-->
 
@@ -347,84 +320,84 @@
         <!--bagian rekomendasi makanan-->
 
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_marginLeft="20dp"-->
-            <!--android:layout_marginRight="20dp">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp">-->
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Makanan Rekomendasi Anda"-->
-                <!--android:textSize="18sp"/>-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Makanan Rekomendasi Anda"-->
+        <!--android:textSize="18sp"/>-->
 
-            <!--<View-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="2dp"-->
-                <!--android:background="@android:color/darker_gray"/>-->
+        <!--<View-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:background="@android:color/darker_gray"/>-->
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Makan Pagi"-->
-                <!--android:textSize="18sp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_marginBottom="10dp"/>-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Makan Pagi"-->
+        <!--android:textSize="18sp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginBottom="10dp"/>-->
 
         <!--</LinearLayout>-->
 
-        
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical">-->
-            <!---->
-            <!--<androidx.recyclerview.widget.RecyclerView-->
-                <!--android:id="@+id/recyclerViewMakanan"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:orientation="horizontal">-->
 
-            <!--</androidx.recyclerview.widget.RecyclerView>-->
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
+        <!---->
+        <!--<androidx.recyclerview.widget.RecyclerView-->
+        <!--android:id="@+id/recyclerViewMakanan"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--</androidx.recyclerview.widget.RecyclerView>-->
 
         <!--</LinearLayout>-->
 
 
         <!--Bagian Recycler View Makan siang-->
-        
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_marginRight="20dp"-->
-            <!--android:layout_marginLeft="20dp">-->
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Makan Siang"-->
-                <!--android:textSize="18sp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_marginBottom="10dp"/>-->
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_marginLeft="20dp">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Makan Siang"-->
+        <!--android:textSize="18sp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginBottom="10dp"/>-->
 
         <!--</LinearLayout>-->
 
 
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
 
-            <!--<androidx.recyclerview.widget.RecyclerView-->
-                <!--android:id="@+id/recyclerViewMakananSiang"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:orientation="horizontal">-->
+        <!--<androidx.recyclerview.widget.RecyclerView-->
+        <!--android:id="@+id/recyclerViewMakananSiang"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="horizontal">-->
 
-            <!--</androidx.recyclerview.widget.RecyclerView>-->
+        <!--</androidx.recyclerview.widget.RecyclerView>-->
 
         <!--</LinearLayout>-->
 
@@ -432,35 +405,35 @@
         <!--Bagian Recycler View Makan Malam-->
 
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_marginRight="20dp"-->
-            <!--android:layout_marginLeft="20dp">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_marginLeft="20dp">-->
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Makan Malam"-->
-                <!--android:textSize="18sp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_marginBottom="10dp"/>-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Makan Malam"-->
+        <!--android:textSize="18sp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginBottom="10dp"/>-->
 
         <!--</LinearLayout>-->
 
 
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
 
-            <!--<androidx.recyclerview.widget.RecyclerView-->
-                <!--android:id="@+id/recyclerViewMakananMalam"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:orientation="horizontal">-->
+        <!--<androidx.recyclerview.widget.RecyclerView-->
+        <!--android:id="@+id/recyclerViewMakananMalam"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="horizontal">-->
 
-            <!--</androidx.recyclerview.widget.RecyclerView>-->
+        <!--</androidx.recyclerview.widget.RecyclerView>-->
 
         <!--</LinearLayout>-->
 
@@ -468,41 +441,41 @@
         <!--Bagian RecyclerView Olahraga Yang dilakukan-->
 
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_marginLeft="20dp"-->
-            <!--android:layout_marginRight="20dp"-->
-            <!--android:layout_marginTop="10dp">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_marginTop="10dp">-->
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Olahraga yang Anda Lakukan"-->
-                <!--android:textSize="18sp"/>-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Olahraga yang Anda Lakukan"-->
+        <!--android:textSize="18sp"/>-->
 
-            <!--<View-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="2dp"-->
-                <!--android:background="@android:color/darker_gray"/>-->
+        <!--<View-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:background="@android:color/darker_gray"/>-->
 
         <!--</LinearLayout>-->
 
 
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_marginTop="10dp">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_marginTop="10dp">-->
 
-            <!--<androidx.recyclerview.widget.RecyclerView-->
-                <!--android:id="@+id/recyclerViewOlahraga"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:orientation="horizontal">-->
+        <!--<androidx.recyclerview.widget.RecyclerView-->
+        <!--android:id="@+id/recyclerViewOlahraga"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="horizontal">-->
 
-            <!--</androidx.recyclerview.widget.RecyclerView>-->
+        <!--</androidx.recyclerview.widget.RecyclerView>-->
 
         <!--</LinearLayout>-->
 
@@ -512,12 +485,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/bg_spinner"
-            android:orientation="horizontal"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
-            android:layout_marginBottom="15dp">
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/bg_spinner"
+            android:orientation="horizontal">
 
             <Spinner
                 android:id="@+id/spinnerAgenda"
@@ -531,59 +504,59 @@
 
         <!--Makan Pagi-->
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
 
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_marginTop="20dp"-->
-                <!--android:layout_marginBottom="2dp"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:layout_marginRight="20dp"-->
-                <!--android:background="@drawable/bg_cardhome">-->
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_marginBottom="2dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:background="@drawable/bg_cardhome">-->
 
-                <!--<androidx.cardview.widget.CardView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--app:cardBackgroundColor="@android:color/transparent">-->
-
-
-                <!--</androidx.cardview.widget.CardView>-->
+        <!--<androidx.cardview.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:cardBackgroundColor="@android:color/transparent">-->
 
 
-            <!--</LinearLayout>-->
+        <!--</androidx.cardview.widget.CardView>-->
 
 
-            <!--<androidx.recyclerview.widget.RecyclerView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginRight="20dp"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:background="@android:color/darker_gray"-->
-                <!--android:layout_marginTop="2dp"/>-->
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_marginTop="2dp"-->
-                <!--android:layout_marginBottom="2dp"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:layout_marginRight="20dp"-->
-                <!--android:background="@drawable/bg_cardhomedown">-->
-
-                <!--<androidx.cardview.widget.CardView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--app:cardBackgroundColor="@android:color/transparent">-->
-
-                <!--</androidx.cardview.widget.CardView>-->
+        <!--</LinearLayout>-->
 
 
-            <!--</LinearLayout>-->
+        <!--<androidx.recyclerview.widget.RecyclerView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:background="@android:color/darker_gray"-->
+        <!--android:layout_marginTop="2dp"/>-->
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginTop="2dp"-->
+        <!--android:layout_marginBottom="2dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:background="@drawable/bg_cardhomedown">-->
+
+        <!--<androidx.cardview.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:cardBackgroundColor="@android:color/transparent">-->
+
+        <!--</androidx.cardview.widget.CardView>-->
+
+
+        <!--</LinearLayout>-->
 
 
         <!--</LinearLayout>-->
@@ -593,8 +566,8 @@
             android:id="@+id/peringatanNoAgenda"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp">
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
             <TableRow
                 android:id="@+id/tableRowNoAgenda1"
@@ -607,8 +580,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:orientation="horizontal"
                     android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp">
 
@@ -623,22 +596,22 @@
                         android:textSize="16sp" />
 
                     <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="Hallo"-->
-                        <!--android:padding="3dp"-->
-                        <!--android:textSize="16sp"-->
-                        <!--android:textColor="@android:color/darker_gray"-->
-                        <!--android:fontFamily="@font/coresans"/>-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Hallo"-->
+                    <!--android:padding="3dp"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:textColor="@android:color/darker_gray"-->
+                    <!--android:fontFamily="@font/coresans"/>-->
 
                     <ImageButton
                         android:id="@+id/cancelInfo"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_close_black_24dp"
+                        android:layout_marginRight="5dp"
                         android:background="@android:color/white"
-                        android:layout_marginRight="5dp"/>
+                        android:src="@drawable/ic_close_black_24dp" />
 
                 </LinearLayout>
 
@@ -657,29 +630,29 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/judulNoAgenda"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/coresans"
                         android:gravity="center_vertical"
                         android:padding="3dp"
-                        android:fontFamily="@font/coresans"
-                        android:textStyle="bold"
                         android:text="Agenda Belum Tersedia"
+                        android:textColor="@android:color/black"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/deskripsiNoAgenda"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/coresans"
                         android:gravity="center_vertical"
                         android:padding="3dp"
-                        android:fontFamily="@font/coresans"
                         android:text="Mari buat agenda anda"
                         android:textSize="12sp" />
 
@@ -689,14 +662,13 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:padding="8dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/error"/>
+                    android:padding="8dp"
+                    android:src="@drawable/error" />
 
             </TableRow>
-
 
 
         </TableLayout>
@@ -709,9 +681,9 @@
             android:id="@+id/makan_pagi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp">
+            android:layout_marginRight="20dp">
 
             <TableRow
                 android:id="@+id/tableRowMakanPagi"
@@ -724,38 +696,38 @@
                     android:id="@+id/imageMakanPagi"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:padding="8dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/makanpagi"/>
+                    android:padding="8dp"
+                    android:src="@drawable/makanpagi" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/judulMakanPagi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/coresans"
                         android:gravity="center_vertical"
                         android:padding="3dp"
-                        android:fontFamily="@font/coresans"
-                        android:textStyle="bold"
                         android:text="Makan Pagi"
+                        android:textColor="@android:color/black"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/rekomendasiMakanPagi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/coresans"
                         android:gravity="center_vertical"
                         android:padding="3dp"
-                        android:fontFamily="@font/coresans"
                         android:text="Rekomendasi: 563 - 1000 kj"
                         android:textSize="12sp" />
 
@@ -767,10 +739,10 @@
                     android:id="@+id/tambahMakanPagi"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/btn_circlecardhome"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_plus"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/btn_circlecardhome"
+                    android:src="@drawable/ic_plus" />
 
             </TableRow>
 
@@ -778,35 +750,35 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/bg_cardhomedown">
+                android:background="@drawable/bg_cardhomedown"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/banyakKaloriPagi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:fontFamily="@font/coresans"
-                    android:textStyle="bold"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/coresans"
+                    android:padding="8dp"
+                    android:text="1350 cal"
                     android:textSize="12sp"
-                    android:text="1350 cal"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/kaloriDimakan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/coresans"
-                    android:padding="8dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:fontFamily="@font/coresans"
+                    android:padding="8dp"
+                    android:text="1200 cal tersisa"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:text="1200 cal tersisa"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -815,11 +787,10 @@
                 android:id="@+id/recyclerViewMakanPagi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
+
                 android:layout_marginTop="10dp"
-                android:padding="20dp"
-                />
+
+                android:background="@drawable/bg_cardhomefull" />
 
 
         </TableLayout>
@@ -827,7 +798,6 @@
         <!-- Akhir TableLayout Makan Pagi-->
 
         <!-- Recyclerview tampilan makanan yang dipilih -->
-
 
 
         <!-- Akhir Recyclerview tampilan makanan yang dipilih-->
@@ -838,9 +808,9 @@
             android:id="@+id/makan_siang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp">
+            android:layout_marginRight="20dp">
 
             <TableRow
                 android:id="@+id/tableRowMakanSiang"
@@ -853,38 +823,38 @@
                     android:id="@+id/imageMakanSiang"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:padding="8dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/makansiang"/>
+                    android:padding="8dp"
+                    android:src="@drawable/makansiang" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/judulMakanSiang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/coresans"
                         android:gravity="center_vertical"
                         android:padding="3dp"
-                        android:fontFamily="@font/coresans"
-                        android:textStyle="bold"
                         android:text="Makan Siang"
+                        android:textColor="@android:color/black"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/rekomendasiMakanSiang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/coresans"
                         android:gravity="center_vertical"
                         android:padding="3dp"
-                        android:fontFamily="@font/coresans"
                         android:text="Rekomendasi: 563 - 1000 kj"
                         android:textSize="12sp" />
 
@@ -896,10 +866,10 @@
                     android:id="@+id/tambahMakanSiang"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/btn_circlecardhome"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_plus"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/btn_circlecardhome"
+                    android:src="@drawable/ic_plus" />
 
             </TableRow>
 
@@ -907,38 +877,45 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/bg_cardhomedown">
+                android:background="@drawable/bg_cardhomedown"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/banyakKaloriSiang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:textStyle="bold"
-                    android:textSize="12sp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:fontFamily="@font/coresans"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
-                    android:text="1350 cal"/>
+                    android:fontFamily="@font/coresans"
+                    android:padding="8dp"
+                    android:text="1350 cal"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/kaloriDimakanSiang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/coresans"
-                    android:padding="8dp"
-                    android:textStyle="bold"
-                    android:textSize="12sp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:text="1200 cal tersisa"/>
+                    android:fontFamily="@font/coresans"
+                    android:padding="8dp"
+                    android:text="1200 cal tersisa"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
 
             </LinearLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewMakanSiang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_cardhomefull" />
 
         </TableLayout>
 
@@ -946,17 +923,8 @@
 
         <!-- Recyclerview tampilan makanan yang dipilih -->
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewMakanSiang"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:padding="20dp"/>
 
         <!-- Akhir Recyclerview tampilan makanan yang dipilih-->
-
 
 
         <!--TableLayout Makan Malam-->
@@ -964,9 +932,9 @@
             android:id="@+id/makan_malam"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp">
+            android:layout_marginRight="20dp">
 
             <TableRow
                 android:id="@+id/tableRowMakanMalam"
@@ -979,38 +947,38 @@
                     android:id="@+id/imageMakanMalam"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:padding="8dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/makanmalam"/>
+                    android:padding="8dp"
+                    android:src="@drawable/makanmalam" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/judulMakanMalam"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/coresans"
                         android:gravity="center_vertical"
                         android:padding="3dp"
-                        android:fontFamily="@font/coresans"
-                        android:textStyle="bold"
                         android:text="Makan Malam"
+                        android:textColor="@android:color/black"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/rekomendasiMakanMalam"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/coresans"
                         android:gravity="center_vertical"
                         android:padding="3dp"
-                        android:fontFamily="@font/coresans"
                         android:text="Rekomendasi: 563 - 1000 kj"
                         android:textSize="12sp" />
 
@@ -1022,10 +990,10 @@
                     android:id="@+id/tambahMakanMalam"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/btn_circlecardhome"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_plus"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/btn_circlecardhome"
+                    android:src="@drawable/ic_plus" />
 
             </TableRow>
 
@@ -1033,37 +1001,45 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/bg_cardhomedown">
+                android:background="@drawable/bg_cardhomedown"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/banyakKaloriMalam"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:textStyle="bold"
-                    android:textSize="12sp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:fontFamily="@font/coresans"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
-                    android:text="1350 cal"/>
+                    android:fontFamily="@font/coresans"
+                    android:padding="8dp"
+                    android:text="1350 cal"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/kaloriDimakanMalam"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/coresans"
-                    android:padding="8dp"
-                    android:textStyle="bold"
-                    android:textSize="12sp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:text="1200 cal tersisa"/>
+                    android:fontFamily="@font/coresans"
+                    android:padding="8dp"
+                    android:text="1200 cal tersisa"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
 
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recylerMakanMalam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_cardhomefull" />
 
 
         </TableLayout>
@@ -1072,22 +1048,11 @@
 
         <!-- Recyclerview tampilan makanan yang dipilih -->
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recylerMakanMalam"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:padding="20dp"/>
 
         <!-- Akhir Recyclerview tampilan makanan yang dipilih-->
 
 
-
-
     </LinearLayout>
-
 
 
 </ScrollView>

@@ -31,6 +31,8 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener, AgendaMakanPagiAdapter.MakananPagiListener {
     public static ArrayList<ExampleItem> mExampleList = new ArrayList<>();
+    public static ArrayList<MakananModel> listMakananSiang = new ArrayList<>();
+    public static ArrayList<MakananModel> listMakananMalam = new ArrayList<>();
     private RecyclerView mRecyclerView, mRecyclerViewMakanan, mRecyclerViewMakananSiang, mRecyclerViewMakananMalam,
             mRecyclerViewMakananOlahraga, mRecyclerViewMenuPagi,mRecyclerViewMenuSiang, mRecyclerViewMenuMalam;
     private RecyclerView.Adapter mAdapter, mAdapterMakanan, mAdapterMakananSiang, mAdapterMakananMalam, mAdapterMakananOlahraga,
@@ -139,6 +141,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         tv_banyakKalori.setText(String.valueOf(banyakKalori));
 
         getMenuMakanPagi();
+        getMenuMakanSiang();
+        getMenuMakanMalam();
 
         return rootView;
     }
@@ -220,7 +224,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         mLayoutManagerMakananSiang = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 //        mRecyclerViewMakananSiang    = rootView.findViewById(R.id.recyclerViewMakananSiang);
         mRecyclerViewMakananSiang.setLayoutManager(mLayoutManagerMakananSiang);
-        mAdapterMakananSiang = new RecyclerViewAdapterMakananSiang(getContext(), mNameSiang, mKaloriSiang, mImagesSiang, mKandunganSiang);
+//        mAdapterMakananSiang = new RecyclerViewAdapterMakananSiang(getContext(), mNameSiang, mKaloriSiang, mImagesSiang, mKandunganSiang);
         mRecyclerViewMakananSiang.setAdapter(mAdapterMakananSiang);
     }
 
@@ -323,20 +327,37 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
     public void getMenuMakanPagi() {
         mRecyclerViewMenuPagi = rootView.findViewById(R.id.recyclerViewMakanPagi);
-        mLayoutMenuMakanPagi = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        mLayoutMenuMakanPagi = new LinearLayoutManager(getContext());
         mRecyclerViewMenuPagi.setLayoutManager(mLayoutMenuMakanPagi);
         mAdapterMenuPagi = new RecyclerViewAdapterMakanan(getContext(), HomeFragment.listMakananPagi);
         mRecyclerViewMenuPagi.setAdapter(mAdapterMenuPagi);
     }
+
+    public void getMenuMakanSiang() {
+        mRecyclerViewMenuSiang = rootView.findViewById(R.id.recyclerViewMakanSiang);
+        mLayoutMenuMakanSiang = new LinearLayoutManager(getContext());
+        mRecyclerViewMenuSiang.setLayoutManager(mLayoutMenuMakanSiang);
+        mAdapterMenuSiang = new RecyclerViewAdapterMakanan(getContext(), HomeFragment.listMakananSiang);
+        mRecyclerViewMenuSiang.setAdapter(mAdapterMenuSiang);
+    }
+
+    public void getMenuMakanMalam() {
+        mRecyclerViewMenuMalam = rootView.findViewById(R.id.recylerMakanMalam);
+        mLayoutMenuMakanMalam = new LinearLayoutManager(getContext());
+        mRecyclerViewMenuMalam.setLayoutManager(mLayoutMenuMakanMalam);
+        mAdapterMenuMalam = new RecyclerViewAdapterMakanan(getContext(), HomeFragment.listMakananMalam);
+        mRecyclerViewMenuMalam.setAdapter(mAdapterMenuMalam);
+    }
+
+
 
     @Override
     public void onResume() {
         super.onResume();
         Log.d("On Resume", "TEST");
         getMenuMakanPagi();
-        if(listMakananPagi.size() > 0){
-            Log.d("ResumeMenu", listMakananPagi.get(0).getNama());
-        }
+        getMenuMakanSiang();
+        getMenuMakanMalam();
 
     }
 

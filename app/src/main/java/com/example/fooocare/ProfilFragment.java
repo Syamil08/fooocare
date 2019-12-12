@@ -74,6 +74,8 @@ public class ProfilFragment extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(),databaseError.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
+
+
 //
 //        btn_logout = root.findViewById(R.id.btn_logout);
 //

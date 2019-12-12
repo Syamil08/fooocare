@@ -82,9 +82,9 @@ public class RecyclerViewAdapterMakananMalam extends RecyclerView.Adapter<Recycl
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageMalam   = itemView.findViewById(R.id.image_makananMalam);
-            makananMalam = itemView.findViewById(R.id.tvMakananCardMalam);
-            kaloriMalam  = itemView.findViewById(R.id.tvBanyakKaloriMalam);
+            imageMalam   = itemView.findViewById(R.id.imageMenuMalam);
+            makananMalam = itemView.findViewById(R.id.textNamaMenuMalam);
+            kaloriMalam  = itemView.findViewById(R.id.textKaloriMenuMalam);
         }
     }
 }

@@ -27,7 +27,7 @@ public class RecyclerViewAdapterMakanan extends RecyclerView.Adapter<RecyclerVie
 
 //    mendefinisikan variable ArrayList
 
-    private ArrayList<MakananModel> dataMakanan = new ArrayList<>();
+    private ArrayList<MakananModel> dataMakanan;
 
     private Context mContext;
 

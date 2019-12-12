@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,7 +40,7 @@ public class AgendaMakanSiangAdapter extends RecyclerView.Adapter<AgendaMakanSia
 
     @Override
     public void onBindViewHolder(@NonNull AgendaListViewHolder holder, int position) {
-        MakananModel currentItem = listAgenda.get(position);
+        final MakananModel currentItem = listAgenda.get(position);
 
         Glide.with(mContext)
                 .asBitmap()
@@ -52,6 +53,14 @@ public class AgendaMakanSiangAdapter extends RecyclerView.Adapter<AgendaMakanSia
         else if (currentItem instanceof MakananProteinModel){
             holder._mkalori.setText(currentItem.getKalori() +" cal / "+ ((MakananProteinModel) currentItem).getProtein()+"gram");
         }
+        holder.mBtnTambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext,"Test", Toast.LENGTH_SHORT).show();
+                listAgenda.add(currentItem);
+                HomeFragment.listMakananSiang.add(currentItem);
+            }
+        });
 
     }
 
@@ -68,13 +77,14 @@ public class AgendaMakanSiangAdapter extends RecyclerView.Adapter<AgendaMakanSia
         ImageView imageAgendaSiang;
         public TextView _mJudul, _mkalori;
         public RelativeLayout expandableLayout;
+        public ImageButton mBtnTambah;
 
         public AgendaListViewHolder(@NonNull View itemView) {
             super(itemView);
             imageAgendaSiang = itemView.findViewById(R.id.imageAgendasiang);
             _mJudul = (TextView) itemView.findViewById(R.id.textJudulsiang);
             _mkalori = (TextView) itemView.findViewById(R.id.caloriSiang);
-
+            mBtnTambah = (ImageButton)itemView.findViewById(R.id.btn_tambah);
 
         }
     }

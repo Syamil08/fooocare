@@ -48,7 +48,7 @@ public class JenisMakananActivity extends AppCompatActivity {
 
     public void InitMakananPagi(){
         mRecyclerMakananPagi = findViewById(R.id.makanan);
-        mLayoutManagerPagi = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        mLayoutManagerPagi = new LinearLayoutManager(this);
         mRecyclerMakananPagi.setLayoutManager(mLayoutManagerPagi);
         mAdapterPagi = new AgendaMakanPagiAdapter(this,listMakanan);
         mRecyclerMakananPagi.setAdapter(mAdapterPagi);
@@ -56,7 +56,7 @@ public class JenisMakananActivity extends AppCompatActivity {
 
     public void InitMakananSiang(){
         mRecyclerMakananSiang = findViewById(R.id.makanan);
-        mLayoutManagerSiang = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
+        mLayoutManagerSiang = new LinearLayoutManager(getApplicationContext());
         mRecyclerMakananSiang.setLayoutManager(mLayoutManagerSiang);
         mAdapterSiang = new AgendaMakanSiangAdapter(this,listMakanan);
         mRecyclerMakananSiang.setAdapter(mAdapterSiang);
@@ -64,7 +64,7 @@ public class JenisMakananActivity extends AppCompatActivity {
 
     public void InitMakananMalam(){
         mRecyclerMakananMalam = findViewById(R.id.makanan);
-        mLayoutManagerMalam = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        mLayoutManagerMalam = new LinearLayoutManager(this);
         mRecyclerMakananMalam.setLayoutManager(mLayoutManagerMalam);
         mAdapterMalam = new AgendaMakanMalamAdapter(this,listMakanan);
         mRecyclerMakananMalam.setAdapter(mAdapterMalam);
