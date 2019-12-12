@@ -21,14 +21,19 @@ import java.util.ArrayList;
 
 public class AgendaFragment extends Fragment {
     public static ArrayList<ExampleItem> mExampleList = new ArrayList<>();
-    private View rootview;
-    private RecyclerView agenda, agendaSejarah,agendaPagi;
-    private RecyclerView.LayoutManager mLayoutAgenda, mLayoutAgendaSejarah,mLayoutAgendaPagi;
-    private RecyclerView.Adapter mAdapterAgenda, mAdapterAgendaSejarah,mAdapterAgendaPagi;
+    private static View rootview;
+    private static RecyclerView agenda, agendaSejarah,agendaPagi;
+    private static  RecyclerView.LayoutManager mLayoutAgenda, mLayoutAgendaSejarah,mLayoutAgendaPagi;
+    private static  RecyclerView.Adapter mAdapterAgenda, mAdapterAgendaSejarah,mAdapterAgendaPagi;
     private ArrayList<AgendaItem> AgendaList;
     private ArrayList<AgendaItem> AgendaListSejarah;
     private Button tambahAgenda;
 
+    public AgendaFragment(ArrayList<String> list){
+
+    }
+
+    public  AgendaFragment (){}
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,6 +54,7 @@ public class AgendaFragment extends Fragment {
             }
         });
 
+        buildRecyclerViewAgenda();
         return rootview;
     }
 
@@ -61,6 +67,15 @@ public class AgendaFragment extends Fragment {
         mAdapterAgenda.notifyItemInserted(position);
     }
 
+    public static void buildAgenda(){
+        agenda = rootview.findViewById(R.id.recyclerViewJadwalPertandingan);
+        agenda.setHasFixedSize(true);
+        mLayoutAgenda = new LinearLayoutManager(rootview.getContext());
+        mAdapterAgenda = new ExampleAdapter(rootview.getContext(),mExampleList);
+
+        agenda.setLayoutManager(mLayoutAgenda);
+        agenda.setAdapter(mAdapterAgenda);
+    }
 
     public void buildRecyclerViewAgenda(){
         agenda = rootview.findViewById(R.id.recyclerViewJadwalPertandingan);
@@ -72,25 +87,9 @@ public class AgendaFragment extends Fragment {
         agenda.setAdapter(mAdapterAgenda);
     }
 
-//    public void buildRecyclerViewAgendaSejarah(){
-////        agendaSejarah = rootview.findViewById(R.id.recyclerViewSejarahAgenda);
-//        agendaSejarah.setHasFixedSize(true);
-//        mLayoutAgendaSejarah = new LinearLayoutManager(getContext());
-//        mAdapterAgendaSejarah = new AgendaListAdapter(AgendaListSejarah);
-//
-//        agendaSejarah.setLayoutManager(mLayoutAgendaSejarah);
-//        agendaSejarah.setAdapter(mAdapterAgendaSejarah);
-//    }
-//
-//    public void createListAgenda(){
-//        AgendaList = new ArrayList<AgendaItem>();
-//        AgendaList.add(new AgendaItem("Pertandingan Persahabatan Shopee", "     24 Oktober 2019"));
-//        AgendaList.add(new AgendaItem("Pertandingan Liga 1 Traveloka", "     25 Oktober 2019"));
-//    }
-//
-//    public void createListAgendaSejara(){
-//        AgendaListSejarah = new ArrayList<AgendaItem>();
-//        AgendaListSejarah.add(new AgendaItem("Pertandingan Champions League", "     24 November 2019"));
-//        AgendaListSejarah.add(new AgendaItem("Pertandingan Europa League", "     25 November 2019"));
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        buildRecyclerViewAgenda();
+    }
 }

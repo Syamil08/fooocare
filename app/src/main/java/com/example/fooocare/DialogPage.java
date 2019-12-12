@@ -24,7 +24,7 @@ public class DialogPage extends AppCompatDialogFragment {
     EditText _judul,_tanggal;
     DialogPageListener listener;
     DatePickerDialog picker;
-
+    ArrayList<String> list = new ArrayList<>();
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -46,7 +46,10 @@ public class DialogPage extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String judul = _judul.getText().toString().trim();
                         String tanggal = _tanggal.getText().toString();
-                        listener.applyTexts(judul, tanggal);
+                        list.add(judul);
+                        list.add(tanggal);
+                        AgendaFragment.buildAgenda();
+                        listener.applyTexts(list);
                         Log.d("User",judul + " " +tanggal);
                     }
                 });
@@ -89,6 +92,6 @@ public class DialogPage extends AppCompatDialogFragment {
     }
 
     public interface DialogPageListener{
-        void applyTexts(String judul, String tanggal);
+        void applyTexts(ArrayList<String> data);
     }
 }
