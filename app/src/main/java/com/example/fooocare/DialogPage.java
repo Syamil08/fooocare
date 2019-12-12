@@ -1,12 +1,16 @@
 package com.example.fooocare;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -14,11 +18,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class DialogPage extends AppCompatDialogFragment {
     EditText _judul,_tanggal;
     DialogPageListener listener;
-    ArrayList<ExampleItem> mExampleAgnda = new ArrayList<>();
+    DatePickerDialog picker;
 
     @NonNull
     @Override
@@ -42,11 +47,31 @@ public class DialogPage extends AppCompatDialogFragment {
                         String judul = _judul.getText().toString().trim();
                         String tanggal = _tanggal.getText().toString();
                         listener.applyTexts(judul, tanggal);
+                        Log.d("User",judul + " " +tanggal);
                     }
                 });
 
         _judul = view.findViewById(R.id.jadwal_agenda);
         _tanggal = view.findViewById(R.id.tanggalPertandingan);
+        _tanggal.setInputType(InputType.TYPE_NULL);
+        _tanggal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                picker = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                _tanggal.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            }
+                        }, year, month, day);
+                picker.show();
+            }
+        });
 
         return builder.create();
     }

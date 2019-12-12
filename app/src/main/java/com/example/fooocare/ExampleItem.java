@@ -9,6 +9,7 @@ public class ExampleItem {
         this.tanggal = tanggal;
     }
 
+
     public String getJudul() {
         return judul;
     }
@@ -23,5 +24,10 @@ public class ExampleItem {
 
     public void setTanggal(String tanggal) {
         this.tanggal = tanggal;
+    }
+
+    @Override
+    public String toString(){
+        return judul;
     }
 }

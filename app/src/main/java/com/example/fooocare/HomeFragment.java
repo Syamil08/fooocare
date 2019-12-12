@@ -6,10 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +29,7 @@ import com.example.fooocare.Model.MakananProteinModel;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     public static ArrayList<ExampleItem> mExampleList = new ArrayList<>();
     private RecyclerView mRecyclerView,mRecyclerViewMakanan,mRecyclerViewMakananSiang,mRecyclerViewMakananMalam,mRecyclerViewMakananOlahraga;
     private RecyclerView.Adapter mAdapter,mAdapterMakanan,mAdapterMakananSiang,mAdapterMakananMalam,mAdapterMakananOlahraga;
@@ -36,7 +40,7 @@ public class HomeFragment extends Fragment {
     private int line1 = 5,line2 = 6;
     private float banyakKalori,kaloriAgenda;
     ImageButton tambahPagi,tambahSiang,tambahMalam;
-
+    Spinner spinnerAgenda;
 
 
     //    array list makanan rekomendasi makan pagi
@@ -79,6 +83,13 @@ public class HomeFragment extends Fragment {
         getImagesSiang();
         getImages();
 //        buildRecyclerView();
+        spinnerAgenda = rootView.findViewById(R.id.spinnerAgenda);
+        ArrayAdapter<ExampleItem> list = new ArrayAdapter<ExampleItem>(getContext(),android.R.layout.simple_spinner_item,mExampleList);
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),R.array.numbers,android.R.layout.simple_spinner_item);
+        list.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAgenda.setAdapter(list);
+        spinnerAgenda.setOnItemSelectedListener(this);
+
         tambahPagi = rootView.findViewById(R.id.tambahMakanPagi);
         tv_banyakKalori = rootView.findViewById(R.id.tv_banyakKalori);
 //        buttonInsertAgenda = rootView.findViewById(R.id.btn_tambah_agenda);
@@ -126,16 +137,16 @@ public class HomeFragment extends Fragment {
 
 
 
-    public void buildRecyclerView(){
-//        mRecyclerView = rootView.findViewById(R.id.recyclerViewAgenda);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new ExampleAdapter(mExampleList);
-
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-
-    }
+//    public void buildRecyclerView(){
+////        mRecyclerView = rootView.findViewById(R.id.recyclerViewAgenda);
+//        mRecyclerView.setHasFixedSize(true);
+//        mLayoutManager = new LinearLayoutManager(getContext());
+//        mAdapter = new ExampleAdapter(mExampleList);
+//
+//        mRecyclerView.setLayoutManager(mLayoutManager);
+//        mRecyclerView.setAdapter(mAdapter);
+//
+//    }
 
     public void getImages(){
         for (MakananKarbohidratModel karbo : listKarbo){
@@ -274,5 +285,16 @@ public class HomeFragment extends Fragment {
         mRecyclerViewMakananOlahraga.setLayoutManager(mLayoutManagerMakananOlahraga);
         mAdapterMakananOlahraga = new RecyclerViewAdapterMakanan(getContext(),mNameOlahraga,mKaloriOlahraga,mImagesOlahraga,mKandungan);
         mRecyclerViewMakananOlahraga.setAdapter(mAdapterMakananOlahraga);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+        String text = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(),text,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

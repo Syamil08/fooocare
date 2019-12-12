@@ -63,7 +63,8 @@ public class DashboardActivity extends AppCompatActivity implements DialogPage.D
 
     @Override
     public void applyTexts(String judul, String tanggal) {
-        HomeFragment.mExampleList.add(new ExampleItem(judul, tanggal));
+        AgendaFragment.mExampleList.add(new ExampleItem(judul, tanggal));
+        HomeFragment.mExampleList.add(new ExampleItem(judul,tanggal));
     }
 
 }

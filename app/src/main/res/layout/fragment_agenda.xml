@@ -20,8 +20,8 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:background="#0099FF" />
+                    android:layout_height="300dp"
+                    android:background="@drawable/ellipse_home" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -31,45 +31,41 @@
                     android:orientation="horizontal"
                     android:gravity="center">
 
-                    <ImageView
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:src="@drawable/agenda_vector" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
+                        android:fontFamily="@font/coresans"
+                        android:textStyle="bold"
                         android:text="Mari Lihat Agenda Apa Saja yang Anda Miliki"
                         android:textColor="@android:color/white"
                         android:textSize="23sp" />
+
                 </LinearLayout>
 
 
             </FrameLayout>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_wave2" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:text="Agenda terdekat anda"
-                android:textSize="20sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewAgendaTerdekat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:scrollbars="vertical"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"/>
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="25dp"-->
+                <!--android:text="Agenda terdekat anda"-->
+                <!--android:textSize="20sp" />-->
+
+            <!--<androidx.recyclerview.widget.RecyclerView-->
+                <!--android:id="@+id/recyclerViewAgendaTerdekat"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="4dp"-->
+                <!--android:scrollbars="vertical"-->
+                <!--android:layout_marginLeft="25dp"-->
+                <!--android:layout_marginRight="25dp"/>-->
 
 <!--            <RelativeLayout-->
 <!--                android:id="@+id/agenda"-->
@@ -401,24 +397,24 @@
 <!--                    android:layout_below="@+id/agenda2"/>-->
 <!--            </RelativeLayout>-->
 
-            <TextView
-                android:id="@+id/txt_sejarah"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sejarah Agenda Anda"
-                android:textSize="20sp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginLeft="25dp"/>
+            <!--<TextView-->
+                <!--android:id="@+id/txt_sejarah"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Sejarah Agenda Anda"-->
+                <!--android:textSize="20sp"-->
+                <!--android:layout_marginTop="15dp"-->
+                <!--android:layout_marginBottom="15dp"-->
+                <!--android:layout_marginLeft="25dp"/>-->
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewSejarahAgenda"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:scrollbars="vertical"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"/>
+            <!--<androidx.recyclerview.widget.RecyclerView-->
+                <!--android:id="@+id/recyclerViewSejarahAgenda"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="4dp"-->
+                <!--android:scrollbars="vertical"-->
+                <!--android:layout_marginLeft="25dp"-->
+                <!--android:layout_marginRight="25dp"/>-->
 
 <!--            <RelativeLayout-->
 <!--                android:id="@+id/layout_agenda3"-->
@@ -794,9 +790,36 @@
 
 <!--            </RelativeLayout>-->
 
+                <Button
+                    android:id="@+id/btn_tambahAgendaa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="Tambah Agenda"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/coresans"
+                    android:background="@drawable/btn_tambah_agenda_custom"
+                    android:drawableLeft="@drawable/ic_plus"
+                    android:gravity="start|center_vertical"
+                    android:paddingLeft="20dp"
+                    android:drawablePadding="10dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewJadwalPertandingan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"/>
+
 
 
         </LinearLayout>
+
     </ScrollView>
 
 

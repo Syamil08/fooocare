@@ -3,157 +3,96 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="20dp"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="4dp"
+    android:layout_marginBottom="10dp">
 
-    <RelativeLayout
+    <ImageView
+        android:src="@drawable/bg_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"/>
+
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/txt_pertandingan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pertandingan Perdana Liga 1 Shopee"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/txt_tanggal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_pertandingan"
-            android:layout_marginTop="5dp"
-            android:drawableLeft="@drawable/ic_date"
-            android:text="   24 November 2019" />
-
-        <RelativeLayout
-            android:id="@+id/agenda_expandable"
+        <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_tanggal">
+            android:paddingLeft="30dp">
 
-            <RelativeLayout
-                android:id="@+id/daftar_menu1"
+            <ImageView
+                android:id="@+id/imagePertandingan"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/football"/>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:orientation="vertical"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/coresans"
+                android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/text_makanPagi"
+                    android:id="@+id/namaPertandingan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Makan Pagi"
+                    android:text="Pertandingan"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/coresans"
                     android:textSize="18sp"
-                    android:layout_marginBottom="10dp"/>
-                
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"/>
+
                 <TextView
+                    android:id="@+id/tanggalPertandinganBola"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="calori"
-                    android:layout_marginRight="20dp"
-                    android:textSize="18sp"
-                    android:layout_alignParentRight="true"/>
-                
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewAgendaPagi"
-                    android:layout_below="@+id/text_makanPagi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="Tanggal Pertandingan"
+                    android:fontFamily="@font/coresans"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:layout_below="@id/recyclerViewAgendaPagi"
-                    android:background="@drawable/btn_checkout"
-                    android:text="Check Out Makanan"
-                    android:textColor="@android:color/white" />
-                
-            </RelativeLayout>
+                    android:layout_marginBottom="15dp"/>
 
-            <RelativeLayout
-                android:id="@+id/daftar_menu2"
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/daftar_menu1"
-                android:layout_marginTop="10dp">
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginRight="10dp">
 
                 <TextView
-                    android:id="@+id/txt_makan2"
+                    android:id="@+id/deadlinePertandingan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Makan Siang"
-                    android:textSize="18dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:text="5"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/coresans"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:layout_marginBottom="5dp"/>
 
                 <TextView
-                    android:id="@+id/txt_kalori2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="calori"
-                    android:layout_marginRight="20dp"
-                    android:textSize="18dp" />
+                    android:text="Hari Lagi"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/coresans"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/darker_gray"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewAgendaSiang"
-                    android:layout_below="@+id/txt_makan2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/recyclerViewAgendaSiang"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/btn_checkout"
-                    android:text="Check Out Makanan"
-                    android:textColor="@android:color/white" />
 
-            </RelativeLayout>
+        </TableRow>
 
-            <RelativeLayout
-                android:id="@+id/daftar_menu3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/daftar_menu2"
-                android:layout_marginTop="10dp">
+    </TableLayout>
 
-                <TextView
-                    android:id="@+id/txt_makan3"
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Makan Malam"
-                    android:textSize="18dp" />
-
-                <TextView
-                    android:id="@+id/txt_kalori3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="calori"
-                    android:layout_marginRight="20dp"
-                    android:textSize="18dp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewAgendaMalam"
-                    android:layout_below="@+id/txt_makan3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/recyclerViewAgendaMalam"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/btn_checkout"
-                    android:text="Check Out Makanan"
-                    android:textColor="@android:color/white" />
-            </RelativeLayout>
-
-        </RelativeLayout>
-    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

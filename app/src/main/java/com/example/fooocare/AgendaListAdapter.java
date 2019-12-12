@@ -61,24 +61,24 @@ public class AgendaListAdapter extends RecyclerView.Adapter<AgendaListAdapter.Ag
 
         public AgendaListViewHolder(@NonNull View itemView) {
             super(itemView);
-            mTxtPertandingan = (TextView) itemView.findViewById(R.id.txt_pertandingan);
-            mTxtTanggal = (TextView) itemView.findViewById(R.id.txt_tanggal);
-            expandableLayout = itemView.findViewById(R.id.agenda_expandable);
+//            mTxtPertandingan = (TextView) itemView.findViewById(R.id.txt_pertandingan);
+//            mTxtTanggal = (TextView) itemView.findViewById(R.id.txt_tanggal);
+//            expandableLayout = itemView.findViewById(R.id.agenda_expandable);
 
-            mTxtPertandingan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AgendaItem agenda = listAgenda.get(getAdapterPosition());
-                    agenda.setExpanded(!agenda.isExpanded());
-                    notifyItemChanged(getAdapterPosition());
-                }
-            });
+//            mTxtPertandingan.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    AgendaItem agenda = listAgenda.get(getAdapterPosition());
+//                    agenda.setExpanded(!agenda.isExpanded());
+//                    notifyItemChanged(getAdapterPosition());
+//                }
+//            });
         }
     }
 
 
     private void buildRecyclerViewAgendaPagi(ViewGroup parent) {
-        agendaPagi = v.findViewById(R.id.recyclerViewAgendaPagi);
+//        agendaPagi = v.findViewById(R.id.recyclerViewAgendaPagi);
         agendaPagi.setHasFixedSize(true);
         mLayoutAgendaPagi = new LinearLayoutManager(parent.getContext());
         mAdapterAgendaPagi = new AgendaMakanPagiAdapter(parent.getContext(),agendaMakananPagi);
@@ -88,7 +88,7 @@ public class AgendaListAdapter extends RecyclerView.Adapter<AgendaListAdapter.Ag
     }
 
     private void buildRecyclerViewAgendaSiang(ViewGroup parent) {
-        agendaSiang = v.findViewById(R.id.recyclerViewAgendaSiang);
+//        agendaSiang = v.findViewById(R.id.recyclerViewAgendaSiang);
         agendaSiang.setHasFixedSize(true);
         mLayoutAgendaSiang = new LinearLayoutManager(parent.getContext());
         mAdapterAgendaSiang = new AgendaMakanSiangAdapter(parent.getContext(),agendaMakananSiang);
@@ -98,7 +98,7 @@ public class AgendaListAdapter extends RecyclerView.Adapter<AgendaListAdapter.Ag
     }
 
     private void buildRecyclerViewAgendaMalam(ViewGroup parent) {
-        agendaMalam = v.findViewById(R.id.recyclerViewAgendaMalam);
+//        agendaMalam = v.findViewById(R.id.recyclerViewAgendaMalam);
         agendaMalam.setHasFixedSize(true);
         mLayoutAgendaMalam = new LinearLayoutManager(parent.getContext());
         mAdapterAgendaMalam = new AgendaMakanMalamAdapter(parent.getContext(),agendaMakananMalam);

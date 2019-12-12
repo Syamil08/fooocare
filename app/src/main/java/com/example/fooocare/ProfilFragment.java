@@ -41,12 +41,11 @@ public class ProfilFragment extends Fragment {
         user = auth.getCurrentUser();
 
         namaPengguna =root.findViewById(R.id.namaPengguna);
-        nama =root.findViewById(R.id.nama);
-        email =root.findViewById(R.id.email);
-        usia =root.findViewById(R.id.usia);
-        jenisKelamin = root.findViewById(R.id.kelamin);
+        email =root.findViewById(R.id.emailPengguna);
+        usia =root.findViewById(R.id.usiaPengguna);
+        jenisKelamin = root.findViewById(R.id.jenisKelamin);
         tinggiBadan =root.findViewById(R.id.tinggiBadan);
-        beratBadan = root.findViewById(R.id.berat);
+        beratBadan = root.findViewById(R.id.beratBadan);
 
 
         reference = FirebaseDatabase.getInstance().getReference().child("Pengguna").child(user.getUid());
@@ -55,15 +54,13 @@ public class ProfilFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String _namaPengguna = dataSnapshot.child("namaLengkap").getValue().toString();
-                String _nama = dataSnapshot.child("namaLengkap").getValue().toString();
                 String _email = dataSnapshot.child("email").getValue().toString();
                 String _usia = dataSnapshot.child("usia").getValue().toString();
                 String _jenisKelamin = dataSnapshot.child("jenis_kelamin").getValue().toString();
                 String _tinggiBadan = dataSnapshot.child("tinggiBadan").getValue().toString();
                 String _beratBadan = dataSnapshot.child("beratBadan").getValue().toString();
 
-                namaPengguna.setText("Hallo, "+_namaPengguna);
-                nama.setText(_nama);
+                namaPengguna.setText(_namaPengguna);
                 email.setText(_email);
                 usia.setText(_usia);
                 jenisKelamin.setText(_jenisKelamin);
@@ -77,23 +74,23 @@ public class ProfilFragment extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(),databaseError.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
-
-        btn_logout = root.findViewById(R.id.btn_logout);
-
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                auth.signOut();
-                Intent i = new Intent(getActivity().getApplicationContext(),LoginActivity.class);
-                SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putBoolean("isIntroOpened", false);
-                editor.commit();
-                startActivity(i);
-
-            }
-        });
+//
+//        btn_logout = root.findViewById(R.id.btn_logout);
+//
+//        btn_logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                auth.signOut();
+//                Intent i = new Intent(getActivity().getApplicationContext(),LoginActivity.class);
+//                SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+//                SharedPreferences.Editor editor = pref.edit();
+//                editor.putBoolean("isIntroOpened", false);
+//                editor.commit();
+//                startActivity(i);
+//
+//            }
+//        });
 
         return root;
     }
