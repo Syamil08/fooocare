@@ -26,6 +26,8 @@ import com.example.fooocare.Model.MakananKarbohidratModel;
 import com.example.fooocare.Model.MakananModel;
 import com.example.fooocare.Model.MakananProteinGenerator;
 import com.example.fooocare.Model.MakananProteinModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -46,6 +48,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private float banyakKalori, kaloriAgenda;
     ImageButton tambahPagi, tambahSiang, tambahMalam;
     Spinner spinnerAgenda;
+
 
 
     //    array list makanan rekomendasi makan pagi
@@ -73,12 +76,15 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private ArrayList<MakananKarbohidratModel> listKarbo;
     private ArrayList<MakananProteinModel> listProtein;
     public static ArrayList<MakananModel> listMakananPagi = new ArrayList<>();
+    FirebaseAuth auth;
+    FirebaseUser user;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
         MakananKarboGenerator generatorKarbo = new MakananKarboGenerator();
         listKarbo = generatorKarbo.getListMakanan();
         MakananProteinGenerator generatorProtein = new MakananProteinGenerator();
