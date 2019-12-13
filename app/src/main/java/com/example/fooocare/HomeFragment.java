@@ -28,7 +28,13 @@ import com.example.fooocare.Model.MakananProteinGenerator;
 import com.example.fooocare.Model.MakananProteinModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.nio.channels.FileLock;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener, AgendaMakanPagiAdapter.MakananPagiListener {
@@ -42,9 +48,14 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private RecyclerView.LayoutManager mLayoutManager, mLayoutManagerMakanan, mLayoutManagerMakananSiang, mLayoutManagerMakananMalam, mLayoutManagerMakananOlahraga,
             mLayoutMenuMakanPagi, mLayoutMenuMakanSiang, mLayoutMenuMakanMalam;
     private View rootView;
-    TextView tv_banyakKalori;
+    TextView tv_banyakKalori, banyakKaloriPagi,banyakKaloriSiang, banyakKaloriMalam, kaloriDimakanPagi, kaloriDimakanSian, kaloriDimakanMalam;
     private Button buttonInsertAgenda;
     private int line1 = 5, line2 = 6;
+
+    public void setBanyakKalori(float banyakKalori) {
+        this.banyakKalori = banyakKalori;
+    }
+
     private float banyakKalori, kaloriAgenda;
     ImageButton tambahPagi, tambahSiang, tambahMalam;
     Spinner spinnerAgenda;
@@ -78,6 +89,13 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     public static ArrayList<MakananModel> listMakananPagi = new ArrayList<>();
     FirebaseAuth auth;
     FirebaseUser user;
+    DatabaseReference reference;
+
+    public void setBerat(int berat) {
+        this.berat = berat;
+    }
+
+    int berat;
 
     @Nullable
     @Override
@@ -106,7 +124,12 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         tambahSiang = rootView.findViewById(R.id.tambahMakanSiang);
         tambahMalam = rootView.findViewById(R.id.tambahMakanMalam);
         tv_banyakKalori = rootView.findViewById(R.id.tv_banyakKalori);
-//        buttonInsertAgenda = rootView.findViewById(R.id.btn_tambah_agenda);
+        banyakKaloriPagi = rootView.findViewById(R.id.banyakKaloriPagi);
+        banyakKaloriSiang = rootView.findViewById(R.id.banyakKaloriSiang);
+        banyakKaloriMalam = rootView.findViewById(R.id.banyakKaloriMalam);
+        kaloriDimakanPagi = rootView.findViewById(R.id.kaloriDimakan);
+        kaloriDimakanSian = rootView.findViewById(R.id.kaloriDimakanSiang);
+        kaloriDimakanMalam = rootView.findViewById(R.id.kaloriDimakanMalam);
 
         tambahPagi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,10 +164,30 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             }
         });
 
-        CaloryCounter.GeneratePengali();
-        CaloryCounter.GenerateBMR();
-        banyakKalori = CaloryCounter.coutnCalory(60, 19, "Laki-Laki", 160, (float) 2.3);
-        tv_banyakKalori.setText(String.valueOf(banyakKalori));
+        reference = FirebaseDatabase.getInstance().getReference().child("Pengguna").child(user.getUid());
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String _namaPengguna = dataSnapshot.child("namaLengkap").getValue().toString();
+                String _email = dataSnapshot.child("email").getValue().toString();
+                String _usia = dataSnapshot.child("usia").getValue().toString();
+                String _jenisKelamin = dataSnapshot.child("jenis_kelamin").getValue().toString();
+                String _tinggiBadan = dataSnapshot.child("tinggiBadan").getValue().toString();
+                String _beratBadan = dataSnapshot.child("beratBadan").getValue().toString();
+                CaloryCounter.GeneratePengali();
+                CaloryCounter.GenerateBMR();
+                setBerat(Integer.parseInt(_beratBadan));
+                banyakKalori = CaloryCounter.coutnCalory(Float.valueOf(_beratBadan), Float.valueOf(_usia), _jenisKelamin, Float.valueOf(_tinggiBadan), (float) 2.3);
+                tv_banyakKalori.setText(String.valueOf(banyakKalori));
+                setBanyakKalori(banyakKalori);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity().getApplicationContext(),databaseError.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
 
         getMenuMakanPagi();
         getMenuMakanSiang();
@@ -317,8 +360,16 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+        CaloryCounter.GenerateBMR();
+        CaloryCounter.GeneratePengali();
+        float kaloriAgenda = CaloryCounter.agendaCounter(berat, 1);
+        float kalori_saat_ini = banyakKalori + (kaloriAgenda/7);
+        tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
         String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_LONG).show();
+        getMenuMakanPagi();
+        getMenuMakanSiang();
+        getMenuMakanMalam();
+        Toast.makeText(parent.getContext(), String.valueOf(this.berat), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -337,6 +388,14 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         mRecyclerViewMenuPagi.setLayoutManager(mLayoutMenuMakanPagi);
         mAdapterMenuPagi = new RecyclerViewAdapterMakanan(getContext(), HomeFragment.listMakananPagi);
         mRecyclerViewMenuPagi.setAdapter(mAdapterMenuPagi);
+        float kalori = Float.valueOf(tv_banyakKalori.getText().toString())/3;
+        banyakKaloriPagi.setText(String.valueOf(kalori) +" cal");
+        float kaloriDimakan = 0;
+        for (MakananModel data: listMakananPagi) {
+            kaloriDimakan += data.getKalori();
+        }
+        float kaloriSisa = kalori - kaloriDimakan;
+        kaloriDimakanPagi.setText(kaloriSisa + " cal tersisa");
     }
 
     public void getMenuMakanSiang() {
@@ -345,6 +404,14 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         mRecyclerViewMenuSiang.setLayoutManager(mLayoutMenuMakanSiang);
         mAdapterMenuSiang = new RecyclerViewAdapterMakanan(getContext(), HomeFragment.listMakananSiang);
         mRecyclerViewMenuSiang.setAdapter(mAdapterMenuSiang);
+        float kalori = Float.valueOf(tv_banyakKalori.getText().toString())/3;
+        banyakKaloriSiang.setText(String.valueOf(kalori));
+        float kaloriDimakan = 0;
+        for (MakananModel data: listMakananSiang) {
+            kaloriDimakan += data.getKalori();
+        }
+        float kaloriSisa = kalori - kaloriDimakan;
+        kaloriDimakanSian.setText(kaloriSisa + " cal tersisa");
     }
 
     public void getMenuMakanMalam() {
@@ -353,6 +420,14 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         mRecyclerViewMenuMalam.setLayoutManager(mLayoutMenuMakanMalam);
         mAdapterMenuMalam = new RecyclerViewAdapterMakanan(getContext(), HomeFragment.listMakananMalam);
         mRecyclerViewMenuMalam.setAdapter(mAdapterMenuMalam);
+        float kalori = Float.valueOf(tv_banyakKalori.getText().toString())/3;
+        banyakKaloriMalam.setText(String.valueOf(kalori));
+        float kaloriDimakan = 0;
+        for (MakananModel data: listMakananMalam) {
+            kaloriDimakan += data.getKalori();
+        }
+        float kaloriSisa = kalori - kaloriDimakan;
+        kaloriDimakanMalam.setText(kaloriSisa + " cal tersisa");
     }
 
 
@@ -366,6 +441,4 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         getMenuMakanMalam();
 
     }
-
-
 }
