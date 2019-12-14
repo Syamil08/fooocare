@@ -5,6 +5,16 @@ public class MakananModel {
     protected float kalori;
     protected String images;
 
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    protected boolean isChecked;
+
     public MakananModel(String nama, float kalori, String images) {
         this.nama = nama;
         this.kalori = kalori;

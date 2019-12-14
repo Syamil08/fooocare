@@ -48,9 +48,16 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private RecyclerView.LayoutManager mLayoutManager, mLayoutManagerMakanan, mLayoutManagerMakananSiang, mLayoutManagerMakananMalam, mLayoutManagerMakananOlahraga,
             mLayoutMenuMakanPagi, mLayoutMenuMakanSiang, mLayoutMenuMakanMalam;
     private View rootView;
-    TextView tv_banyakKalori, banyakKaloriPagi,banyakKaloriSiang, banyakKaloriMalam, kaloriDimakanPagi, kaloriDimakanSian, kaloriDimakanMalam;
+    static TextView tv_banyakKalori;
+    TextView banyakKaloriPagi;
+    TextView banyakKaloriSiang;
+    TextView banyakKaloriMalam;
+    TextView kaloriDimakanPagi;
+    TextView kaloriDimakanSian;
+    TextView kaloriDimakanMalam;
     private Button buttonInsertAgenda;
     private int line1 = 5, line2 = 6;
+    private static float kalori_saat_ini;
 
     public void setBanyakKalori(float banyakKalori) {
         this.banyakKalori = banyakKalori;
@@ -131,6 +138,26 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                     ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, item);
                     areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     areaSpinner.setAdapter(areasAdapter);
+                    areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            CaloryCounter.GenerateBMR();
+                            CaloryCounter.GeneratePengali();
+                            float kaloriAgenda = CaloryCounter.agendaCounter(berat, 1);
+                            kalori_saat_ini = banyakKalori + (kaloriAgenda/7);
+                            tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
+                            String text = adapterView.getItemAtPosition(i).toString();
+                            getMenuMakanPagi();
+                            getMenuMakanSiang();
+                            getMenuMakanMalam();
+                            Toast.makeText(adapterView.getContext(), String.valueOf(berat), Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
                 }
 
             }
@@ -387,16 +414,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-        CaloryCounter.GenerateBMR();
-        CaloryCounter.GeneratePengali();
-        float kaloriAgenda = CaloryCounter.agendaCounter(berat, 1);
-        float kalori_saat_ini = banyakKalori + (kaloriAgenda/7);
-        tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
-        String text = parent.getItemAtPosition(position).toString();
-        getMenuMakanPagi();
-        getMenuMakanSiang();
-        getMenuMakanMalam();
-        Toast.makeText(parent.getContext(), String.valueOf(this.berat), Toast.LENGTH_LONG).show();
+
     }
 
     @Override
@@ -422,7 +440,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             kaloriDimakan += data.getKalori();
         }
         float kaloriSisa = kalori - kaloriDimakan;
-        kaloriDimakanPagi.setText(kaloriSisa + " cal tersisa");
+        kalori_saat_ini -= kaloriDimakan;
+//        tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
+//        kaloriDimakanPagi.setText(kaloriSisa + " cal tersisa");
     }
 
     public void getMenuMakanSiang() {
@@ -439,6 +459,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         }
         float kaloriSisa = kalori - kaloriDimakan;
         kaloriDimakanSian.setText(kaloriSisa + " cal tersisa");
+//        kalori_saat_ini -= kaloriDimakan;
+//        tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
     }
 
     public void getMenuMakanMalam() {
@@ -454,7 +476,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             kaloriDimakan += data.getKalori();
         }
         float kaloriSisa = kalori - kaloriDimakan;
-        kaloriDimakanMalam.setText(kaloriSisa + " cal tersisa");
+        kaloriDimakanMalam.setText(kaloriSisa + " cal tersisa");;
     }
 
 
@@ -466,6 +488,12 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         getMenuMakanPagi();
         getMenuMakanSiang();
         getMenuMakanMalam();
+    }
 
+    public static void KurangiKalori(float kalori){
+        Log.d("Kalori sebelum dikurangin", String.valueOf(kalori_saat_ini));
+        kalori_saat_ini -= kalori;
+        Log.d("Kalori abis dikurangin", String.valueOf(kalori_saat_ini));
+        tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
     }
 }

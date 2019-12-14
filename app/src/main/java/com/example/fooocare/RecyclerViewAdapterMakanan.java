@@ -1,14 +1,18 @@
 package com.example.fooocare;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -45,10 +49,10 @@ public class RecyclerViewAdapterMakanan extends RecyclerView.Adapter<RecyclerVie
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final MakananModel currentItem = dataMakanan.get(position);
 //        untuk holder image menggunakan glide
-
+        final boolean[] clicked = new boolean[1];
         Glide.with(mContext)
                 .asBitmap()
                 .load(currentItem.getImages())
@@ -62,6 +66,21 @@ public class RecyclerViewAdapterMakanan extends RecyclerView.Adapter<RecyclerVie
             holder.kalori.setText(currentItem.getKalori() +" cal / "+ ((MakananProteinModel) currentItem).getProtein()+"gram");
         }
 
+
+        holder.mBtn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.mBtn_confirm.setBackground(mContext.getDrawable(R.drawable.btn_cardhome_checked));
+                holder.mBtn_confirm.setImageResource(R.drawable.ic_check_white);
+                currentItem.setChecked(true);
+                HomeFragment.KurangiKalori(currentItem.getKalori());
+                Log.d("Kalori mau makan", String.valueOf(currentItem.getKalori()));
+            }
+        });
+        if(currentItem.isChecked() == true){
+            holder.mBtn_confirm.setBackground(mContext.getDrawable(R.drawable.btn_cardhome_checked));
+            holder.mBtn_confirm.setImageResource(R.drawable.ic_check_white);
+        }
     }
 
     @Override
@@ -74,6 +93,7 @@ public class RecyclerViewAdapterMakanan extends RecyclerView.Adapter<RecyclerVie
         ImageView image;
         TextView makanan;
         TextView kalori;
+        ImageButton mBtn_confirm;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,6 +101,7 @@ public class RecyclerViewAdapterMakanan extends RecyclerView.Adapter<RecyclerVie
             image   = itemView.findViewById(R.id.imageMenuPagi);
             makanan = itemView.findViewById(R.id.textNamaMenuPagi);
             kalori  = itemView.findViewById(R.id.textKaloriMenuPagi);
+            mBtn_confirm = itemView.findViewById(R.id.btn_confirm);
         }
     }
 }
