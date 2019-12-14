@@ -57,7 +57,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     TextView kaloriDimakanMalam;
     private Button buttonInsertAgenda;
     private int line1 = 5, line2 = 6;
-    private static float kalori_saat_ini;
+    private static float kalori_saat_ini =0;
 
     public void setBanyakKalori(float banyakKalori) {
         this.banyakKalori = banyakKalori;
@@ -124,6 +124,29 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         reference = FirebaseDatabase.getInstance().getReference().child("Pengguna").child(user.getUid());
         agenda = FirebaseDatabase.getInstance().getReference().child("Agenda").child(user.getUid());
 
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String _namaPengguna = dataSnapshot.child("namaLengkap").getValue().toString();
+                String _email = dataSnapshot.child("email").getValue().toString();
+                String _usia = dataSnapshot.child("usia").getValue().toString();
+                String _jenisKelamin = dataSnapshot.child("jenis_kelamin").getValue().toString();
+                String _tinggiBadan = dataSnapshot.child("tinggiBadan").getValue().toString();
+                String _beratBadan = dataSnapshot.child("beratBadan").getValue().toString();
+                CaloryCounter.GeneratePengali();
+                CaloryCounter.GenerateBMR();
+                setBerat(Integer.parseInt(_beratBadan));
+                banyakKalori = CaloryCounter.coutnCalory(Float.valueOf(_beratBadan), Float.valueOf(_usia), _jenisKelamin, Float.valueOf(_tinggiBadan), (float) 2.3);
+                tv_banyakKalori.setText(String.valueOf(banyakKalori));
+                setBanyakKalori(banyakKalori);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity().getApplicationContext(),databaseError.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+
         agenda.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -167,12 +190,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
             }
         });
-
-//        spinnerAgenda = rootView.findViewById(R.id.spinnerAgenda);
-//        ArrayAdapter<ExampleItem> list = new ArrayAdapter<ExampleItem>(getContext(), android.R.layout.simple_spinner_item, mExampleList);
-//        list.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerAgenda.setAdapter(list);
-//        spinnerAgenda.setOnItemSelectedListener(this);
 
         tambahPagi = rootView.findViewById(R.id.tambahMakanPagi);
         tambahSiang = rootView.findViewById(R.id.tambahMakanSiang);
@@ -220,28 +237,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
 
 
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String _namaPengguna = dataSnapshot.child("namaLengkap").getValue().toString();
-                String _email = dataSnapshot.child("email").getValue().toString();
-                String _usia = dataSnapshot.child("usia").getValue().toString();
-                String _jenisKelamin = dataSnapshot.child("jenis_kelamin").getValue().toString();
-                String _tinggiBadan = dataSnapshot.child("tinggiBadan").getValue().toString();
-                String _beratBadan = dataSnapshot.child("beratBadan").getValue().toString();
-                CaloryCounter.GeneratePengali();
-                CaloryCounter.GenerateBMR();
-                setBerat(Integer.parseInt(_beratBadan));
-                banyakKalori = CaloryCounter.coutnCalory(Float.valueOf(_beratBadan), Float.valueOf(_usia), _jenisKelamin, Float.valueOf(_tinggiBadan), (float) 2.3);
-                tv_banyakKalori.setText(String.valueOf(banyakKalori));
-                setBanyakKalori(banyakKalori);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getActivity().getApplicationContext(),databaseError.getMessage(),Toast.LENGTH_LONG).show();
-            }
-        });
 
         getMenuMakanPagi();
         getMenuMakanSiang();
@@ -262,17 +258,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         mAdapter.notifyItemInserted(position);
     }
 
-
-//    public void buildRecyclerView(){
-////        mRecyclerView = rootView.findViewById(R.id.recyclerViewAgenda);
-//        mRecyclerView.setHasFixedSize(true);
-//        mLayoutManager = new LinearLayoutManager(getContext());
-//        mAdapter = new ExampleAdapter(mExampleList);
-//
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//        mRecyclerView.setAdapter(mAdapter);
-//
-//    }
 
     public void getImages() {
         for (MakananKarbohidratModel karbo : listKarbo) {
@@ -440,9 +425,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             kaloriDimakan += data.getKalori();
         }
         float kaloriSisa = kalori - kaloriDimakan;
-        kalori_saat_ini -= kaloriDimakan;
-//        tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
-//        kaloriDimakanPagi.setText(kaloriSisa + " cal tersisa");
+        kaloriDimakanPagi.setText(kaloriSisa + " cal tersisa");
     }
 
     public void getMenuMakanSiang() {
@@ -459,8 +442,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         }
         float kaloriSisa = kalori - kaloriDimakan;
         kaloriDimakanSian.setText(kaloriSisa + " cal tersisa");
-//        kalori_saat_ini -= kaloriDimakan;
-//        tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
     }
 
     public void getMenuMakanMalam() {
@@ -492,7 +473,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
     public static void KurangiKalori(float kalori){
         Log.d("Kalori sebelum dikurangin", String.valueOf(kalori_saat_ini));
-        kalori_saat_ini -= kalori;
+        kalori_saat_ini =  kalori_saat_ini - kalori;
         Log.d("Kalori abis dikurangin", String.valueOf(kalori_saat_ini));
         tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
     }
