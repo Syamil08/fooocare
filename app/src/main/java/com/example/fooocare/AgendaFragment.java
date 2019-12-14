@@ -94,7 +94,7 @@ public class AgendaFragment extends Fragment {
             public void onClick(View view) {
                 int position = mExampleList.size();
                 Log.d("User 2", String.valueOf(position));
-                openDialog();
+                openDialog(position);
                 insertItem(position);
             }
         });
@@ -103,8 +103,8 @@ public class AgendaFragment extends Fragment {
         return rootview;
     }
 
-    private void openDialog() {
-        DialogPage dialogPage = new DialogPage();
+    private void openDialog(int position) {
+        DialogPage dialogPage = new DialogPage(position);
         dialogPage.show(getFragmentManager(),"Tambah Agenda");
     }
 

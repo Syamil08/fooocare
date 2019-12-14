@@ -32,10 +32,15 @@ public class DialogPage extends AppCompatDialogFragment {
     DialogPageListener listener;
     DatePickerDialog picker;
     ArrayList<String> list = new ArrayList<>();
-
+    int position;
     FirebaseAuth auth;
     FirebaseUser user;
     DatabaseReference root;
+
+    public DialogPage(int position) {
+        this.position = position;
+
+    }
 
 
     @NonNull
@@ -68,8 +73,7 @@ public class DialogPage extends AppCompatDialogFragment {
                         list.add(tanggal);
                         AgendaFragment.buildAgenda();
                         listener.applyTexts(list);
-                        root.push().setValue(new ExampleItem(judul, tanggal));
-
+                        root.child(String.valueOf(position)).setValue(new ExampleItem(judul, tanggal, position));
                         Log.d("User",judul + " " +tanggal);
                     }
                 });

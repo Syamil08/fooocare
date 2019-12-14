@@ -5,11 +5,27 @@ import java.util.ArrayList;
 public class ExampleItem {
     private  String judul;
     private  String tanggal;
+    private  int position;
+
+    public ExampleItem(String judul, String tanggal, int position) {
+        this.judul = judul;
+        this.tanggal = tanggal;
+        this.position = position;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     public ExampleItem(String judul, String tanggal) {
         this.judul = judul;
         this.tanggal = tanggal;
     }
+
 
     public ExampleItem(ArrayList<String> list){
         this.judul = list.get(0);

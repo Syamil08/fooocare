@@ -1,6 +1,7 @@
 package com.example.fooocare;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +19,28 @@ import com.bumptech.glide.Glide;
 import com.example.fooocare.Model.MakananKarbohidratModel;
 import com.example.fooocare.Model.MakananModel;
 import com.example.fooocare.Model.MakananProteinModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class AgendaMakanPagiAdapter extends RecyclerView.Adapter<AgendaMakanPagiAdapter.AgendaListViewHolder> {
-
+    int posisiKlik;
     ArrayList<MakananModel> listAgenda;
     Context mContext;
     MakananPagiListener listener;
+
+    FirebaseAuth auth;
+    FirebaseUser user;
+    DatabaseReference menu;
+
     public interface MakananPagiListener{
         void listenList(MakananModel makanan);
     }
@@ -36,10 +51,20 @@ public class AgendaMakanPagiAdapter extends RecyclerView.Adapter<AgendaMakanPagi
         this.listener = listener;
     }
 
+    public AgendaMakanPagiAdapter(Context mContext,ArrayList<MakananModel> listAgenda,int posisi) {
+        this.listAgenda = listAgenda;
+        this.mContext = mContext;
+        this.listener = listener;
+        this.posisiKlik = posisi;
+    }
+
     @NonNull
     @Override
     public AgendaListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.agendamakanpagi, parent, false);
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        menu = FirebaseDatabase.getInstance().getReference().child("Agenda").child(user.getUid()).child(String.valueOf(posisiKlik));
         AgendaListViewHolder holder = new AgendaListViewHolder(v);
         return  holder;
     }
@@ -62,9 +87,11 @@ public class AgendaMakanPagiAdapter extends RecyclerView.Adapter<AgendaMakanPagi
         holder.mBtnTambah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              Toast.makeText(mContext,"Test", Toast.LENGTH_SHORT).show();
+//              Toast.makeText(mContext,"Test", Toast.LENGTH_SHORT).show();
               listAgenda.add(currentItem);
+              menu.child("Menu Pagi").child(String.valueOf(HomeFragment.listMakananPagi.size())).setValue(currentItem);
               HomeFragment.listMakananPagi.add(currentItem);
+
             }
         });
     }

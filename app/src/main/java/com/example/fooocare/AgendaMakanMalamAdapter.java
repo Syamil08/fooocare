@@ -1,6 +1,7 @@
 package com.example.fooocare;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,23 +18,40 @@ import com.bumptech.glide.Glide;
 import com.example.fooocare.Model.MakananKarbohidratModel;
 import com.example.fooocare.Model.MakananModel;
 import com.example.fooocare.Model.MakananProteinModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class AgendaMakanMalamAdapter extends RecyclerView.Adapter<AgendaMakanMalamAdapter.AgendaListViewHolder> {
-
+    int posisiKlik;
     ArrayList<MakananModel> listAgenda;
     Context mContext;
+
+    FirebaseAuth auth;
+    FirebaseUser user;
+    DatabaseReference menu;
 
     public AgendaMakanMalamAdapter(Context mContext, ArrayList<MakananModel> listAgenda) {
         this.listAgenda = listAgenda;
         this.mContext = mContext;
     }
 
+    public AgendaMakanMalamAdapter(Context mContext,ArrayList<MakananModel> listAgenda,int posisi) {
+        this.listAgenda = listAgenda;
+        this.mContext = mContext;
+        this.posisiKlik = posisi;
+    }
+
     @NonNull
     @Override
     public AgendaListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitemcardmakanmalam, parent, false);
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        menu = FirebaseDatabase.getInstance().getReference().child("Agenda").child(user.getUid()).child(String.valueOf(posisiKlik));
         AgendaListViewHolder holder = new AgendaListViewHolder(v);
         return holder;
     }
@@ -56,8 +74,10 @@ public class AgendaMakanMalamAdapter extends RecyclerView.Adapter<AgendaMakanMal
         holder.mBtnTambah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "Test", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "Test", Toast.LENGTH_SHORT).show();
                 listAgenda.add(currentItem);
+                Log.d("Menu Malam", String.valueOf(HomeFragment.listMakananMalam.size()));
+                menu.child("Menu Malam").child(String.valueOf(HomeFragment.listMakananMalam.size())).setValue(currentItem);
                 HomeFragment.listMakananMalam.add(currentItem);
             }
         });

@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,11 +60,14 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private int line1 = 5, line2 = 6;
     private static float kalori_saat_ini =0;
 
+    static ProgressBar progressKalori;
+
     public void setBanyakKalori(float banyakKalori) {
         this.banyakKalori = banyakKalori;
     }
 
-    private float banyakKalori, kaloriAgenda;
+    private static float banyakKalori;
+    private float kaloriAgenda;
     ImageButton tambahPagi, tambahSiang, tambahMalam;
     Spinner spinnerAgenda;
 
@@ -97,6 +101,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     FirebaseAuth auth;
     FirebaseUser user;
     DatabaseReference reference,agenda;
+    int positionSpinner;
 
     public void setBerat(int berat) {
         this.berat = berat;
@@ -114,6 +119,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         listKarbo = generatorKarbo.getListMakanan();
         MakananProteinGenerator generatorProtein = new MakananProteinGenerator();
         listProtein = generatorProtein.getListMakanan();
+        progressKalori = rootView.findViewById(R.id.progressBarKalori);
 
         getImagesOlahraga();
         getImagesMalam();
@@ -123,6 +129,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
         reference = FirebaseDatabase.getInstance().getReference().child("Pengguna").child(user.getUid());
         agenda = FirebaseDatabase.getInstance().getReference().child("Agenda").child(user.getUid());
+
+
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -138,6 +146,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 setBerat(Integer.parseInt(_beratBadan));
                 banyakKalori = CaloryCounter.coutnCalory(Float.valueOf(_beratBadan), Float.valueOf(_usia), _jenisKelamin, Float.valueOf(_tinggiBadan), (float) 2.3);
                 tv_banyakKalori.setText(String.valueOf(banyakKalori));
+                progressKalori.setMax((int) banyakKalori);
+                progressKalori.setProgress((int) banyakKalori);
                 setBanyakKalori(banyakKalori);
             }
 
@@ -170,10 +180,30 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                             kalori_saat_ini = banyakKalori + (kaloriAgenda/7);
                             tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
                             String text = adapterView.getItemAtPosition(i).toString();
+                            int _position = Math.toIntExact(adapterView.getItemIdAtPosition(i));
                             getMenuMakanPagi();
                             getMenuMakanSiang();
                             getMenuMakanMalam();
-                            Toast.makeText(adapterView.getContext(), String.valueOf(berat), Toast.LENGTH_LONG).show();
+                            Toast.makeText(adapterView.getContext(), text + _position, Toast.LENGTH_LONG).show();
+                            setPositionSpinner(_position);
+                            agenda.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                        long position = (long) ds.child("position").getValue();
+                                        if (positionSpinner == position){
+                                            String judul = ds.child("judul").getValue(String.class);
+                                            String tanggal = ds.child("tanggal").getValue(String.class);
+                                            Log.d("db agenda", position+" "+judul+" "+tanggal);
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
                         }
 
                         @Override
@@ -190,6 +220,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
             }
         });
+
 
         tambahPagi = rootView.findViewById(R.id.tambahMakanPagi);
         tambahSiang = rootView.findViewById(R.id.tambahMakanSiang);
@@ -208,9 +239,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 for (MakananModel makanan2 : listMakananPagi) {
                     Log.d("Nama Makanan", makanan2.getNama());
                 }
-                String tag = "Menu Pagi";
+                int posisiMakanan = positionSpinner;
                 Intent iin = new Intent(getContext(), JenisMakananActivity.class);
-                iin.putExtra("tag", tag);
+                iin.putExtra("tag", posisiMakanan);
+                iin.putExtra("Penanda", "Menu Pagi");
                 startActivity(iin);
             }
         });
@@ -219,8 +251,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             @Override
             public void onClick(View view) {
                 String tag = "Menu Siang";
+                int posisiMakanan = positionSpinner;
                 Intent iin = new Intent(getContext(), JenisMakananActivity.class);
-                iin.putExtra("tag", tag);
+                iin.putExtra("tag", posisiMakanan);
+                iin.putExtra("Penanda", "Menu Siang");
                 startActivity(iin);
             }
         });
@@ -229,8 +263,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             @Override
             public void onClick(View view) {
                 String tag = "Menu Malam";
+                int posisiMakanan = positionSpinner;
                 Intent iin = new Intent(getContext(), JenisMakananActivity.class);
-                iin.putExtra("tag", tag);
+                iin.putExtra("tag", posisiMakanan);
+                iin.putExtra("Penanda", "Menu Malam");
                 startActivity(iin);
             }
         });
@@ -246,11 +282,15 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         return rootView;
     }
 
-    //    untuk membuka dialog,
-    public void openDialog() {
-        DialogPage dialogPage = new DialogPage();
-        dialogPage.show(getFragmentManager(), "Tambah Agenda");
+    public void setPositionSpinner(int positionSpinner) {
+        this.positionSpinner = positionSpinner;
     }
+
+    //    untuk membuka dialog,
+//    public void openDialog(int position) {
+//        DialogPage dialogPage = new DialogPage(position);
+//        dialogPage.show(getFragmentManager(), "Tambah Agenda");
+//    }
 
 
     //    prosedur untuk menambah agenda
@@ -469,12 +509,15 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         getMenuMakanPagi();
         getMenuMakanSiang();
         getMenuMakanMalam();
+
     }
 
     public static void KurangiKalori(float kalori){
         Log.d("Kalori sebelum dikurangin", String.valueOf(kalori_saat_ini));
         kalori_saat_ini =  kalori_saat_ini - kalori;
         Log.d("Kalori abis dikurangin", String.valueOf(kalori_saat_ini));
+        progressKalori.setProgress((int) (progressKalori.getProgress() - kalori));
+        Log.d("progress", String.valueOf(progressKalori.getProgress()));
         tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
     }
 }

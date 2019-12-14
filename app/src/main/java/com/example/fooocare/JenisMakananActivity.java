@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ public class JenisMakananActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapterPagi, mAdapterSiang, mAdapterMalam;
     private RecyclerView.LayoutManager mLayoutManagerPagi, mLayoutManagerSiang,mLayoutManagerMalam;
     ArrayList<MakananModel> listMakanan = new ArrayList<>();
+    int posisiKlik;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,14 +32,16 @@ public class JenisMakananActivity extends AppCompatActivity {
         GenerateMakananKarbo();
         GenerateMakananProtein();
         Intent iin= getIntent();
+        posisiKlik = iin.getIntExtra("tag",0);
+        Log.d("posisi agenda", String.valueOf(posisiKlik));
         Bundle b = iin.getExtras();
         if(b!=null)
         {
-            if(b.get("tag").equals("Menu Pagi")) {
+            if(b.get("Penanda").equals("Menu Pagi")) {
                 Toast.makeText(getApplicationContext(), "Menu pagi", Toast.LENGTH_SHORT).show();
                 InitMakananPagi();
             }
-            else if(b.get("tag").equals("Menu Siang")) {
+            else if(b.get("Penanda").equals("Menu Siang")) {
                 Toast.makeText(getApplicationContext(), "Menu siang", Toast.LENGTH_SHORT).show();
                 InitMakananSiang();
             }else{
@@ -50,7 +55,7 @@ public class JenisMakananActivity extends AppCompatActivity {
         mRecyclerMakananPagi = findViewById(R.id.makanan);
         mLayoutManagerPagi = new LinearLayoutManager(this);
         mRecyclerMakananPagi.setLayoutManager(mLayoutManagerPagi);
-        mAdapterPagi = new AgendaMakanPagiAdapter(this,listMakanan);
+        mAdapterPagi = new AgendaMakanPagiAdapter(this,listMakanan,posisiKlik);
         mRecyclerMakananPagi.setAdapter(mAdapterPagi);
     }
 
@@ -58,7 +63,7 @@ public class JenisMakananActivity extends AppCompatActivity {
         mRecyclerMakananSiang = findViewById(R.id.makanan);
         mLayoutManagerSiang = new LinearLayoutManager(getApplicationContext());
         mRecyclerMakananSiang.setLayoutManager(mLayoutManagerSiang);
-        mAdapterSiang = new AgendaMakanSiangAdapter(this,listMakanan);
+        mAdapterSiang = new AgendaMakanSiangAdapter(this,listMakanan,posisiKlik);
         mRecyclerMakananSiang.setAdapter(mAdapterSiang);
     }
 
@@ -66,7 +71,7 @@ public class JenisMakananActivity extends AppCompatActivity {
         mRecyclerMakananMalam = findViewById(R.id.makanan);
         mLayoutManagerMalam = new LinearLayoutManager(this);
         mRecyclerMakananMalam.setLayoutManager(mLayoutManagerMalam);
-        mAdapterMalam = new AgendaMakanMalamAdapter(this,listMakanan);
+        mAdapterMalam = new AgendaMakanMalamAdapter(this,listMakanan,posisiKlik);
         mRecyclerMakananMalam.setAdapter(mAdapterMalam);
     }
 
