@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fooocare">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,12 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DashboardActivity">
-
-        </activity>
-        <activity android:name=".SignUP">
-
-        </activity>
+        <activity android:name=".UpdateProfile"></activity>
+        <activity android:name=".DashboardActivity"></activity>
+        <activity android:name=".SignUP"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".onBoarding">
-
-        </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".JenisMakananActivity"></activity>
+        <activity android:name=".onBoarding"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".JenisMakananActivity"/>
     </application>
 
 </manifest>

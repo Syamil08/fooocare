@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     public static ArrayList<MakananModel> listMakananPagi = new ArrayList<>();
     FirebaseAuth auth;
     FirebaseUser user;
-    DatabaseReference reference;
+    DatabaseReference reference,agenda;
 
     public void setBerat(int berat) {
         this.berat = berat;
@@ -113,12 +113,39 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         getImagesSiang();
         getImages();
 //        buildRecyclerView();
-        spinnerAgenda = rootView.findViewById(R.id.spinnerAgenda);
-        ArrayAdapter<ExampleItem> list = new ArrayAdapter<ExampleItem>(getContext(), android.R.layout.simple_spinner_item, mExampleList);
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),R.array.numbers,android.R.layout.simple_spinner_item);
-        list.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerAgenda.setAdapter(list);
-        spinnerAgenda.setOnItemSelectedListener(this);
+
+        reference = FirebaseDatabase.getInstance().getReference().child("Pengguna").child(user.getUid());
+        agenda = FirebaseDatabase.getInstance().getReference().child("Agenda").child(user.getUid());
+
+        agenda.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<String> item = new ArrayList<>();
+                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                    String judul = areaSnapshot.child("judul").getValue(String.class);
+                    item.add(judul);
+                }
+
+                Spinner areaSpinner = (Spinner) rootView.findViewById(R.id.spinnerAgenda);
+                if (getActivity()!=null) {
+                    ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, item);
+                    areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    areaSpinner.setAdapter(areasAdapter);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+//        spinnerAgenda = rootView.findViewById(R.id.spinnerAgenda);
+//        ArrayAdapter<ExampleItem> list = new ArrayAdapter<ExampleItem>(getContext(), android.R.layout.simple_spinner_item, mExampleList);
+//        list.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerAgenda.setAdapter(list);
+//        spinnerAgenda.setOnItemSelectedListener(this);
 
         tambahPagi = rootView.findViewById(R.id.tambahMakanPagi);
         tambahSiang = rootView.findViewById(R.id.tambahMakanSiang);
@@ -164,7 +191,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             }
         });
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Pengguna").child(user.getUid());
+
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

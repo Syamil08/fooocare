@@ -28,7 +28,7 @@ public class ProfilFragment extends Fragment {
     FirebaseAuth auth;
     FirebaseUser user;
     View root;
-    Button btn_logout;
+    Button btn_logout,btn_editProfile;
 
     TextView namaPengguna,nama,email,usia,jenisKelamin,tinggiBadan,beratBadan;
 
@@ -40,6 +40,7 @@ public class ProfilFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
+        btn_editProfile = root.findViewById(R.id.btn_edit_profil);
         namaPengguna =root.findViewById(R.id.namaPengguna);
         email =root.findViewById(R.id.emailPengguna);
         usia =root.findViewById(R.id.usiaPengguna);
@@ -75,6 +76,12 @@ public class ProfilFragment extends Fragment {
             }
         });
 
+        btn_editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(),UpdateProfile.class));
+            }
+        });
 
 //
 //        btn_logout = root.findViewById(R.id.btn_logout);

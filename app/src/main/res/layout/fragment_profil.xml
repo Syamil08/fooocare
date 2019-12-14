@@ -573,7 +573,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="Usia"
-                        android:paddingRight="20dp"
                         android:fontFamily="@font/oscine"
                         android:textStyle="bold"
                         android:textSize="20sp"
@@ -605,6 +604,7 @@
                 android:layout_marginBottom="60dp">
 
                 <Button
+                    android:id="@+id/btn_edit_profil"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -613,6 +613,7 @@
                     android:background="@drawable/btn_tambah_agenda_custom"/>
 
                 <Button
+                    android:id="@+id/btn_delete_profil"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

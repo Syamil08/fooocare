@@ -5,12 +5,14 @@ import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -44,6 +46,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 //                .asBitmap()
 //                .load(currentItem.getImages())
 //                .into(holder.imageAgenda);
+
+        holder.container.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_scale_animation));
         holder.mTextView1.setText(currentItem.getJudul());
         holder.mTextView2.setText(currentItem.getTanggal());
 //        holder.mTextView3.setText(currentItem.getmMakan());
@@ -76,6 +80,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         public TextView mTextView1;
         public TextView mTextView2;
         ImageView imageAgenda;
+        CardView container;
 
         public ExampleViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,6 +88,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
             mTextView1 = itemView.findViewById(R.id.namaPertandingan);
             mTextView2 = itemView.findViewById(R.id.tanggalPertandinganBola);
             imageAgenda = itemView.findViewById(R.id.imagePertandingan);
+            container = itemView.findViewById(R.id.container);
 
 //            mTextView3 = itemView.findViewById(R.id.tvMakanPagi);
 //            mTextView4 = itemView.findViewById(R.id.tvKalori);

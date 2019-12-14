@@ -16,22 +16,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fooocare.Model.MakananKarbohidratModel;
 import com.example.fooocare.Model.MakananModel;
 import com.example.fooocare.Model.MakananProteinModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class AgendaFragment extends Fragment {
-    public static ArrayList<ExampleItem> mExampleList = new ArrayList<>();
+    public static ArrayList<ExampleItem> mExampleList;
     private static View rootview;
     private static RecyclerView agenda, agendaSejarah,agendaPagi;
     private static  RecyclerView.LayoutManager mLayoutAgenda, mLayoutAgendaSejarah,mLayoutAgendaPagi;
     private static  RecyclerView.Adapter mAdapterAgenda, mAdapterAgendaSejarah,mAdapterAgendaPagi;
-    private ArrayList<AgendaItem> AgendaList;
     private ArrayList<AgendaItem> AgendaListSejarah;
     private Button tambahAgenda;
 
-    public AgendaFragment(ArrayList<String> list){
+    FirebaseAuth auth;
+    FirebaseUser user;
 
+    public static void setmExampleList(ArrayList<ExampleItem> mExampleList) {
+        AgendaFragment.mExampleList = mExampleList;
     }
+
+    DatabaseReference root;
+
 
     public  AgendaFragment (){}
     @Nullable
@@ -43,6 +56,38 @@ public class AgendaFragment extends Fragment {
         buildRecyclerViewAgenda();
 //        buildRecyclerViewAgendaSejarah();
         Log.d("User 1", String.valueOf(mExampleList));
+
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        root = FirebaseDatabase.getInstance().getReference().child("Agenda").child(user.getUid());
+
+
+
+        root.addValueEventListener(new ValueEventListener() {
+            ArrayList<ExampleItem> listSanpshot = new ArrayList<>();
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listSanpshot.clear();
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    String judul = ds.child("judul").getValue().toString();
+                    String tanggal = ds.child("tanggal").getValue().toString();
+
+                    listSanpshot.add(new ExampleItem(judul,tanggal));
+                    setmExampleList(listSanpshot);
+
+                }
+                buildRecyclerViewAgenda();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
+
+
         tambahAgenda = rootview.findViewById(R.id.btn_tambahAgendaa);
         tambahAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +99,7 @@ public class AgendaFragment extends Fragment {
             }
         });
 
-        buildRecyclerViewAgenda();
+
         return rootview;
     }
 
@@ -90,6 +135,6 @@ public class AgendaFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        buildRecyclerViewAgenda();
+//        buildRecyclerViewAgenda();
     }
 }

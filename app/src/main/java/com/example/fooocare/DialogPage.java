@@ -17,14 +17,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class DialogPage extends AppCompatDialogFragment {
+    ArrayList<ExampleItem> exampleItem = new ArrayList<>();
+
     EditText _judul,_tanggal;
     DialogPageListener listener;
     DatePickerDialog picker;
     ArrayList<String> list = new ArrayList<>();
+
+    FirebaseAuth auth;
+    FirebaseUser user;
+    DatabaseReference root;
+
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -32,6 +45,11 @@ public class DialogPage extends AppCompatDialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_dialog,null);
+
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+
+        root = FirebaseDatabase.getInstance().getReference().child("Agenda").child(user.getUid());
 
         builder.setView(view)
                 .setTitle("Agendaku")
@@ -50,6 +68,8 @@ public class DialogPage extends AppCompatDialogFragment {
                         list.add(tanggal);
                         AgendaFragment.buildAgenda();
                         listener.applyTexts(list);
+                        root.push().setValue(new ExampleItem(judul, tanggal));
+
                         Log.d("User",judul + " " +tanggal);
                     }
                 });
