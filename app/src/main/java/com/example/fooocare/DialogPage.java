@@ -73,6 +73,7 @@ public class DialogPage extends AppCompatDialogFragment {
                         list.add(tanggal);
                         AgendaFragment.buildAgenda();
                         listener.applyTexts(list);
+//                        root untuk setValue
                         root.child(String.valueOf(position)).setValue(new ExampleItem(judul, tanggal, position));
                         Log.d("User",judul + " " +tanggal);
                     }
