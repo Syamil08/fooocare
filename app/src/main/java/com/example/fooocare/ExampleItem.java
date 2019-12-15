@@ -6,6 +6,7 @@ public class ExampleItem {
     private  String judul;
     private  String tanggal;
     private  int position;
+//    Model Agenda
 
     public ExampleItem(String judul, String tanggal, int position) {
         this.judul = judul;
