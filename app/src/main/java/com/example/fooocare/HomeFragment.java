@@ -1,7 +1,9 @@
 package com.example.fooocare;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,8 +73,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     ImageButton tambahPagi, tambahSiang, tambahMalam;
     Spinner spinnerAgenda;
 
-    //     array list untuk menampuang agendar dari firebase
-    private ArrayList<ExampleItem> agendas = new ArrayList<>();
+
 
     //    array list makanan rekomendasi makan pagi
     private ArrayList<String> mName = new ArrayList<>();
@@ -91,7 +92,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private ArrayList<String> mKaloriMalam = new ArrayList<>();
     private ArrayList<String> mImagesMalam = new ArrayList<>();
     private ArrayList<String> mKandunganMalam = new ArrayList<>();
-
 
     //    array list olahraga yang dilakukan
     private ArrayList<String> mNameOlahraga = new ArrayList<>();
@@ -159,34 +159,45 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             }
         });
 
+
+
         agenda.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<String> item = new ArrayList<>();
                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
                     String judul = areaSnapshot.child("judul").getValue(String.class);
-                    String tanggal = areaSnapshot.child("tanggal").getValue(String.class);
-//                    agendas.add(new ExampleItem(judul, tanggal, new ArrayList<MakananModel>(), new ArrayList<MakananModel>(), new ArrayList<MakananModel>()));
                     item.add(judul);
                 }
 
-                Spinner areaSpinner = (Spinner) rootView.findViewById(R.id.spinnerAgenda);
+                final Spinner areaSpinner = (Spinner) rootView.findViewById(R.id.spinnerAgenda);
                 if (getActivity()!=null) {
                     ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, item);
                     areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     areaSpinner.setAdapter(areasAdapter);
+                    final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                    String language = preferences.getString("Pertandingan", "");
+                    if(!language.equalsIgnoreCase(""))
+                    {
+                        int spinnerPosition = areasAdapter.getPosition(language);
+                        areaSpinner.setSelection(spinnerPosition);
+
+                    }
                     areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            ExampleItem currentAgenda = agendas.get(i);
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, final long l) {
                             CaloryCounter.GenerateBMR();
                             CaloryCounter.GeneratePengali();
                             float kaloriAgenda = CaloryCounter.agendaCounter(berat, 1);
                             kalori_saat_ini = banyakKalori + (kaloriAgenda/7);
                             tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
                             String text = adapterView.getItemAtPosition(i).toString();
-                            int _position = Math.toIntExact(adapterView.getItemIdAtPosition(i));
-                            getMenuMakanPagi();
+                            final int _position = Math.toIntExact(adapterView.getItemIdAtPosition(i));
+
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("Pertandingan",areaSpinner.getSelectedItem().toString());
+                            editor.apply();
+
                             getMenuMakanSiang();
                             getMenuMakanMalam();
                             Toast.makeText(adapterView.getContext(), text + _position, Toast.LENGTH_LONG).show();
@@ -199,7 +210,156 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                                         if (positionSpinner == position){
                                             String judul = ds.child("judul").getValue(String.class);
                                             String tanggal = ds.child("tanggal").getValue(String.class);
+
+                                            DatabaseReference refMenuPagi = agenda.child(String.valueOf(positionSpinner)).child("Menu Pagi");
+
+                                            agenda.child(String.valueOf(positionSpinner)).addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        listMakananPagi.clear();
+                                                        listMakananSiang.clear();
+                                                        listMakananMalam.clear();
+                                                    String isPagi = null;
+                                                    try {
+//                                                        isPagi = dataSnapshot.child("Menu Pagi").getValue().toString();
+                                                        agenda.child(String.valueOf(positionSpinner)).child("Menu Pagi").addValueEventListener(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                                                        String nama = ds.child("nama").getValue(String.class);
+                                                                        long kalori = (long)ds.child("kalori").getValue();
+                                                                        String images = ds.child("images").getValue(String.class);
+                                                                        double kandungan = 0;
+                                                                        try {
+                                                                            kandungan = (double) ds.child("karbohidrat").getValue();
+                                                                            listMakananPagi.add(new MakananKarbohidratModel(nama, (float)kandungan, (float)kalori, images));
+                                                                        } catch (Exception e) {
+                                                                            kandungan = (double) ds.child("protein").getValue();
+                                                                            listMakananPagi.add(new MakananProteinModel(nama,(float)kalori, (float)kandungan, images));
+                                                                        }
+                                                                        Log.d("nama",nama+" Kandungan : "+kandungan);
+
+                                                                    }
+                                                                    getMenuMakanPagi();
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                                }
+                                                            });
+                                                    } catch (Exception e) {
+                                                        String err = (e.getMessage()==null)?"SD Card failed":e.getMessage();
+                                                        listMakananPagi.clear();
+                                                        getMenuMakanPagi();
+                                                        Log.e("sdcard-err2:",err);
+                                                    }
+                                                    try {
+//                                                        isPagi = dataSnapshot.child("Menu Pagi").getValue().toString();
+                                                        agenda.child(String.valueOf(positionSpinner)).child("Menu Siang").addValueEventListener(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                                                    String nama = ds.child("nama").getValue(String.class);
+                                                                    long kalori = (long)ds.child("kalori").getValue();
+                                                                    String images = ds.child("images").getValue(String.class);
+                                                                    double kandungan = 0;
+                                                                    try {
+                                                                        kandungan = (double) ds.child("karbohidrat").getValue();
+                                                                        listMakananSiang.add(new MakananKarbohidratModel(nama, (float)kandungan, (float)kalori, images));
+                                                                    } catch (Exception e) {
+                                                                        kandungan = (double) ds.child("protein").getValue();
+                                                                        listMakananPagi.add(new MakananProteinModel(nama,(float)kalori, (float)kandungan, images));
+                                                                    }
+                                                                    Log.d("nama",nama+" Kandungan : "+kandungan);
+
+                                                                }
+                                                                getMenuMakanSiang();
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                            }
+                                                        });
+                                                    } catch (Exception e) {
+                                                        String err = (e.getMessage()==null)?"SD Card failed":e.getMessage();
+                                                        listMakananSiang.clear();
+                                                        getMenuMakanSiang();
+                                                        Log.e("sdcard-err2:",err);
+                                                    }
+                                                    try {
+//                                                        isPagi = dataSnapshot.child("Menu Pagi").getValue().toString();
+                                                        agenda.child(String.valueOf(positionSpinner)).child("Menu Malam").addValueEventListener(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                                                    String nama = ds.child("nama").getValue(String.class);
+                                                                    long kalori = (long)ds.child("kalori").getValue();
+                                                                    String images = ds.child("images").getValue(String.class);
+                                                                    double kandungan = 0;
+                                                                    try {
+                                                                        kandungan = (double) ds.child("karbohidrat").getValue();
+                                                                        listMakananMalam.add(new MakananKarbohidratModel(nama, (float)kandungan, (float)kalori, images));
+                                                                    } catch (Exception e) {
+                                                                        kandungan = (double) ds.child("protein").getValue();
+                                                                        listMakananMalam.add(new MakananProteinModel(nama,(float)kalori, (float)kandungan, images));
+                                                                    }
+                                                                    Log.d("nama",nama+" Kandungan : "+kandungan);
+
+                                                                }
+                                                                getMenuMakanMalam();
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                            }
+                                                        });
+                                                    } catch (Exception e) {
+                                                        String err = (e.getMessage()==null)?"SD Card failed":e.getMessage();
+                                                        listMakananMalam.clear();
+                                                        getMenuMakanMalam();
+                                                        Log.e("sdcard-err2:",err);
+                                                    }
+//                                                    Log.d("Ada Pagi", isPagi);
+//                                                        if (dataSnapshot.child("Menu Pagi").exists()){
+//                                                            agenda.child(String.valueOf(positionSpinner)).child("Menu Pagi").addValueEventListener(new ValueEventListener() {
+//                                                                @Override
+//                                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                                                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+//                                                                        String nama = ds.child("nama").getValue(String.class);
+//                                                                        long kalori = (long)ds.child("kalori").getValue();
+//                                                                        String images = ds.child("images").getValue(String.class);
+//                                                                        double kandungan = 0;
+//                                                                        try {
+//                                                                            kandungan = (double) ds.child("karbohidrat").getValue();
+//                                                                            listMakananPagi.add(new MakananKarbohidratModel(nama, (float)kandungan, (float)kalori, images));
+//                                                                        } catch (Exception e) {
+//                                                                            kandungan = (double) ds.child("protein").getValue();
+//                                                                            listMakananPagi.add(new MakananProteinModel(nama,(float)kalori, (float)kandungan, images));
+//                                                                        }
+//                                                                        Log.d("nama",nama+" Kandungan : "+kandungan);
+//                                                                        getMenuMakanPagi();
+//                                                                    }
+//                                                                }
+//
+//                                                                @Override
+//                                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                                                                }
+//                                                            });
+//                                                        }
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                }
+                                            });
                                             Log.d("db agenda", position+" "+judul+" "+tanggal);
+
                                         }
                                     }
                                 }
@@ -209,6 +369,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
                                 }
                             });
+
                         }
 
                         @Override
@@ -280,9 +441,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
 
 
-        getMenuMakanPagi();
-        getMenuMakanSiang();
-        getMenuMakanMalam();
 
         return rootView;
     }
@@ -524,5 +682,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         progressKalori.setProgress((int) (progressKalori.getProgress() - kalori));
         Log.d("progress", String.valueOf(progressKalori.getProgress()));
         tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
+    }
+
+    public static void setListMakananPagi(ArrayList<MakananModel> listMakananPagi) {
+        HomeFragment.listMakananPagi = listMakananPagi;
     }
 }
