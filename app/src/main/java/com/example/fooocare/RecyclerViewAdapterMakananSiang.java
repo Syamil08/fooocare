@@ -1,9 +1,12 @@
 package com.example.fooocare;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +45,7 @@ public class RecyclerViewAdapterMakananSiang extends RecyclerView.Adapter<Recycl
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
 //        untuk holder image menggunakan glide
         final MakananModel currentItem = dataMakanan.get(position);
@@ -59,6 +62,26 @@ public class RecyclerViewAdapterMakananSiang extends RecyclerView.Adapter<Recycl
         else if (currentItem instanceof MakananProteinModel) {
             holder.kaloriSiang.setText(currentItem.getKalori() + " cal / " + ((MakananProteinModel) currentItem).getProtein() + "gram");
         }
+
+        holder.mBtn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.mBtn_confirm.setBackground(mContextSiang.getDrawable(R.drawable.btn_cardhome_checked));
+                holder.mBtn_confirm.setImageResource(R.drawable.ic_check_white);
+                currentItem.setChecked(true);
+                HomeFragment.KurangiKalori(currentItem.getKalori());
+                if(currentItem instanceof MakananProteinModel){
+                    HomeFragment.KurangiProtein((int) ((MakananProteinModel) currentItem).getProtein());
+                }
+                else if(currentItem instanceof  MakananKarbohidratModel)
+                    HomeFragment.KurangiKarbo((int) ((MakananKarbohidratModel) currentItem).getKarbohidrat());
+                Log.d("Kalori mau makan", String.valueOf(currentItem.getKalori()));
+            }
+        });
+        if(currentItem.isChecked() == true){
+            holder.mBtn_confirm.setBackground(mContextSiang.getDrawable(R.drawable.btn_cardhome_checked));
+            holder.mBtn_confirm.setImageResource(R.drawable.ic_check_white);
+        }
     }
 
     @Override
@@ -68,9 +91,10 @@ public class RecyclerViewAdapterMakananSiang extends RecyclerView.Adapter<Recycl
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        CircleImageView imageSiang;
+        ImageView imageSiang;
         TextView makananSiang;
         TextView kaloriSiang;
+        ImageButton mBtn_confirm;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +102,7 @@ public class RecyclerViewAdapterMakananSiang extends RecyclerView.Adapter<Recycl
             imageSiang = itemView.findViewById(R.id.imageMenuSiang);
             makananSiang = itemView.findViewById(R.id.textNamaMenuSiang);
             kaloriSiang = itemView.findViewById(R.id.textKaloriMenuSiang);
+            mBtn_confirm = itemView.findViewById(R.id.btn_confirm);
         }
     }
 }

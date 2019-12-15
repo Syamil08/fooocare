@@ -152,6 +152,7 @@
                             android:progressTint="@android:color/white" />
 
                         <TextView
+                            android:id="@+id/textKarbo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -195,6 +196,7 @@
                             android:progressTint="@android:color/white" />
 
                         <TextView
+                            android:id="@+id/txt_protein"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"

@@ -37,7 +37,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.nio.channels.FileLock;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener, AgendaMakanPagiAdapter.MakananPagiListener {
@@ -45,7 +44,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     public static ArrayList<MakananModel> listMakananSiang = new ArrayList<>();
     public static ArrayList<MakananModel> listMakananMalam = new ArrayList<>();
     private RecyclerView mRecyclerView, mRecyclerViewMakanan, mRecyclerViewMakananSiang, mRecyclerViewMakananMalam,
-            mRecyclerViewMakananOlahraga, mRecyclerViewMenuPagi,mRecyclerViewMenuSiang, mRecyclerViewMenuMalam;
+            mRecyclerViewMakananOlahraga, mRecyclerViewMenuPagi, mRecyclerViewMenuSiang, mRecyclerViewMenuMalam;
     private RecyclerView.Adapter mAdapter, mAdapterMakanan, mAdapterMakananSiang, mAdapterMakananMalam, mAdapterMakananOlahraga,
             mAdapterMenuPagi, mAdapterMenuSiang, mAdapterMenuMalam;
     private RecyclerView.LayoutManager mLayoutManager, mLayoutManagerMakanan, mLayoutManagerMakananSiang, mLayoutManagerMakananMalam, mLayoutManagerMakananOlahraga,
@@ -60,9 +59,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     TextView kaloriDimakanMalam;
     private Button buttonInsertAgenda;
     private int line1 = 5, line2 = 6;
-    private static float kalori_saat_ini =0;
+    private static float kalori_saat_ini = 0;
 
-    static ProgressBar progressKalori;
+    static ProgressBar progressKalori, progressProtein, progressKarbo;
 
     public void setBanyakKalori(float banyakKalori) {
         this.banyakKalori = banyakKalori;
@@ -72,7 +71,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private float kaloriAgenda;
     ImageButton tambahPagi, tambahSiang, tambahMalam;
     Spinner spinnerAgenda;
-
 
 
     //    array list makanan rekomendasi makan pagi
@@ -102,8 +100,12 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     public static ArrayList<MakananModel> listMakananPagi = new ArrayList<>();
     FirebaseAuth auth;
     FirebaseUser user;
-    DatabaseReference reference,agenda;
+    DatabaseReference reference, agenda, profil;
     int positionSpinner;
+    static int banyakProtein;
+    static int banyakKarbo;
+    static TextView mTextProtein;
+    static TextView mTextKarbo;
 
     public void setBerat(int berat) {
         this.berat = berat;
@@ -115,6 +117,23 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        tambahPagi = rootView.findViewById(R.id.tambahMakanPagi);
+        tambahSiang = rootView.findViewById(R.id.tambahMakanSiang);
+        tambahMalam = rootView.findViewById(R.id.tambahMakanMalam);
+        tv_banyakKalori = rootView.findViewById(R.id.tv_banyakKalori);
+        banyakKaloriPagi = rootView.findViewById(R.id.banyakKaloriPagi);
+        banyakKaloriSiang = rootView.findViewById(R.id.banyakKaloriSiang);
+        banyakKaloriMalam = rootView.findViewById(R.id.banyakKaloriMalam);
+        kaloriDimakanPagi = rootView.findViewById(R.id.kaloriDimakan);
+        kaloriDimakanSian = rootView.findViewById(R.id.kaloriDimakanSiang);
+        kaloriDimakanMalam = rootView.findViewById(R.id.kaloriDimakanMalam);
+        mTextProtein = rootView.findViewById(R.id.txt_protein);
+        mTextKarbo = rootView.findViewById(R.id.textKarbo);
+        progressProtein = rootView.findViewById(R.id.progress_bar_protein);
+        progressKarbo = rootView.findViewById(R.id.progress_bar_karbo);
+
+
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         MakananKarboGenerator generatorKarbo = new MakananKarboGenerator();
@@ -131,8 +150,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
         reference = FirebaseDatabase.getInstance().getReference().child("Pengguna").child(user.getUid());
         agenda = FirebaseDatabase.getInstance().getReference().child("Agenda").child(user.getUid());
-
-
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -151,6 +168,34 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 progressKalori.setMax((int) banyakKalori);
                 progressKalori.setProgress((int) banyakKalori);
                 setBanyakKalori(banyakKalori);
+                int karbo = (int) banyakKalori/2;
+                mTextKarbo.setText(karbo +"g tersisa");
+                setBanyakKarbo(karbo);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity().getApplicationContext(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        profil = FirebaseDatabase.getInstance().getReference().child("Pengguna").child(user.getUid());
+        profil.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String _namaPengguna = dataSnapshot.child("namaLengkap").getValue().toString();
+                String _email = dataSnapshot.child("email").getValue().toString();
+                String _usia = dataSnapshot.child("usia").getValue().toString();
+                String _jenisKelamin = dataSnapshot.child("jenis_kelamin").getValue().toString();
+                int _tinggiBadan = Integer.valueOf(dataSnapshot.child("tinggiBadan").getValue().toString());
+                int _beratBadan = Integer.valueOf(dataSnapshot.child("beratBadan").getValue().toString());
+
+                int protein = (_jenisKelamin.equals("Perempuan"))?
+                        MakananProteinGenerator.getProteinPerempuan(_beratBadan) : MakananProteinGenerator.getProteinLaki(_beratBadan);
+                mTextProtein.setText(String.valueOf(protein)+"g tersisa");
+                progressProtein.setMax(protein);
+                progressProtein.setProgress(protein);
+                setBanyakProtein(protein);
             }
 
             @Override
@@ -159,26 +204,23 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             }
         });
 
-
-
         agenda.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<String> item = new ArrayList<>();
-                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
                     String judul = areaSnapshot.child("judul").getValue(String.class);
                     item.add(judul);
                 }
 
                 final Spinner areaSpinner = (Spinner) rootView.findViewById(R.id.spinnerAgenda);
-                if (getActivity()!=null) {
+                if (getActivity() != null) {
                     ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, item);
                     areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     areaSpinner.setAdapter(areasAdapter);
                     final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                     String language = preferences.getString("Pertandingan", "");
-                    if(!language.equalsIgnoreCase(""))
-                    {
+                    if (!language.equalsIgnoreCase("")) {
                         int spinnerPosition = areasAdapter.getPosition(language);
                         areaSpinner.setSelection(spinnerPosition);
 
@@ -189,13 +231,18 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                             CaloryCounter.GenerateBMR();
                             CaloryCounter.GeneratePengali();
                             float kaloriAgenda = CaloryCounter.agendaCounter(berat, 1);
-                            kalori_saat_ini = banyakKalori + (kaloriAgenda/7);
-                            tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
+                            kalori_saat_ini = banyakKalori + (kaloriAgenda / 7);
+                            int karboAgenda = (int) kalori_saat_ini /2 ;
+                            setBanyakKarbo(karboAgenda);
+                            progressKarbo.setMax(karboAgenda);
+                            progressKarbo.setProgress(karboAgenda);
+                            mTextKarbo.setText(karboAgenda +"g tersisa");
+                            tv_banyakKalori.setText(String.valueOf((int)kalori_saat_ini));
                             String text = adapterView.getItemAtPosition(i).toString();
                             final int _position = Math.toIntExact(adapterView.getItemIdAtPosition(i));
 
                             SharedPreferences.Editor editor = preferences.edit();
-                            editor.putString("Pertandingan",areaSpinner.getSelectedItem().toString());
+                            editor.putString("Pertandingan", areaSpinner.getSelectedItem().toString());
                             editor.apply();
 
                             getMenuMakanSiang();
@@ -205,9 +252,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                             agenda.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
                                         long position = (long) ds.child("position").getValue();
-                                        if (positionSpinner == position){
+                                        if (positionSpinner == position) {
                                             String judul = ds.child("judul").getValue(String.class);
                                             String tanggal = ds.child("tanggal").getValue(String.class);
 
@@ -216,62 +263,62 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                                             agenda.child(String.valueOf(positionSpinner)).addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                        listMakananPagi.clear();
-                                                        listMakananSiang.clear();
-                                                        listMakananMalam.clear();
+                                                    listMakananPagi.clear();
+                                                    listMakananSiang.clear();
+                                                    listMakananMalam.clear();
                                                     String isPagi = null;
                                                     try {
 //                                                        isPagi = dataSnapshot.child("Menu Pagi").getValue().toString();
                                                         agenda.child(String.valueOf(positionSpinner)).child("Menu Pagi").addValueEventListener(new ValueEventListener() {
-                                                                @Override
-                                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                                    for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                                                        String nama = ds.child("nama").getValue(String.class);
-                                                                        long kalori = (long)ds.child("kalori").getValue();
-                                                                        String images = ds.child("images").getValue(String.class);
-                                                                        double kandungan = 0;
-                                                                        try {
-                                                                            kandungan = (double) ds.child("karbohidrat").getValue();
-                                                                            listMakananPagi.add(new MakananKarbohidratModel(nama, (float)kandungan, (float)kalori, images));
-                                                                        } catch (Exception e) {
-                                                                            kandungan = (double) ds.child("protein").getValue();
-                                                                            listMakananPagi.add(new MakananProteinModel(nama,(float)kalori, (float)kandungan, images));
-                                                                        }
-                                                                        Log.d("nama",nama+" Kandungan : "+kandungan);
-
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                                                    String nama = ds.child("nama").getValue(String.class);
+                                                                    long kalori = (long) ds.child("kalori").getValue();
+                                                                    String images = ds.child("images").getValue(String.class);
+                                                                    double kandungan = 0;
+                                                                    try {
+                                                                        kandungan = (double) ds.child("karbohidrat").getValue();
+                                                                        listMakananPagi.add(new MakananKarbohidratModel(nama, (float) kandungan, (float) kalori, images));
+                                                                    } catch (Exception e) {
+                                                                        kandungan = (double) ds.child("protein").getValue();
+                                                                        listMakananPagi.add(new MakananProteinModel(nama, (float) kalori, (float) kandungan, images));
                                                                     }
-                                                                    getMenuMakanPagi();
-                                                                }
-
-                                                                @Override
-                                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                                    Log.d("nama", nama + " Kandungan : " + kandungan);
 
                                                                 }
-                                                            });
+                                                                getMenuMakanPagi();
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                            }
+                                                        });
                                                     } catch (Exception e) {
-                                                        String err = (e.getMessage()==null)?"SD Card failed":e.getMessage();
+                                                        String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                                                         listMakananPagi.clear();
                                                         getMenuMakanPagi();
-                                                        Log.e("sdcard-err2:",err);
+                                                        Log.e("sdcard-err2:", err);
                                                     }
                                                     try {
 //                                                        isPagi = dataSnapshot.child("Menu Pagi").getValue().toString();
                                                         agenda.child(String.valueOf(positionSpinner)).child("Menu Siang").addValueEventListener(new ValueEventListener() {
                                                             @Override
                                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                                                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                                                                     String nama = ds.child("nama").getValue(String.class);
-                                                                    long kalori = (long)ds.child("kalori").getValue();
+                                                                    long kalori = (long) ds.child("kalori").getValue();
                                                                     String images = ds.child("images").getValue(String.class);
                                                                     double kandungan = 0;
                                                                     try {
                                                                         kandungan = (double) ds.child("karbohidrat").getValue();
-                                                                        listMakananSiang.add(new MakananKarbohidratModel(nama, (float)kandungan, (float)kalori, images));
+                                                                        listMakananSiang.add(new MakananKarbohidratModel(nama, (float) kandungan, (float) kalori, images));
                                                                     } catch (Exception e) {
                                                                         kandungan = (double) ds.child("protein").getValue();
-                                                                        listMakananPagi.add(new MakananProteinModel(nama,(float)kalori, (float)kandungan, images));
+                                                                        listMakananPagi.add(new MakananProteinModel(nama, (float) kalori, (float) kandungan, images));
                                                                     }
-                                                                    Log.d("nama",nama+" Kandungan : "+kandungan);
+                                                                    Log.d("nama", nama + " Kandungan : " + kandungan);
 
                                                                 }
                                                                 getMenuMakanSiang();
@@ -283,29 +330,29 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                                                             }
                                                         });
                                                     } catch (Exception e) {
-                                                        String err = (e.getMessage()==null)?"SD Card failed":e.getMessage();
+                                                        String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                                                         listMakananSiang.clear();
                                                         getMenuMakanSiang();
-                                                        Log.e("sdcard-err2:",err);
+                                                        Log.e("sdcard-err2:", err);
                                                     }
                                                     try {
 //                                                        isPagi = dataSnapshot.child("Menu Pagi").getValue().toString();
                                                         agenda.child(String.valueOf(positionSpinner)).child("Menu Malam").addValueEventListener(new ValueEventListener() {
                                                             @Override
                                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                                                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                                                                     String nama = ds.child("nama").getValue(String.class);
-                                                                    long kalori = (long)ds.child("kalori").getValue();
+                                                                    long kalori = (long) ds.child("kalori").getValue();
                                                                     String images = ds.child("images").getValue(String.class);
                                                                     double kandungan = 0;
                                                                     try {
                                                                         kandungan = (double) ds.child("karbohidrat").getValue();
-                                                                        listMakananMalam.add(new MakananKarbohidratModel(nama, (float)kandungan, (float)kalori, images));
+                                                                        listMakananMalam.add(new MakananKarbohidratModel(nama, (float) kandungan, (float) kalori, images));
                                                                     } catch (Exception e) {
                                                                         kandungan = (double) ds.child("protein").getValue();
-                                                                        listMakananMalam.add(new MakananProteinModel(nama,(float)kalori, (float)kandungan, images));
+                                                                        listMakananMalam.add(new MakananProteinModel(nama, (float) kalori, (float) kandungan, images));
                                                                     }
-                                                                    Log.d("nama",nama+" Kandungan : "+kandungan);
+                                                                    Log.d("nama", nama + " Kandungan : " + kandungan);
 
                                                                 }
                                                                 getMenuMakanMalam();
@@ -317,10 +364,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                                                             }
                                                         });
                                                     } catch (Exception e) {
-                                                        String err = (e.getMessage()==null)?"SD Card failed":e.getMessage();
+                                                        String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                                                         listMakananMalam.clear();
                                                         getMenuMakanMalam();
-                                                        Log.e("sdcard-err2:",err);
+                                                        Log.e("sdcard-err2:", err);
                                                     }
 //                                                    Log.d("Ada Pagi", isPagi);
 //                                                        if (dataSnapshot.child("Menu Pagi").exists()){
@@ -358,7 +405,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
                                                 }
                                             });
-                                            Log.d("db agenda", position+" "+judul+" "+tanggal);
+                                            Log.d("db agenda", position + " " + judul + " " + tanggal);
 
                                         }
                                     }
@@ -386,18 +433,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
             }
         });
-
-
-        tambahPagi = rootView.findViewById(R.id.tambahMakanPagi);
-        tambahSiang = rootView.findViewById(R.id.tambahMakanSiang);
-        tambahMalam = rootView.findViewById(R.id.tambahMakanMalam);
-        tv_banyakKalori = rootView.findViewById(R.id.tv_banyakKalori);
-        banyakKaloriPagi = rootView.findViewById(R.id.banyakKaloriPagi);
-        banyakKaloriSiang = rootView.findViewById(R.id.banyakKaloriSiang);
-        banyakKaloriMalam = rootView.findViewById(R.id.banyakKaloriMalam);
-        kaloriDimakanPagi = rootView.findViewById(R.id.kaloriDimakan);
-        kaloriDimakanSian = rootView.findViewById(R.id.kaloriDimakanSiang);
-        kaloriDimakanMalam = rootView.findViewById(R.id.kaloriDimakanMalam);
 
         tambahPagi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -436,25 +471,12 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 startActivity(iin);
             }
         });
-
-
-
-
-
-
         return rootView;
     }
 
     public void setPositionSpinner(int positionSpinner) {
         this.positionSpinner = positionSpinner;
     }
-
-    //    untuk membuka dialog,
-//    public void openDialog(int position) {
-//        DialogPage dialogPage = new DialogPage(position);
-//        dialogPage.show(getFragmentManager(), "Tambah Agenda");
-//    }
-
 
     //    prosedur untuk menambah agenda
     public void insertItem(int position) {
@@ -535,17 +557,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             mKaloriMalam.add(String.valueOf(protein.getKalori()));
             mKandunganMalam.add(String.valueOf(protein.getProtein()));
         }
-
-//        initRecyclerViewMalam();
     }
 
-    private void initRecyclerViewMalam() {
-        mLayoutManagerMakananMalam = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-//        mRecyclerViewMakananMalam    = rootView.findViewById(R.id.recyclerViewMakananMalam);
-        mRecyclerViewMakananMalam.setLayoutManager(mLayoutManagerMakananMalam);
-        mAdapterMakananMalam = new RecyclerViewAdapterMakananMalam(getContext(), mNameMalam, mKaloriMalam, mImagesMalam, mKandunganMalam);
-        mRecyclerViewMakananMalam.setAdapter(mAdapterMakananMalam);
-    }
 
     private void getImagesOlahraga() {
         mImagesOlahraga.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
@@ -621,10 +634,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         mRecyclerViewMenuPagi.setLayoutManager(mLayoutMenuMakanPagi);
         mAdapterMenuPagi = new RecyclerViewAdapterMakanan(getContext(), HomeFragment.listMakananPagi);
         mRecyclerViewMenuPagi.setAdapter(mAdapterMenuPagi);
-        float kalori = Float.valueOf(tv_banyakKalori.getText().toString())/3;
-        banyakKaloriPagi.setText(String.valueOf(kalori) +" cal");
+        float kalori = Float.valueOf(tv_banyakKalori.getText().toString()) / 3;
+        banyakKaloriPagi.setText(String.valueOf(kalori) + " cal");
         float kaloriDimakan = 0;
-        for (MakananModel data: listMakananPagi) {
+        for (MakananModel data : listMakananPagi) {
             kaloriDimakan += data.getKalori();
         }
         float kaloriSisa = kalori - kaloriDimakan;
@@ -635,12 +648,12 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         mRecyclerViewMenuSiang = rootView.findViewById(R.id.recyclerViewMakanSiang);
         mLayoutMenuMakanSiang = new LinearLayoutManager(getContext());
         mRecyclerViewMenuSiang.setLayoutManager(mLayoutMenuMakanSiang);
-        mAdapterMenuSiang = new RecyclerViewAdapterMakanan(getContext(), HomeFragment.listMakananSiang);
+        mAdapterMenuSiang = new RecyclerViewAdapterMakananSiang(getContext(), HomeFragment.listMakananSiang);
         mRecyclerViewMenuSiang.setAdapter(mAdapterMenuSiang);
-        float kalori = Float.valueOf(tv_banyakKalori.getText().toString())/3;
+        float kalori = Float.valueOf(tv_banyakKalori.getText().toString()) / 3;
         banyakKaloriSiang.setText(String.valueOf(kalori));
         float kaloriDimakan = 0;
-        for (MakananModel data: listMakananSiang) {
+        for (MakananModel data : listMakananSiang) {
             kaloriDimakan += data.getKalori();
         }
         float kaloriSisa = kalori - kaloriDimakan;
@@ -651,18 +664,17 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         mRecyclerViewMenuMalam = rootView.findViewById(R.id.recylerMakanMalam);
         mLayoutMenuMakanMalam = new LinearLayoutManager(getContext());
         mRecyclerViewMenuMalam.setLayoutManager(mLayoutMenuMakanMalam);
-        mAdapterMenuMalam = new RecyclerViewAdapterMakanan(getContext(), HomeFragment.listMakananMalam);
+        mAdapterMenuMalam = new RecyclerViewAdapterMakananMalam(getContext(), HomeFragment.listMakananMalam);
         mRecyclerViewMenuMalam.setAdapter(mAdapterMenuMalam);
-        float kalori = Float.valueOf(tv_banyakKalori.getText().toString())/3;
+        float kalori = Float.valueOf(tv_banyakKalori.getText().toString()) / 3;
         banyakKaloriMalam.setText(String.valueOf(kalori));
         float kaloriDimakan = 0;
-        for (MakananModel data: listMakananMalam) {
+        for (MakananModel data : listMakananMalam) {
             kaloriDimakan += data.getKalori();
         }
         float kaloriSisa = kalori - kaloriDimakan;
-        kaloriDimakanMalam.setText(kaloriSisa + " cal tersisa");;
+        kaloriDimakanMalam.setText(kaloriSisa + " cal tersisa");
     }
-
 
 
     @Override
@@ -675,16 +687,46 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
 
     }
 
-    public static void KurangiKalori(float kalori){
+    public static void KurangiKalori(float kalori) {
         Log.d("Kalori sebelum dikurangin", String.valueOf(kalori_saat_ini));
-        kalori_saat_ini =  kalori_saat_ini - kalori;
+        kalori_saat_ini = kalori_saat_ini - kalori;
         Log.d("Kalori abis dikurangin", String.valueOf(kalori_saat_ini));
         progressKalori.setProgress((int) (progressKalori.getProgress() - kalori));
         Log.d("progress", String.valueOf(progressKalori.getProgress()));
-        tv_banyakKalori.setText(String.valueOf(kalori_saat_ini));
+        tv_banyakKalori.setText(String.valueOf((int)kalori_saat_ini));
+    }
+
+    public static void KurangiProtein(int protein){
+        banyakProtein = banyakProtein - protein;
+        progressProtein.setProgress(progressProtein.getProgress() - protein);
+        mTextProtein.setText(banyakProtein +"g tersisa");
+    }
+
+    public static void KurangiKarbo(int karbo)
+    {
+        banyakKarbo = banyakKarbo -karbo;
+        progressKarbo.setProgress(progressKarbo.getProgress() - karbo);
+        mTextKarbo.setText(banyakKarbo+"g tersisa");
     }
 
     public static void setListMakananPagi(ArrayList<MakananModel> listMakananPagi) {
         HomeFragment.listMakananPagi = listMakananPagi;
+
+    }
+
+    public int getBanyakProtein() {
+        return banyakProtein;
+    }
+
+    public void setBanyakProtein(int banyakProtein) {
+        this.banyakProtein = banyakProtein;
+    }
+
+    public int getBanyakKarbo() {
+        return banyakKarbo;
+    }
+
+    public void setBanyakKarbo(int banyakKarbo) {
+        this.banyakKarbo = banyakKarbo;
     }
 }

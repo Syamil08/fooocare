@@ -28,7 +28,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class AgendaFragment extends Fragment {
-    public static ArrayList<ExampleItem> mExampleList;
+    public static ArrayList<ExampleItem> mExampleList = new ArrayList<>();
     private static View rootview;
     private static RecyclerView agenda, agendaSejarah,agendaPagi;
     private static  RecyclerView.LayoutManager mLayoutAgenda, mLayoutAgendaSejarah,mLayoutAgendaPagi;

@@ -103,7 +103,7 @@ public class AgendaMakanMalamAdapter extends RecyclerView.Adapter<AgendaMakanMal
             imageAgendaMalam = itemView.findViewById(R.id.imageMenuMalam);
             _mJudul = (TextView) itemView.findViewById(R.id.textNamaMenuMalam);
             _mkalori = (TextView) itemView.findViewById(R.id.textKaloriMenuMalam);
-            mBtnTambah = (ImageButton) itemView.findViewById(R.id.btn_tambah);
+            mBtnTambah = (ImageButton) itemView.findViewById(R.id.btn_confirm);
         }
     }
 }

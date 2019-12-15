@@ -60,10 +60,10 @@ public class RecyclerViewAdapterMakanan extends RecyclerView.Adapter<RecyclerVie
 
         holder.makanan.setText(currentItem.getNama());
         if(currentItem instanceof MakananKarbohidratModel){
-            holder.kalori.setText(currentItem.getKalori() +" cal / "+ ((MakananKarbohidratModel) currentItem).getKarbohidrat()+"gram");
+            holder.kalori.setText(currentItem.getKalori() +" cal / "+ ((MakananKarbohidratModel) currentItem).getKalori()+"gram");
         }
         else if (currentItem instanceof MakananProteinModel){
-            holder.kalori.setText(currentItem.getKalori() +" cal / "+ ((MakananProteinModel) currentItem).getProtein()+"gram");
+            holder.kalori.setText(currentItem.getKalori() +" cal / "+ ((MakananProteinModel) currentItem).getKalori()+"gram");
         }
 
 
@@ -74,6 +74,11 @@ public class RecyclerViewAdapterMakanan extends RecyclerView.Adapter<RecyclerVie
                 holder.mBtn_confirm.setImageResource(R.drawable.ic_check_white);
                 currentItem.setChecked(true);
                 HomeFragment.KurangiKalori(currentItem.getKalori());
+                if(currentItem instanceof MakananProteinModel){
+                    HomeFragment.KurangiProtein((int) ((MakananProteinModel) currentItem).getProtein());
+                }
+                else if(currentItem instanceof  MakananKarbohidratModel)
+                    HomeFragment.KurangiKarbo((int) ((MakananKarbohidratModel) currentItem).getKarbohidrat());
                 Log.d("Kalori mau makan", String.valueOf(currentItem.getKalori()));
             }
         });

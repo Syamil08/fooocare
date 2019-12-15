@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.fooocare.Model.CaloryCounter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +31,7 @@ public class ProfilFragment extends Fragment {
     View root;
     Button btn_logout,btn_editProfile;
 
-    TextView namaPengguna,nama,email,usia,jenisKelamin,tinggiBadan,beratBadan;
+    TextView namaPengguna,nama,email,usia,jenisKelamin,tinggiBadan,beratBadan, _kalori;
 
     DatabaseReference reference;
     @Nullable
@@ -47,6 +48,7 @@ public class ProfilFragment extends Fragment {
         jenisKelamin = root.findViewById(R.id.jenisKelamin);
         tinggiBadan =root.findViewById(R.id.tinggiBadan);
         beratBadan = root.findViewById(R.id.beratBadan);
+        _kalori = root.findViewById(R.id.kaloriBadan);
 
 
         reference = FirebaseDatabase.getInstance().getReference().child("Pengguna").child(user.getUid());
@@ -60,14 +62,15 @@ public class ProfilFragment extends Fragment {
                 String _jenisKelamin = dataSnapshot.child("jenis_kelamin").getValue().toString();
                 String _tinggiBadan = dataSnapshot.child("tinggiBadan").getValue().toString();
                 String _beratBadan = dataSnapshot.child("beratBadan").getValue().toString();
-
+                String kalori = String.valueOf((int)CaloryCounter.coutnCalory(Float.valueOf(_beratBadan), Float.valueOf(_usia), _jenisKelamin
+                , Float.valueOf(_tinggiBadan), (float)2.3));
                 namaPengguna.setText(_namaPengguna);
                 email.setText(_email);
                 usia.setText(_usia);
                 jenisKelamin.setText(_jenisKelamin);
                 tinggiBadan.setText(_tinggiBadan);
                 beratBadan.setText(_beratBadan);
-
+                _kalori.setText(kalori);
             }
 
             @Override
