@@ -71,7 +71,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     ImageButton tambahPagi, tambahSiang, tambahMalam;
     Spinner spinnerAgenda;
 
-
+    //     array list untuk menampuang agendar dari firebase
+    private ArrayList<ExampleItem> agendas = new ArrayList<>();
 
     //    array list makanan rekomendasi makan pagi
     private ArrayList<String> mName = new ArrayList<>();
@@ -90,6 +91,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     private ArrayList<String> mKaloriMalam = new ArrayList<>();
     private ArrayList<String> mImagesMalam = new ArrayList<>();
     private ArrayList<String> mKandunganMalam = new ArrayList<>();
+
 
     //    array list olahraga yang dilakukan
     private ArrayList<String> mNameOlahraga = new ArrayList<>();
@@ -163,6 +165,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 ArrayList<String> item = new ArrayList<>();
                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
                     String judul = areaSnapshot.child("judul").getValue(String.class);
+                    String tanggal = areaSnapshot.child("tanggal").getValue(String.class);
+//                    agendas.add(new ExampleItem(judul, tanggal, new ArrayList<MakananModel>(), new ArrayList<MakananModel>(), new ArrayList<MakananModel>()));
                     item.add(judul);
                 }
 
@@ -174,6 +178,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                     areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            ExampleItem currentAgenda = agendas.get(i);
                             CaloryCounter.GenerateBMR();
                             CaloryCounter.GeneratePengali();
                             float kaloriAgenda = CaloryCounter.agendaCounter(berat, 1);
