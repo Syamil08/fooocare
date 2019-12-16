@@ -1,26 +1,45 @@
 package com.example.fooocare;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.fooocare.Fragment_sign_up_data.OnHeadlineSelectedListener;
+import com.example.fooocare.Model.Pengguna;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fragment_sign_up_tinggi_badan extends Fragment {
+import static android.content.Context.MODE_PRIVATE;
 
+public class Fragment_sign_up_tinggi_badan extends Fragment implements OnHeadlineSelectedListener {
+    public static Pengguna pengguna;
     EditText mTinggiBadan, mBeratBadan;
-    Button btnKembali, btnNext;
+    Button btnKembali, btnSelesai;
+    FirebaseAuth fAuth;
+    FirebaseUser firebaseuser;
+    DatabaseReference reff;
 
     public interface FragmentSignUpTinggiBadanListener {
         public void fragmentSignUpTinggiBadanEvent(List<Integer> s);
@@ -52,7 +71,7 @@ public class Fragment_sign_up_tinggi_badan extends Fragment {
         View v = inflater.inflate(R.layout.fragment_sign_up_tinggi_badan, container, false);
         mTinggiBadan = (EditText) v.findViewById(R.id.tinggi_badan);
         mBeratBadan = (EditText) v.findViewById(R.id.berat_badan);
-        btnNext = (Button) v.findViewById(R.id.btn_next);
+        btnSelesai = (Button) v.findViewById(R.id.btn_selesai);
         btnKembali = (Button) v.findViewById(R.id.btn_prev);
         mBeratBadan.addTextChangedListener(new TextWatcher() {
 
@@ -68,14 +87,35 @@ public class Fragment_sign_up_tinggi_badan extends Fragment {
             }
         });
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
+        btnSelesai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<Integer> data = new ArrayList<>();
-                data.add(Integer.parseInt(mTinggiBadan.getText().toString()));
-                data.add(Integer.parseInt(mBeratBadan.getText().toString()));
-                listener.fragmentSignUpTinggiBadanEvent(data);
-                movePositionListener.move(2);
+                pengguna.setTinggiBadan(174);
+                pengguna.setBeratBadan(Integer.valueOf(mBeratBadan.getText().toString()));
+                fAuth = FirebaseAuth.getInstance();
+                reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
+
+                Log.d("Nama Pengguna", pengguna.getNamaLengkap());
+                Log.d("Tinggi Badan Pengguna", String.valueOf(pengguna.getTinggiBadan()));
+                fAuth.createUserWithEmailAndPassword(pengguna.getEmail(), pengguna.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            firebaseuser = fAuth.getCurrentUser();
+                            reff.child(firebaseuser.getUid()).setValue(pengguna).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(getActivity().getApplicationContext(), "User created", Toast.LENGTH_SHORT).show();
+                                    savePrefsData();
+                                    startActivity(new Intent(getActivity().getApplicationContext() , DashboardActivity.class));
+                                }
+                            });
+
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), "Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
 
@@ -86,5 +126,23 @@ public class Fragment_sign_up_tinggi_badan extends Fragment {
             }
         });
         return v;
+    }
+
+    @Override
+    public void fragmentSignUpEvent(List<String> s) {
+        pengguna.setNamaLengkap("Test");
+        pengguna.setEmail(s.get(1));
+        pengguna.setPassword(s.get(2));
+        pengguna.setUsia(Integer.parseInt(s.get(3)));
+        pengguna.setJenis_kelamin(s.get(4));
+    }
+
+    private void savePrefsData() {
+
+        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean("isIntroOpened", true);
+        editor.commit();
+
     }
 }

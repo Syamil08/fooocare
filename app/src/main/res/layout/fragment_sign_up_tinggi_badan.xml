@@ -78,7 +78,7 @@
 
                 </LinearLayout>
                 <Button
-                    android:id="@+id/btn_next"
+                    android:id="@+id/btn_selesai"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|right"
@@ -86,11 +86,10 @@
                     android:layout_marginBottom="20dp"
                     android:layout_weight="1"
                     android:background="#fff"
-                    android:drawableRight="@drawable/ic_arrow_right"
                     android:drawableTint="@color/gradient_start_color"
                     android:paddingLeft="30dp"
                     android:paddingRight="10dp"
-                    android:text="LANJUT"
+                    android:text="SELESAI"
                     android:textColor="@color/gradient_start_color" />
 
                 <Button

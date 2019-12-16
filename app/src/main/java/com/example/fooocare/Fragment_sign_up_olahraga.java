@@ -29,7 +29,7 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Fragment_sign_up_olahraga extends Fragment implements Fragment_sign_up_data.OnHeadlineSelectedListener, Fragment_sign_up_tinggi_badan.FragmentSignUpTinggiBadanListener {
+public class Fragment_sign_up_olahraga extends Fragment implements Fragment_sign_up_data.OnHeadlineSelectedListener{
     public static Pengguna pengguna;
     Button btnKembali, btnSelesai;
     Fragment_sign_up_data.MovePositionListener movePositionListener;
@@ -105,7 +105,7 @@ public class Fragment_sign_up_olahraga extends Fragment implements Fragment_sign
         pengguna.setJenis_kelamin(s.get(4));
     }
 
-    @Override
+
     public void fragmentSignUpTinggiBadanEvent(List<Integer> s) {
         pengguna.setTinggiBadan(174);
         pengguna.setBeratBadan(s.get(1));
