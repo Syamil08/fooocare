@@ -20,8 +20,11 @@ import com.example.fooocare.Model.MakananModel;
 import com.example.fooocare.Model.MakananProteinModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -33,6 +36,7 @@ public class AgendaMakanSiangAdapter extends RecyclerView.Adapter<AgendaMakanSia
     FirebaseAuth auth;
     FirebaseUser user;
     DatabaseReference menu;
+    static long count = 0;
 
     public AgendaMakanSiangAdapter(Context mContext, ArrayList<MakananModel> listAgenda) {
         this.listAgenda = listAgenda;
@@ -76,8 +80,19 @@ public class AgendaMakanSiangAdapter extends RecyclerView.Adapter<AgendaMakanSia
             public void onClick(View view) {
 //                Toast.makeText(mContext,"Test", Toast.LENGTH_SHORT).show();
                 listAgenda.add(currentItem);
+                menu.child("Menu Siang").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        AgendaMakanSiangAdapter.count = dataSnapshot.getChildrenCount();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
                 Log.d("Menu Siang", String.valueOf(HomeFragment.listMakananSiang.size()));
-                menu.child("Menu Siang").child(String.valueOf(HomeFragment.listMakananSiang.size())).setValue(currentItem);
+                menu.child("Menu Siang").child(String.valueOf(AgendaMakanSiangAdapter.count)).setValue(currentItem);
                 HomeFragment.listMakananSiang.add(currentItem);
             }
         });

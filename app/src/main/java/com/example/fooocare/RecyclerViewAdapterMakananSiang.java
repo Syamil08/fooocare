@@ -17,6 +17,13 @@ import com.bumptech.glide.Glide;
 import com.example.fooocare.Model.MakananKarbohidratModel;
 import com.example.fooocare.Model.MakananModel;
 import com.example.fooocare.Model.MakananProteinModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -31,6 +38,11 @@ public class RecyclerViewAdapterMakananSiang extends RecyclerView.Adapter<Recycl
     private ArrayList<MakananModel> dataMakanan;
     private Context mContextSiang;
 
+    FirebaseAuth auth;
+    FirebaseUser user;
+    DatabaseReference reference;
+    public static int posisiAgenda;
+
     public RecyclerViewAdapterMakananSiang(Context mContext, ArrayList<MakananModel> list) {
         dataMakanan = list;
         this.mContextSiang = mContext;
@@ -40,6 +52,9 @@ public class RecyclerViewAdapterMakananSiang extends RecyclerView.Adapter<Recycl
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitemcardmakansiang, parent, false);
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference().child("Agenda").child(user.getUid()).child(String.valueOf(posisiAgenda));
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
@@ -76,12 +91,33 @@ public class RecyclerViewAdapterMakananSiang extends RecyclerView.Adapter<Recycl
                 else if(currentItem instanceof  MakananKarbohidratModel)
                     HomeFragment.KurangiKarbo((int) ((MakananKarbohidratModel) currentItem).getKarbohidrat());
                 Log.d("Kalori mau makan", String.valueOf(currentItem.getKalori()));
+                reference.child("Menu Siang").child(String.valueOf(position)).child("checked").setValue(true);
+                holder.mBtn_confirm.setEnabled(false);
             }
         });
-        if(currentItem.isChecked() == true){
-            holder.mBtn_confirm.setBackground(mContextSiang.getDrawable(R.drawable.btn_cardhome_checked));
-            holder.mBtn_confirm.setImageResource(R.drawable.ic_check_white);
-        }
+        reference.child("Menu Siang").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int i =0;
+                boolean _isChecked = false;
+                try {
+                    _isChecked = (boolean)dataSnapshot.child(String.valueOf(position)).child("checked").getValue();
+                    if(_isChecked == true){
+                        holder.mBtn_confirm.setBackground(mContextSiang.getDrawable(R.drawable.btn_cardhome_checked));
+                        holder.mBtn_confirm.setImageResource(R.drawable.ic_check_white);
+                        holder.mBtn_confirm.setEnabled(false);
+                    }
+                } catch (Exception e) {
+//                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

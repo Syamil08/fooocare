@@ -40,6 +40,7 @@ public class AgendaMakanPagiAdapter extends RecyclerView.Adapter<AgendaMakanPagi
     FirebaseAuth auth;
     FirebaseUser user;
     DatabaseReference menu;
+    static long count = 0;
 
     public interface MakananPagiListener{
         void listenList(MakananModel makanan);
@@ -84,14 +85,28 @@ public class AgendaMakanPagiAdapter extends RecyclerView.Adapter<AgendaMakanPagi
         else if (currentItem instanceof MakananProteinModel){
             holder._mkalori.setText(currentItem.getKalori() +" cal / "+ ((MakananProteinModel) currentItem).getProtein()+"gram");
         }
+        final long[] count = {0};
         holder.mBtnTambah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //              Toast.makeText(mContext,"Test", Toast.LENGTH_SHORT).show();
               listAgenda.add(currentItem);
-              menu.child("Menu Pagi").child(String.valueOf(HomeFragment.listMakananPagi.size())).setValue(currentItem);
-              HomeFragment.listMakananPagi.add(currentItem);
 
+                menu.child("Menu Pagi").addValueEventListener(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                         AgendaMakanPagiAdapter.count = dataSnapshot.getChildrenCount();
+//
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                menu.child("Menu Pagi").child(String.valueOf(AgendaMakanPagiAdapter.count)).setValue(currentItem);
+              HomeFragment.listMakananPagi.add(currentItem);
             }
         });
     }

@@ -56,7 +56,7 @@ public class onBoarding extends AppCompatActivity {
         final List<Screenitem> mList = new ArrayList<>();
         mList.add(new Screenitem("Menjaga Kesehatan", "Mencegah lebih baik daripada mengobati, jaga kesehatan keluarga Anda saat ini", R.drawable.vektor_one));
         mList.add(new Screenitem("Menjaga Stamina", "Memudahkan anda untuk melihat report harian yang anda miliki", R.drawable.vektor_three));
-        mList.add(new Screenitem("Report Harian", "Ambil gambar anda dan lihat kalorinya", R.drawable.vektor_two));
+        mList.add(new Screenitem("Rekomendasi Makanan", "Rekomendasi makanan berdasarkan kebutuhan kalori", R.drawable.vektor_two));
 
 //        setup viewpager
 

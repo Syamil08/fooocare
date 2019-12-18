@@ -3,6 +3,7 @@ package com.example.fooocare;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,20 +45,31 @@ public class LoginActivity extends AppCompatActivity {
                 String email = mEmail.getText().toString();
                 String password = mPassword.getText().toString().trim();
 
-                fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this, "Login succesful",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
-                            finish();
-                            savePrefsData();
+                if (TextUtils.isEmpty(email)){
+                    mEmail.setError("Maaf field tidak boleh dikosongi");
+                }
+                if (TextUtils.isEmpty(password)){
+                    mEmail.setError("Maaf field tidak boleh dikosongi");
+                }
+                else
+                {
+                    fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(LoginActivity.this, "Login succesful",Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                                finish();
+                                savePrefsData();
+                            }
+                            else {
+                                Toast.makeText(LoginActivity.this, "Login Failed",Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else {
-                            Toast.makeText(LoginActivity.this, "Login Failed",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                    });
+                }
+
+
             }
         });
     }

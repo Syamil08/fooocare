@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -69,13 +72,22 @@ public class DialogPage extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String judul = _judul.getText().toString().trim();
                         String tanggal = _tanggal.getText().toString();
-                        list.add(judul);
-                        list.add(tanggal);
-                        AgendaFragment.buildAgenda();
-                        listener.applyTexts(list);
+                        if (TextUtils.isEmpty(judul)){
+                            _judul.setError("Maaf field tidak boleh dikosongi");
+                        }
+                        if (TextUtils.isEmpty(tanggal)){
+                            _tanggal.setError("Maaf field tidak boleh dikosongi");
+                        }
+                        else
+                        {
+                            list.add(judul);
+                            list.add(tanggal);
+                            AgendaFragment.buildAgenda();
+                            listener.applyTexts(list);
 //                        root untuk setValue
-                        root.child(String.valueOf(position)).setValue(new ExampleItem(judul, tanggal, position));
-                        Log.d("User",judul + " " +tanggal);
+                            root.child(String.valueOf(position)).setValue(new ExampleItem(judul, tanggal, position));
+                            Log.d("User",judul + " " +tanggal);
+                        }
                     }
                 });
 

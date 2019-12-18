@@ -86,23 +86,23 @@ public class ProfilFragment extends Fragment {
             }
         });
 
-//
-//        btn_logout = root.findViewById(R.id.btn_logout);
-//
-//        btn_logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                auth.signOut();
-//                Intent i = new Intent(getActivity().getApplicationContext(),LoginActivity.class);
-//                SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
-//                SharedPreferences.Editor editor = pref.edit();
-//                editor.putBoolean("isIntroOpened", false);
-//                editor.commit();
-//                startActivity(i);
-//
-//            }
-//        });
+
+        btn_logout = root.findViewById(R.id.btn_signout);
+
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                auth.signOut();
+                Intent i = new Intent(getActivity().getApplicationContext(),LoginActivity.class);
+                SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putBoolean("isIntroOpened", false);
+                editor.commit();
+                startActivity(i);
+
+            }
+        });
 
         return root;
     }

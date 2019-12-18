@@ -16,6 +16,13 @@ import com.bumptech.glide.Glide;
 import com.example.fooocare.Model.MakananKarbohidratModel;
 import com.example.fooocare.Model.MakananModel;
 import com.example.fooocare.Model.MakananProteinModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -29,6 +36,11 @@ public class RecyclerViewAdapterMakananMalam extends RecyclerView.Adapter<Recycl
 
 //    mendefinisikan variable ArrayList
 
+    FirebaseAuth auth;
+    FirebaseUser user;
+    DatabaseReference reference;
+    public static int posisiAgenda;
+
     private Context mContextMalam;
 
     public RecyclerViewAdapterMakananMalam(Context mContext, ArrayList<MakananModel> list) {
@@ -40,6 +52,9 @@ public class RecyclerViewAdapterMakananMalam extends RecyclerView.Adapter<Recycl
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitemcardmakanmalam, parent, false);
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference().child("Agenda").child(user.getUid()).child(String.valueOf(posisiAgenda));
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
@@ -71,15 +86,37 @@ public class RecyclerViewAdapterMakananMalam extends RecyclerView.Adapter<Recycl
                 HomeFragment.KurangiKalori(currentItem.getKalori());
                 if (currentItem instanceof MakananProteinModel) {
                     HomeFragment.KurangiProtein((int) ((MakananProteinModel) currentItem).getProtein());
+
                 } else if (currentItem instanceof MakananKarbohidratModel)
                     HomeFragment.KurangiKarbo((int) ((MakananKarbohidratModel) currentItem).getKarbohidrat());
                 Log.d("Kalori mau makan", String.valueOf(currentItem.getKalori()));
+                reference.child("Menu Malam").child(String.valueOf(position)).child("checked").setValue(true);
+                holder.mBtn_confirm.setEnabled(false);
             }
         });
-        if (currentItem.isChecked() == true) {
-            holder.mBtn_confirm.setBackground(mContextMalam.getDrawable(R.drawable.btn_cardhome_checked));
-            holder.mBtn_confirm.setImageResource(R.drawable.ic_check_white);
-        }
+        reference.child("Menu Malam").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int i =0;
+                boolean _isChecked = false;
+                try {
+                    _isChecked = (boolean)dataSnapshot.child(String.valueOf(position)).child("checked").getValue();
+                    if(_isChecked == true){
+                        holder.mBtn_confirm.setBackground(mContextMalam.getDrawable(R.drawable.btn_cardhome_checked));
+                        holder.mBtn_confirm.setImageResource(R.drawable.ic_check_white);
+                        holder.mBtn_confirm.setEnabled(false);
+                    }
+                } catch (Exception e) {
+//                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

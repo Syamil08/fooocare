@@ -29,6 +29,7 @@ import com.example.fooocare.Model.MakananKarbohidratModel;
 import com.example.fooocare.Model.MakananModel;
 import com.example.fooocare.Model.MakananProteinGenerator;
 import com.example.fooocare.Model.MakananProteinModel;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -49,7 +50,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             mAdapterMenuPagi, mAdapterMenuSiang, mAdapterMenuMalam;
     private RecyclerView.LayoutManager mLayoutManager, mLayoutManagerMakanan, mLayoutManagerMakananSiang, mLayoutManagerMakananMalam, mLayoutManagerMakananOlahraga,
             mLayoutMenuMakanPagi, mLayoutMenuMakanSiang, mLayoutMenuMakanMalam;
-    private View rootView;
+    private static View rootView;
     static TextView tv_banyakKalori;
     TextView banyakKaloriPagi;
     TextView banyakKaloriSiang;
@@ -132,7 +133,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         mTextKarbo = rootView.findViewById(R.id.textKarbo);
         progressProtein = rootView.findViewById(R.id.progress_bar_protein);
         progressKarbo = rootView.findViewById(R.id.progress_bar_karbo);
-
+        listMakananPagi.clear();
+        listMakananSiang.clear();
+        listMakananMalam.clear();
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -142,10 +145,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         listProtein = generatorProtein.getListMakanan();
         progressKalori = rootView.findViewById(R.id.progressBarKalori);
 
-        getImagesOlahraga();
-        getImagesMalam();
-        getImagesSiang();
-        getImages();
+//        getImagesOlahraga();
+//        getImagesMalam();
+//        getImagesSiang();
+//        getImages();
 //        buildRecyclerView();
 
         reference = FirebaseDatabase.getInstance().getReference().child("Pengguna").child(user.getUid());
@@ -240,7 +243,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                             tv_banyakKalori.setText(String.valueOf((int)kalori_saat_ini));
                             String text = adapterView.getItemAtPosition(i).toString();
                             final int _position = Math.toIntExact(adapterView.getItemIdAtPosition(i));
-
+                            RecyclerViewAdapterMakanan.posisiAgenda = i;
                             SharedPreferences.Editor editor = preferences.edit();
                             editor.putString("Pertandingan", areaSpinner.getSelectedItem().toString());
                             editor.apply();
@@ -688,12 +691,19 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     }
 
     public static void KurangiKalori(float kalori) {
-        Log.d("Kalori sebelum dikurangin", String.valueOf(kalori_saat_ini));
-        kalori_saat_ini = kalori_saat_ini - kalori;
-        Log.d("Kalori abis dikurangin", String.valueOf(kalori_saat_ini));
-        progressKalori.setProgress((int) (progressKalori.getProgress() - kalori));
-        Log.d("progress", String.valueOf(progressKalori.getProgress()));
-        tv_banyakKalori.setText(String.valueOf((int)kalori_saat_ini));
+        if(kalori_saat_ini < kalori)
+        {
+            Snackbar.make(rootView, "Maaf kalori anda sudah berlebihan",
+                    Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
+        else
+            {
+                kalori_saat_ini = kalori_saat_ini - kalori;
+                progressKalori.setProgress((int) (progressKalori.getProgress() - kalori));
+                tv_banyakKalori.setText(String.valueOf((int)kalori_saat_ini));
+            }
+
     }
 
     public static void KurangiProtein(int protein){

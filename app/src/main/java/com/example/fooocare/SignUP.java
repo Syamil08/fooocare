@@ -88,8 +88,8 @@ public class SignUP extends AppCompatActivity implements Fragment_sign_up_data.O
     @Override
     public void move(int position) {
         viewPager.setCurrentItem(position);
-        if(position == 2){
-            Fragment_sign_up_olahraga.pengguna = this.pengguna;
+        if(position == 1){
+            Fragment_sign_up_tinggi_badan.pengguna = this.pengguna;
         }
     }
 

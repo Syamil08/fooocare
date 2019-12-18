@@ -600,8 +600,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="60dp"
-                android:layout_marginBottom="60dp">
+                android:layout_marginTop="60dp">
 
                 <Button
                     android:id="@+id/btn_edit_profil"
@@ -612,13 +611,29 @@
                     android:text="Edit Profil"
                     android:background="@drawable/btn_tambah_agenda_custom"/>
 
+                <!--<Button-->
+                    <!--android:id="@+id/btn_delete_profil"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="Hapus Profil"-->
+                    <!--android:background="@drawable/btn_tambah_agenda_custom"/>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
+
                 <Button
-                    android:id="@+id/btn_delete_profil"
-                    android:layout_width="0dp"
+                    android:id="@+id/btn_signout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Hapus Profil"
-                    android:background="@drawable/btn_tambah_agenda_custom"/>
+                    android:text="Keluar"
+                    android:background="@drawable/btn_signout"
+                    android:textColor="@android:color/white"/>
 
             </LinearLayout>
 

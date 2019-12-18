@@ -2,6 +2,7 @@ package com.example.fooocare;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,16 +83,32 @@ public class Fragment_sign_up_data extends Fragment {
             @Override
             public void onClick(View view) {
 
-                List<String> data = new ArrayList<>();
-                data.add(mNama.getText().toString());
-                data.add(mEmail.getText().toString());
-                data.add(mPassword.getText().toString().trim());
-                data.add(mUsia.getText().toString());
-                int selectedId = jenis_kelamin.getCheckedRadioButtonId();
-                RadioButton kelamin = (RadioButton) v.findViewById(selectedId);
-                data.add(kelamin.getText().toString());
-                listener.fragmentSignUpEvent(data);
-                listenerPosition.move(1);
+                if (TextUtils.isEmpty(mNama.getText().toString())){
+                    mNama.setError("Maaf field tidak boleh dikosongi");
+                }
+                if (TextUtils.isEmpty(mEmail.getText().toString())){
+                    mEmail.setError("Maaf field tidak boleh dikosongi");
+                }
+                if (TextUtils.isEmpty(mPassword.getText().toString())){
+                    mPassword.setError("Maaf field tidak boleh dikosongi");
+                }
+                if (TextUtils.isEmpty(mUsia.getText().toString())){
+                    mUsia.setError("Maaf field tidak boleh dikosongi");
+                }
+                else {
+                    List<String> data = new ArrayList<>();
+                    data.add(mNama.getText().toString());
+                    data.add(mEmail.getText().toString());
+                    data.add(mPassword.getText().toString().trim());
+                    data.add(mUsia.getText().toString());
+                    int selectedId = jenis_kelamin.getCheckedRadioButtonId();
+                    RadioButton kelamin = (RadioButton) v.findViewById(selectedId);
+                    data.add(kelamin.getText().toString());
+                    listener.fragmentSignUpEvent(data);
+                    listenerPosition.move(1);
+                }
+
+
             }
         });
 

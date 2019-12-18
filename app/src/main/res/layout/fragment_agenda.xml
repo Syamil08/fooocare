@@ -26,23 +26,28 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="40dp"
                     android:orientation="horizontal"
                     android:gravity="center">
 
-
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_book"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
                         android:fontFamily="@font/coresans"
                         android:textStyle="bold"
                         android:text="Mari Lihat Agenda Apa Saja yang Anda Miliki"
                         android:textColor="@android:color/white"
-                        android:textSize="23sp" />
+                        android:lineSpacingExtra="5dp"
+                        android:layout_gravity="center"
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -815,6 +820,113 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:padding="5dp"/>
+
+            <!--TableLayout Makan Pagi-->
+            <TableLayout
+                android:id="@+id/peringatanNoAgenda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp">
+
+                <TableRow
+                    android:id="@+id/tableRowNoAgenda1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_cardhome"
+                    android:padding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/coresans"
+                            android:padding="3dp"
+                            android:text="Perhatian!"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="16sp" />
+
+
+                        <ImageButton
+                            android:id="@+id/cancelInfo"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:background="@android:color/white"
+                            android:src="@drawable/ic_close_black_24dp" />
+
+                    </LinearLayout>
+
+                </TableRow>
+
+
+                <TableRow
+                    android:id="@+id/tableRowNoAgenda2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_cardhomedown"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="10dp">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/judulNoAgenda"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/coresans"
+                            android:gravity="center_vertical"
+                            android:padding="3dp"
+                            android:text="Pertandingan Belum Tersedia"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/deskripsiNoAgenda"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/coresans"
+                            android:gravity="center_vertical"
+                            android:padding="3dp"
+                            android:text="Mari buat jadwal pertandingan anda"
+                            android:textSize="12sp" />
+
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:padding="8dp"
+                        android:src="@drawable/error" />
+
+                </TableRow>
+
+
+            </TableLayout>
+
+            <!-- Akhir TableLayout Makan Pagi-->
 
 
 

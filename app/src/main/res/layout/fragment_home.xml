@@ -209,48 +209,48 @@
                     </LinearLayout>
 
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="2"
-                        android:orientation="vertical">
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_weight="2"-->
+                        <!--android:orientation="vertical">-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/coresans"
-                            android:text="Lemak"
-                            android:textAlignment="center"
-                            android:textColor="@android:color/white"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_gravity="center"-->
+                            <!--android:fontFamily="@font/coresans"-->
+                            <!--android:text="Lemak"-->
+                            <!--android:textAlignment="center"-->
+                            <!--android:textColor="@android:color/white"-->
+                            <!--android:textSize="15sp"-->
+                            <!--android:textStyle="bold" />-->
 
 
-                        <ProgressBar
-                            android:id="@+id/progress_bar_lemak"
-                            style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
-                            android:layout_width="90dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:max="100"
-                            android:progress="80"
-                            android:progressBackgroundTint="#80cccccc"
-                            android:progressTint="@android:color/white" />
+                        <!--<ProgressBar-->
+                            <!--android:id="@+id/progress_bar_lemak"-->
+                            <!--style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"-->
+                            <!--android:layout_width="90dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_gravity="center"-->
+                            <!--android:max="100"-->
+                            <!--android:progress="80"-->
+                            <!--android:progressBackgroundTint="#80cccccc"-->
+                            <!--android:progressTint="@android:color/white" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/coresans"
-                            android:text="20g tersisa"
-                            android:textAlignment="center"
-                            android:textColor="@android:color/white"
-                            android:textSize="15sp" />
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_gravity="center"-->
+                            <!--android:fontFamily="@font/coresans"-->
+                            <!--android:text="20g tersisa"-->
+                            <!--android:textAlignment="center"-->
+                            <!--android:textColor="@android:color/white"-->
+                            <!--android:textSize="15sp" />-->
 
-                    </LinearLayout>
+                    <!--</LinearLayout>-->
 
                 </LinearLayout>
 
@@ -642,7 +642,7 @@
                         android:fontFamily="@font/coresans"
                         android:gravity="center_vertical"
                         android:padding="3dp"
-                        android:text="Agenda Belum Tersedia"
+                        android:text="Pertandingan Belum Tersedia"
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -654,7 +654,7 @@
                         android:fontFamily="@font/coresans"
                         android:gravity="center_vertical"
                         android:padding="3dp"
-                        android:text="Mari buat agenda anda"
+                        android:text="Mari buat jadwal pertandingan anda"
                         android:textSize="12sp" />
 
 

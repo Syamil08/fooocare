@@ -20,8 +20,11 @@ import com.example.fooocare.Model.MakananModel;
 import com.example.fooocare.Model.MakananProteinModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -33,6 +36,7 @@ public class AgendaMakanMalamAdapter extends RecyclerView.Adapter<AgendaMakanMal
     FirebaseAuth auth;
     FirebaseUser user;
     DatabaseReference menu;
+    static long count = 0;
 
     public AgendaMakanMalamAdapter(Context mContext, ArrayList<MakananModel> listAgenda) {
         this.listAgenda = listAgenda;
@@ -76,8 +80,20 @@ public class AgendaMakanMalamAdapter extends RecyclerView.Adapter<AgendaMakanMal
             public void onClick(View view) {
 //                Toast.makeText(mContext, "Test", Toast.LENGTH_SHORT).show();
                 listAgenda.add(currentItem);
+                final long[] count = {0};
+                menu.child("Menu Malam").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        AgendaMakanMalamAdapter.count = dataSnapshot.getChildrenCount();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
                 Log.d("Menu Malam", String.valueOf(HomeFragment.listMakananMalam.size()));
-                menu.child("Menu Malam").child(String.valueOf(HomeFragment.listMakananMalam.size())).setValue(currentItem);
+                menu.child("Menu Malam").child(String.valueOf(AgendaMakanMalamAdapter.count)).setValue(currentItem);
                 HomeFragment.listMakananMalam.add(currentItem);
             }
         });

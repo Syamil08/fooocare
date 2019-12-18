@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -90,32 +91,42 @@ public class Fragment_sign_up_tinggi_badan extends Fragment implements OnHeadlin
         btnSelesai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pengguna.setTinggiBadan(174);
-                pengguna.setBeratBadan(Integer.valueOf(mBeratBadan.getText().toString()));
-                fAuth = FirebaseAuth.getInstance();
-                reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
 
-                Log.d("Nama Pengguna", pengguna.getNamaLengkap());
-                Log.d("Tinggi Badan Pengguna", String.valueOf(pengguna.getTinggiBadan()));
-                fAuth.createUserWithEmailAndPassword(pengguna.getEmail(), pengguna.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            firebaseuser = fAuth.getCurrentUser();
-                            reff.child(firebaseuser.getUid()).setValue(pengguna).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(getActivity().getApplicationContext(), "User created", Toast.LENGTH_SHORT).show();
-                                    savePrefsData();
-                                    startActivity(new Intent(getActivity().getApplicationContext() , DashboardActivity.class));
-                                }
-                            });
 
-                        } else {
-                            Toast.makeText(getActivity().getApplicationContext(), "Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                Log.d("Nama Pengguna", pengguna.getNamaLengkap());
+//                Log.d("Tinggi Badan Pengguna", String.valueOf(pengguna.getTinggiBadan()));
+                if (TextUtils.isEmpty(mTinggiBadan.getText().toString())){
+                    mTinggiBadan.setError("Maaf field tidak boleh dikosongi");
+                }
+                if (TextUtils.isEmpty(mBeratBadan.getText().toString())){
+                    mBeratBadan.setError("Maaf field tidak boleh dikosongi");
+                }
+                else{
+                    pengguna.setTinggiBadan(Integer.parseInt(mTinggiBadan.getText().toString()));
+                    pengguna.setBeratBadan(Integer.valueOf(mBeratBadan.getText().toString()));
+                    fAuth = FirebaseAuth.getInstance();
+                    reff = FirebaseDatabase.getInstance().getReference().child("Pengguna");
+                    fAuth.createUserWithEmailAndPassword(pengguna.getEmail(), pengguna.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                firebaseuser = fAuth.getCurrentUser();
+                                reff.child(firebaseuser.getUid()).setValue(pengguna).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(getActivity().getApplicationContext(), "User created", Toast.LENGTH_SHORT).show();
+                                        savePrefsData();
+                                        startActivity(new Intent(getActivity().getApplicationContext() , DashboardActivity.class));
+                                    }
+                                });
+
+                            } else {
+                                Toast.makeText(getActivity().getApplicationContext(), "Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+                }
+
             }
         });
 
@@ -130,7 +141,7 @@ public class Fragment_sign_up_tinggi_badan extends Fragment implements OnHeadlin
 
     @Override
     public void fragmentSignUpEvent(List<String> s) {
-        pengguna.setNamaLengkap("Test");
+        pengguna.setNamaLengkap(s.get(0));
         pengguna.setEmail(s.get(1));
         pengguna.setPassword(s.get(2));
         pengguna.setUsia(Integer.parseInt(s.get(3)));
